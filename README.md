@@ -1,1 +1,2 @@
-# pg
+#projekty z uczelni
+#laboratoria po, aisd
