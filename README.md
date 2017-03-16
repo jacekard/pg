@@ -1,2 +1,2 @@
 #projekty z uczelni
-#laboratoria po, aisd
+#laboratoria #po #aisd
