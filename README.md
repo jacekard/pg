@@ -1,4 +1,2 @@
-Politechnika Repo
-~projekty z uczelni
-~laboratoria: 
-~~po ~~aisd ~~systemy
+Linux branch
+pliki z lab: Systemy Operacyjne
