@@ -1,10 +1,10 @@
 package javaapplication1;
 
-//import javaapplication1.Translacja;
-//import javaapplication1.Skalowanie;
-//import javaapplication1.BrakTransformacjiOdwrotnejException;
-//import javaapplication1.Punkt;
-//import javaapplication1.Transformacja;
+import javaapplication1.Translacja;
+import javaapplication1.Skalowanie;
+import javaapplication1.BrakTransformacjiOdwrotnejException;
+import javaapplication1.Punkt;
+import javaapplication1.Transformacja;
 public class JavaApplication1 {
 
     public static void main(String[] args) {
@@ -16,7 +16,7 @@ public class JavaApplication1 {
             System.out.println(tr);
             Punkt p2 = tr.transformuj(p1);
             System.out.println(p2);
-            Transformacja trr = tr.getTranformacjaOdwrotna();
+            Transformacja trr = tr.getTransformacjaOdwrotna();
             System.out.println(trr);
             Punkt p3 = trr.transformuj(p2);
             System.out.println(p3);
@@ -33,7 +33,7 @@ public class JavaApplication1 {
             System.out.println(tr2);
             Punkt p2 = tr2.transformuj(p1);
             System.out.println(p2);
-            Transformacja trr2 = tr2.getTranformacjaOdwrotna();
+            Transformacja trr2 = tr2.getTransformacjaOdwrotna();
             System.out.println(trr2);
             Punkt p3 = trr2.transformuj(p2);
             System.out.println(p3);
@@ -49,7 +49,7 @@ public class JavaApplication1 {
             System.out.println(p1);
             Punkt p2 = tr2.transformuj(p1);
             System.out.println(p2);
-            Transformacja trr2 = tr2.getTranformacjaOdwrotna();
+            Transformacja trr2 = tr2.getTransformacjaOdwrotna();
             System.out.println(trr2);
             Punkt p3 = trr2.transformuj(p2);
             System.out.println(p3);
@@ -65,13 +65,28 @@ public class JavaApplication1 {
             System.out.println(ob);
             Punkt p2 = ob.transformuj(p1);
             System.out.println(p2);
-            Transformacja ob2 = ob.getTranformacjaOdwrotna();
+            Transformacja ob2 = ob.getTransformacjaOdwrotna();
             System.out.println(ob2);
             Punkt p3 = ob2.transformuj(p2);
             System.out.println(p3);
         } catch (BrakTransformacjiOdwrotnejException ex) {
             ex.printStackTrace();
         }
+            
+            try {
+                Punkt p1 = new Punkt(5,5);
+                Transformacja a = new Obrot(45);
+                Transformacja b = new Skalowanie(3,1);
+                Transformacja c = new Translacja(8,8);
+                Transformacja d = a.getTransformacjaOdwrotna();
+                Transformacja [] tab = {a,b,c,d};
+                ZlozenieTransformacji zlozenie = new ZlozenieTransformacji(tab);
+                zlozenie.transformuj(p1);
+                System.out.println("Punkt p1 po transformacji zlozonej" + p1);
+            } catch (BrakTransformacjiOdwrotnejException ex) {
+            ex.printStackTrace();
+        }
+            
         System.out.println();    
         
         
