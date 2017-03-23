@@ -1,41 +1,49 @@
 #!/bin/bash
-PLIK="a.txt"
-KATALOG="/home/jacek/pg-linux/"
 CMD=0
-OPCJA1=50
-OPCJA2=10
-ZAWARTOSC="echo"
 
-while [ $CMD != 7 ]; do
-	echo "1. nazwa pliku: $PLIK"
-	echo "2. katalog: $KATALOG"
-	echo "3  atime: $OPCJA1"
-	echo "4. max depth: $OPCJA2"
-	echo "5. zawartosc: $ZAWARTOSC"
-	echo "6. szukaj"
-	echo "7. koniec"
+
+while [ $CMD -ne 7 ];do
+echo "1. Nazwa pliku: $PLIK
+2. Sciezka do pliku: $KATALOG
+3. Min rozmiar: $MIN
+4. Max rozmiar: $MAX
+5. Zawartosc: $ZAW
+6. Szukaj
+7. Koniec"
+
 	read CMD
-	
-	if [ $CMD -eq 1 ]; then
-		read PLIK
-	elif [ $CMD -eq 2 ]; then
-		read KATALOG
-	elif [ $CMD -eq 3 ]; then
-		read OPCJA1
-	elif [ $CMD -eq 4 ]; then
-		read OPCJA2
-	elif [ $CMD -eq 5 ]; then
-		read ZAWARTOSC
-	elif [ $CMD -eq 6 ]; then
-		
-var=$(find $KATALOG$PLIK -maxdepth $OPCJA2 -atime $OPCJA1-exec grep $ZAWARTOSC {} \; 2>null)
 
-		if [ ! -z $var ]; then
-			echo "plik istnieje";
-		else
-			echo "plik nie istnieje"
-		fi
-		echo "-------------------"
-	fi
+	if [ $CMD -eq 1 ];then
+	read PLIK
+	CMD=0
+
+	elif [ $CMD -eq 2 ];then
+	read KATALOG
+	CMD=0
+
+	elif [ $CMD -eq 3 ];then
+	echo "c/k/M/G (rozmiar):"
+	read MIN
+	CMD=0
 	
-done
+	elif [ $CMD -eq 4 ];then
+	echo "c/k/M/G (rozmiar):"
+	read MAX
+	CMD=0
+
+	elif [ $CMD -eq 5 ];then
+	read ZAW
+	CMD=0
+
+	elif [ $CMD -eq 6 ];then
+	WYNIK=$(find $KATALOG -name $PLIK -size "+$MIN" -size "-$MAX" -exec grep -l $ZAW {} \; |& grep -v "Brak dostępu" | wc -l)
+		if [ $WYNIK -gt 0 ];then
+		echo "plik istnieje"
+		else
+		echo "plik nie istnieje"
+		fi
+	CMD=0
+
+	else echo "-----------------"
+	fi
+	done
