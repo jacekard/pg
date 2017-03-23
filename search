@@ -1,34 +1,16 @@
 #!/bin/bash
-NAZWA=$1
-#-e (obojetnie, -f (plik) -d (folder)
-# else if = elif
-# -eq : ==
-# -ne : not equal
-# -gt : greater than
-# -lt : less then
-# -ge : great equal
-# -le : less equal
-# -z : ciag znakow pusty
-# -n : niepusty
-
-#find // grep
-#find ... -exec grep ... {} \;
-
-PLIK="";
-KATALOG="";
+PLIK="a.txt";
+KATALOG="/home/jacek/pg-linux/";
 CMD=0;
-CALOSC="";
-OPCJA1="";
-OPCJA2="";
-ZAWARTOSC="";
+OPCJA1=50;
+OPCJA2=10;
+ZAWARTOSC="echo";
 
-EX=1;
-
-while [ $EX ]; do
+while [ $CMD != 7 ]; do
 	echo "1. nazwa pliku: $PLIK";
 	echo "2. katalog: $KATALOG";
-	echo "3. prawa dostepu: $OPCJA1";
-	echo "4. ile dni temu: $OPCJA2";
+	echo "3  atime: $OPCJA1";
+	echo "4. max depth: $OPCJA2";
 	echo "5. zawartosc: $ZAWARTOSC";
 	echo "6. szukaj";
 	echo "7. koniec";
@@ -46,15 +28,14 @@ while [ $EX ]; do
 		read ZAWARTOSC;
 	elif [ $CMD -eq 6 ]; then
 		
-		EXIST=`find $KATALOG -name $PLIK -perm $OPCJA1 -mtime $OPCJA2 -exec grep $ZAWARTOSC {}  \;`
-		if [ -n $EXIST ]; then
-			echo "plik istnieje";
+var=$(find $KATALOG$PLIK -maxdepth $OPCJA2 -atime $OPCJA1-exec grep $ZAWARTOSC {} \; 2>null)
+
+		if [ ! -z $var ]; then
+			echo "plik istnieje"; 
 		else
 			echo "plik nie istnieje";
 		fi
-
-	elif [ $CMD -eq 7 ]; then
-		((EX--));
-		exit 0;
+		echo "-------------------"
 	fi
+	
 done
