@@ -1,39 +1,39 @@
 #!/bin/bash
-PLIK="a.txt";
-KATALOG="/home/jacek/pg-linux/";
-CMD=0;
-OPCJA1=50;
-OPCJA2=10;
-ZAWARTOSC="echo";
+PLIK="a.txt"
+KATALOG="/home/jacek/pg-linux/"
+CMD=0
+OPCJA1=50
+OPCJA2=10
+ZAWARTOSC="echo"
 
 while [ $CMD != 7 ]; do
-	echo "1. nazwa pliku: $PLIK";
-	echo "2. katalog: $KATALOG";
-	echo "3  atime: $OPCJA1";
-	echo "4. max depth: $OPCJA2";
-	echo "5. zawartosc: $ZAWARTOSC";
-	echo "6. szukaj";
-	echo "7. koniec";
+	echo "1. nazwa pliku: $PLIK"
+	echo "2. katalog: $KATALOG"
+	echo "3  atime: $OPCJA1"
+	echo "4. max depth: $OPCJA2"
+	echo "5. zawartosc: $ZAWARTOSC"
+	echo "6. szukaj"
+	echo "7. koniec"
 	read CMD
 	
 	if [ $CMD -eq 1 ]; then
-		read PLIK;
+		read PLIK
 	elif [ $CMD -eq 2 ]; then
-		read KATALOG;
+		read KATALOG
 	elif [ $CMD -eq 3 ]; then
-		read OPCJA1;
+		read OPCJA1
 	elif [ $CMD -eq 4 ]; then
-		read OPCJA2;
+		read OPCJA2
 	elif [ $CMD -eq 5 ]; then
-		read ZAWARTOSC;
+		read ZAWARTOSC
 	elif [ $CMD -eq 6 ]; then
 		
 var=$(find $KATALOG$PLIK -maxdepth $OPCJA2 -atime $OPCJA1-exec grep $ZAWARTOSC {} \; 2>null)
 
 		if [ ! -z $var ]; then
-			echo "plik istnieje"; 
+			echo "plik istnieje";
 		else
-			echo "plik nie istnieje";
+			echo "plik nie istnieje"
 		fi
 		echo "-------------------"
 	fi
