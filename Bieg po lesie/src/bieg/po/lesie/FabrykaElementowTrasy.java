@@ -2,53 +2,36 @@ package bieg.po.lesie;
 
 public class FabrykaElementowTrasy {
 
-    Teren Stworz(RodzajTerenu teren) {
-        Teren t = new Teren(teren);
-        return t;
+    public FabrykaElementowTrasy() {
+
     }
 
-    Zadanie Stworz(DziedzinaZadania zad) {
-        Zadanie z = new Zadanie(zad);
-        return z;
+    public static Teren utworzElementTrasy(RodzajTerenu rt) {
+        Teren T = new Teren(rt);
+        return T;
     }
 
-    Zadanie Stworz(String napis) {
-        Zadanie z;
-        Teren t;
-        switch (napis) {
-            case "MATEMATYKA":
-                z = new Zadanie(DziedzinaZadania.valueOf(napis));
-                break;
-            case "INFORMATYKA":
-                z = new Zadanie(DziedzinaZadania.valueOf(napis));
-                break;
-            case "FIZYKA":
-                z = new Zadanie(DziedzinaZadania.valueOf(napis));
-                break;
-            case "SZTUKA":
-                z = new Zadanie(DziedzinaZadania.valueOf(napis));
-                break;
-            case "NAUKI_LEŚNE":
-                z = new Zadanie(DziedzinaZadania.valueOf(napis));
-                break;
-            case "DROGA":
-                t = new Teren(RodzajTerenu.valueOf(napis));
-                break;
-            case "SCIEZKA":
-                t = new Teren(RodzajTerenu.valueOf(napis));
-                break;
-            case "WYSOKI_LAS":
-                t = new Teren(RodzajTerenu.valueOf(napis));
-                break;
-            case "NISKI_LAS":
-                t = new Teren(RodzajTerenu.valueOf(napis));
-                break;
-            case "BAGNO":
-                t = new Teren(RodzajTerenu.valueOf(napis));
-                break;
-            default:
-                System.out.println("Nieprawidlowy element");
-                break;
+    public static Zadanie utworzElementTrasy(DziedzinaZadania dz) {
+        Zadanie Z = new Zadanie(dz);
+        return Z;
+    }
+
+    public static ElementTrasy utworzElementTrasy(String s)
+            throws BrakElementu {
+        try {
+            DziedzinaZadania dz = DziedzinaZadania.valueOf(s);
+            Zadanie Z = utworzElementTrasy(dz);
+            return Z;
+        } catch (IllegalArgumentException ex) {
+            //throw new BrakElementu(ex.getMessage(), ex.getCause());
+        }
+
+        try {
+            RodzajTerenu tr = RodzajTerenu.valueOf(s);
+            Teren T = utworzElementTrasy(tr);
+            return T;
+        } catch (IllegalArgumentException ex) {
+            throw new BrakElementu(ex.getMessage(), ex.getCause());
         }
     }
 }
