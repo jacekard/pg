@@ -110,7 +110,14 @@ public class BiegPoLesie {
         } else if (et instanceof Zadanie) {
             Zadanie z = (Zadanie) et;
             for (Uczestnik u : z.getUczestnicy()) {
-                komentator.relacjonujZadanie(indeksElementuTrasy + 1, u, u.rozwiazZadanie(z));
+                if (u.rozwiazZadanie(z)) {
+                    komentator.relacjonujZadanie(indeksElementuTrasy + 1, u, true);
+                    doUsuniecia.add(u);
+                    umiescUczestnikaWElemencieTrasy(u, indeksElementuTrasy + 1);
+                } else {
+                    komentator.relacjonujZadanie(indeksElementuTrasy + 1, u, false);
+                }
+                liczbaUczestnikow++;
             }
         }
         for (Uczestnik u : doUsuniecia) {

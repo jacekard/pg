@@ -99,7 +99,6 @@ class Komentator {
         } else {
             mow(slowo_uczestnik + " " + u + " nie rozwiazal wlasnie zadania");
         }
-
     }
 
     private String odmienUczestnik(Uczestnik u) {

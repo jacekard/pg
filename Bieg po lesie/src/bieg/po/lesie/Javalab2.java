@@ -58,6 +58,7 @@ public class Javalab2 {
     {
         BiegPoLesie gorki_ = new BiegPoLesie("Górki",mikrofon,przestrzenWLesie);
         
+        gorki_.dodajElementTrasy(new Zadanie(DziedzinaZadania.MATEMATYKA));
         gorki_.dodajElementTrasy(new Teren(RodzajTerenu.DROGA));
         gorki_.dodajElementTrasy(new Teren(RodzajTerenu.SCIEZKA));
         gorki_.dodajElementTrasy(new Teren(RodzajTerenu.SCIEZKA));

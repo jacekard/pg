@@ -3,7 +3,7 @@ package bieg.po.lesie;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Zadanie implements ElementTrasy {
+class Zadanie implements ElementTrasy {
    
     public final DziedzinaZadania dziedzina;
     private Map<Uczestnik,Double> uczestnicyWTerenie = new HashMap<>();

@@ -1,6 +1,0 @@
-
-package bieg.po.lesie;
-
-public class FabrykaElementowTrasy implements ElementTrasy {
-    
-}
