@@ -1,3 +1,0 @@
-Zapytać prowadzącego o:
-W języku Java wszystkie metody niestatyczne oraz nieprywatne są wirtualne – można je
-nadpisywać. Aby zablokować nadpisywanie metody trzeba dodać do niej słowo kluczowe final.
