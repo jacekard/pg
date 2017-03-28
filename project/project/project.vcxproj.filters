@@ -29,5 +29,20 @@
     <ClInclude Include="Organizm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Roslina.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Zwierze.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wilk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Czlowiek.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

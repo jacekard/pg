@@ -1,15 +1,24 @@
 #pragma once
-#include "Swiat.h"
+#include "Header.h"
+
+
 
 class Organizm {
+private:
+	int sila;
+	int inicjatywa;
+	position pos;
 public:
-	int sila = 0;
-	int inicjatywa = 0;
-	int polozenie = 0;
-	
-	virtual void akcja();
-	virtual void kolizja();
-	virtual void rysowanie();
-	virtual ~Organizm();
-};
+	virtual void akcja() {};
+	virtual void kolizja() {};
+	virtual void rysowanie() {};
 
+	static void gotoxy(int x, int y){
+		COORD coord;
+		coord.X = x;
+		coord.Y = y;
+		SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+	}
+
+
+};

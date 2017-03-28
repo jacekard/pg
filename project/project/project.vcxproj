@@ -79,8 +79,13 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Czlowiek.h" />
+    <ClInclude Include="Header.h" />
     <ClInclude Include="Organizm.h" />
+    <ClInclude Include="Roslina.h" />
     <ClInclude Include="Swiat.h" />
+    <ClInclude Include="Wilk.h" />
+    <ClInclude Include="Zwierze.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="project.cpp" />
