@@ -79,7 +79,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="Organizm.h" />
+    <ClInclude Include="Swiat.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="project.cpp" />
