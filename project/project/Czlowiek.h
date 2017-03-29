@@ -25,7 +25,8 @@ void Czlowiek::rysowanie() {
 	int k = 12;
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, k);
-	printf("%c", 254);
+	//printf("%c", 254);
+	printf("Janek");
 	k = 15;
 	SetConsoleTextAttribute(hConsole, k);
 }

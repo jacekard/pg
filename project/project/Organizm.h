@@ -1,8 +1,6 @@
 #pragma once
 #include "Header.h"
 
-
-
 class Organizm {
 private:
 	int sila;

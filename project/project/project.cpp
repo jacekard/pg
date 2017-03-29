@@ -3,9 +3,10 @@
 int main() {
 	
 	Swiat swiat;
-	Zwierze **sfora = new Zwierze*[ILOSC];
+
+	Organizm **organizmy = new Organizm*[ILOSC];
 	for (int i = 0; i < ILOSC; i++){
-		sfora[i] = new Wilk;
+		organizmy[i] = new Wilk;
 	}
 	//Zwierze *human = new Czlowiek;
 	char zn = '1';
@@ -14,8 +15,8 @@ int main() {
 		swiat.rysujSwiat();
 		
 		for (int i = 0; i < ILOSC; i++){
-			sfora[i]->rysowanie();
-			sfora[i]->akcja();
+			organizmy[i]->rysowanie();
+			organizmy[i]->akcja();
 		}
 		human->rysowanie();
 		
