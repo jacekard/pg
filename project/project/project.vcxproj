@@ -80,10 +80,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Czlowiek.h" />
-    <ClInclude Include="Header.h" />
     <ClInclude Include="Organizm.h" />
+    <ClInclude Include="Set.h" />
+    <ClInclude Include="Rand.h" />
     <ClInclude Include="Roslina.h" />
     <ClInclude Include="Swiat.h" />
+    <ClInclude Include="Trawa.h" />
     <ClInclude Include="Wilk.h" />
     <ClInclude Include="Zwierze.h" />
   </ItemGroup>

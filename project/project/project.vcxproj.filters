@@ -38,10 +38,16 @@
     <ClInclude Include="Wilk.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
+    <ClInclude Include="Czlowiek.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Czlowiek.h">
+    <ClInclude Include="Rand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Set.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Trawa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
