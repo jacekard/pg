@@ -37,15 +37,18 @@ public:
 	void setPosx(int x);
 	void setPosy(int y);
 	void setWiek(int a);
+	void setSila(int s);
 	bool czyDozwolonyRuch(p tmp);
 	bool czyOdbilAtak(Organizm& atakujacy);
+	bool Organizm::czyZwierze(Organizm& other);
 	void grow();
 	void die();
 	void reallocate();
 	void operator=(p& other) {
 		this->pos.x += other.x;
 		this->pos.y += other.y;
-	}
+	}
+
 
 };
 

@@ -38,6 +38,7 @@ public:
 	void rysujMape();
 	int losuj(int a, int b);
 	bool czyKoniec;
+	bool tarczaAlzura;
 	void komentuj(string komunikat);
 	void wypiszKomunikaty(int x, int y);
 	void sortujInicjatywa();

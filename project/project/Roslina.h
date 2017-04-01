@@ -7,6 +7,8 @@ public:
 	Roslina(int s, int i, char sy, int c, int w, string r, Swiat& sw);
 	~Roslina();
 	void akcja() override;
+	void rozmnazanie() override {}; 
+	void kolizja(Organizm& other) override;
 };
 
 #endif

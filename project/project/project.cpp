@@ -8,10 +8,9 @@ int main() {
 	do {
 		
 		swiat.wykonajTure();
-		
-		p::clrscr();
+	
 	} while (!swiat.czyKoniec);
 	p::gameOver(swiat.turnCount, swiat.lista.size());
-	Sleep(6000);
+	Sleep(5000);
 	return 0;
 }

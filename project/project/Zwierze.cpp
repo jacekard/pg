@@ -23,7 +23,9 @@ p Zwierze::ruch() {
 void Zwierze::akcja() {
 	p tmp;
 
-	tmp = ruch();
+	//tmp = ruch();
+	tmp.x = 0;
+	tmp.y = 0;
 
 	if (pos.x + tmp.x > swiat.WIDTH - 1 || pos.x + tmp.x < 1)
 		tmp.x = 0;

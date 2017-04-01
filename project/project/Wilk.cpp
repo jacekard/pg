@@ -2,7 +2,7 @@
 #include "Swiat.h"
 
 //sila(s), inicjatywa(i), symbol(sy), color(c), wiek(w), rodzaj(r), swiat(sw) {
-Wilk::Wilk(Swiat& sw) : Zwierze(9, 5, '%', 14, 0, "WILK", sw) {
+Wilk::Wilk(Swiat& sw) : Zwierze(1, 5, '%', 14, 0, "WILK", sw) {
 }
 Wilk::Wilk(Swiat& sw, p poz) : Zwierze(9, 5, '%', 14, 0, "WILK", sw) {
 	this->pos = poz;

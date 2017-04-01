@@ -6,7 +6,7 @@ Organizm::Organizm(int s, int i, char sy, int c, int w,
 	string r, Swiat& sw)
 	: sila(s), inicjatywa(i), symbol(sy),
 	color(c), wiek(w), rodzaj(r), swiat(sw) {
-	
+
 	pos.x = swiat.losuj(1, swiat.WIDTH - 1);
 	pos.y = swiat.losuj(1, swiat.HEIGHT - 1);
 	if (swiat.world[pos.y][pos.x] == NULL)
@@ -33,9 +33,15 @@ string  Organizm::getRodzaj() { return this->rodzaj; }
 void Organizm::setPosx(int x) { this->pos.x = x; }
 void Organizm::setPosy(int y) { this->pos.y = y; }
 void Organizm::setWiek(int a) { this->wiek = a; }
+void Organizm::setSila(int s) { this->sila = s; }
 void  Organizm::grow() { this->wiek++; }
 
-//bool  Organizm::operator<(Organizm& a) { return inicjatywa < a.getInicjatywa(); }
+bool Organizm::czyZwierze(Organizm& other) {
+	string a = other.getRodzaj();
+	if (a == "WILK" || a == "OWCA" || a == "ZOLW" || a == "ANTYLOPA"
+		|| a == "CYBER-OWCA" || a == "CZLOWIEK") return true;
+	else return false;
+}
 bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
 	string rodzaj = atakujacy.getRodzaj();
 	if (rodzaj == "OWCA" || rodzaj == "LIS" || rodzaj == "ZOLW" ||
@@ -45,9 +51,13 @@ bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
 			if (this->wiek > 10 && atakujacy.getWiek() > 10) {
 				this->rozmnazanie();
 				swiat.komentuj("Urodzil/a sie maly/a " + this->rodzaj + "!");
+				return true;
 			}
 		}
 		else if (atakujacy.getSila() >= this->sila) {
+			if ((this->rodzaj == "CZLOWIEK" || rodzaj == "CZLOWIEK") && swiat.tarczaAlzura) {
+				return true;
+			}
 			swiat.komentuj(this->rodzaj + " zostal pokonany przez " + rodzaj + "!");
 			this->die();
 			return false;
@@ -83,8 +93,8 @@ void Organizm::die() {
 void Organizm::reallocate() {
 	p tmp;
 
-	
-	int rand = swiat.losuj(1, 4);
+	int rand = 1;
+
 	switch (rand) {
 	case 1: 	//case up
 		tmp = pos;
@@ -94,8 +104,7 @@ void Organizm::reallocate() {
 			swiat.world[tmp.y][tmp.x] = this;
 			pos = tmp;
 			return;
-		break;
-	}
+		}
 	case 2: 	//case down
 		tmp = pos;
 		tmp.y++;
@@ -105,7 +114,6 @@ void Organizm::reallocate() {
 			pos = tmp;
 			return;
 		}
-		break;
 	case 3:	//case left
 		tmp = pos;
 		tmp.x--;
@@ -115,7 +123,6 @@ void Organizm::reallocate() {
 			pos = tmp;
 			return;
 		}
-		break;
 	case 4: 	//case right
 		tmp = pos;
 		tmp.x++;
@@ -125,7 +132,6 @@ void Organizm::reallocate() {
 			pos = tmp;
 			return;
 		}
-		break;
 	}
 
 	//swiat.komentuj("Realokacja obiektu " + this->rodzaj + " nie udala sie ");

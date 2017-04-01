@@ -4,6 +4,7 @@ Swiat::Swiat() {
 	p::hidecursor();
 	turnCount = 0;
 	czyKoniec = false;
+	tarczaAlzura = false;
 	int LICZBA_STWOROW = 5;
 
 
@@ -29,15 +30,11 @@ Swiat::Swiat() {
 	}
 	lista.push_back(new Czlowiek(*this));
 
-
-
 	sortujInicjatywa();
 
-	for (int i = 0; i < lista.size(); i++) {
-		//if (world[lista[i]->getPosy()][lista[i]->getPosx()] == NULL)
-		
-		//problem z respawnem w tym samym miejscu!
-	}
+	/* */
+	Rysuj();
+	/* */
 }
 
 Swiat::~Swiat() {
@@ -55,11 +52,10 @@ void Swiat::Rysuj() {
 }
 
 void Swiat::wykonajTure() {
-	/* */
-	Rysuj();
-	/* */
+
 	int x, y;
 	string a;
+
 	for (int i = 0; i < lista.size(); i++) {
 		y = lista[i]->getPosy();
 		x = lista[i]->getPosx();
@@ -68,7 +64,11 @@ void Swiat::wykonajTure() {
 		world[y][x] = NULL;
 		world[lista[i]->getPosy()][lista[i]->getPosx()] = lista[i];
 	}
-
+	
+	/* */
+	p::clrscr();
+	Rysuj();
+	/* */
 	turnCount++;
 }
 
@@ -100,14 +100,29 @@ void Swiat::rysujInterfejs() {
 	int x = WIDTH + OFFX;
 	int y = 0;
 	p::xy(x, y);
-	cout << "- - - - - - - - - - - -";
-	p::xy(x, y++);
 	cout << "Jacek Ardanowski 165178";
-	p::xy(x, y++);
+	p::xy(x, ++y);
+	cout << "- - - - - - - - - - - -";
+	p::xy(x, ++y);
 	cout << "Tura nr " << turnCount;
-	p::xy(x, y++);
+	p::xy(x + 15, y);
+	if (tarczaAlzura) {
+		p::setColor(14);
+		cout << "Tarcza Alzura ";
+		p::setColor(10);
+		cout << "aktywna";
+	}
+	else {
+		p::setColor(14);
+		cout << "Tarcza Alzura ";
+		p::setColor(12);
+		cout << "nieaktywna";
+	}
+	++y;
+	p::xy(x, ++y);
 	cout << "Komunikaty: ";
-	wypiszKomunikaty(x, y);
+	wypiszKomunikaty(x, ++y);
+	
 }
 
 void Swiat::rysujMape() {
@@ -129,7 +144,7 @@ void Swiat::rysujMape() {
 void Swiat::listaGatunkow() {
 	int pom = 0;
 	int x = WIDTH + OFFX;
-	int y = 6;
+	int y = 12;
 	p::xy(x, y);
 	cout << "lista organizmow: ";
 	y++;

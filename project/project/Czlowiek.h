@@ -6,12 +6,14 @@
 
 class Czlowiek : public Zwierze {
 private:
-	bool tarczaAlzura;
+	int coolDown;
+	int skillEnabled;
 public:
 	Czlowiek(Swiat& sw);
 	void kolizja(Organizm& other);
-	void akcja();
+	void akcja() override;
 	void rozmnazanie() override {};
+	void umiejetnosc();
 	p obslugaStrzalek();
 };
 
