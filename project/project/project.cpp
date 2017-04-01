@@ -1,6 +1,7 @@
 #include "Swiat.h"
+#include <conio.h>
 int main() {
-
+	
 	Swiat swiat;
 
 	char zn = '1';
@@ -8,8 +9,9 @@ int main() {
 		
 		swiat.wykonajTure();
 		
-		system("cls");
-	} while (zn != 'q');
-	
-	system("pause");
+		p::clrscr();
+	} while (!swiat.czyKoniec);
+	p::gameOver();
+	Sleep(2500);
+	return 0;
 }

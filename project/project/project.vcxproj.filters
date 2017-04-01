@@ -21,6 +21,27 @@
     <ClCompile Include="project.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Swiat.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Zwierze.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Roslina.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Czlowiek.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Trawa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Wilk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Organizm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Swiat.h">
@@ -39,9 +60,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Czlowiek.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Rand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Set.h">

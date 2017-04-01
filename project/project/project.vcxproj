@@ -82,7 +82,6 @@
     <ClInclude Include="Czlowiek.h" />
     <ClInclude Include="Organizm.h" />
     <ClInclude Include="Set.h" />
-    <ClInclude Include="Rand.h" />
     <ClInclude Include="Roslina.h" />
     <ClInclude Include="Swiat.h" />
     <ClInclude Include="Trawa.h" />
@@ -90,7 +89,14 @@
     <ClInclude Include="Zwierze.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Czlowiek.cpp" />
+    <ClCompile Include="Organizm.cpp" />
     <ClCompile Include="project.cpp" />
+    <ClCompile Include="Roslina.cpp" />
+    <ClCompile Include="Swiat.cpp" />
+    <ClCompile Include="Trawa.cpp" />
+    <ClCompile Include="Wilk.cpp" />
+    <ClCompile Include="Zwierze.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
