@@ -11,7 +11,7 @@ int main() {
 		
 		p::clrscr();
 	} while (!swiat.czyKoniec);
-	p::gameOver();
-	Sleep(2500);
+	p::gameOver(swiat.turnCount, swiat.lista.size());
+	Sleep(6000);
 	return 0;
 }

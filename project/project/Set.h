@@ -9,10 +9,10 @@ public:
 	int x;
 	int y;
 	p() : x(0), y(0) {};
-	static void setColor(int k = 15) { 
+	static void setColor(int k = 15) {
 		HANDLE hConsole;
 		hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		SetConsoleTextAttribute( hConsole, k);
+		SetConsoleTextAttribute(hConsole, k);
 	}
 	static void hidecursor()
 	{
@@ -61,47 +61,29 @@ public:
 			&count
 			)) return;
 	}
-	static void gameOver() {
-		p::xy(1, 1);
-		cout << " @@@@@@@@   @@@@@@   @@@@@@@@@@   @@@@@@@@		 @@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@   " << endl;
-		cout << "@@@@@@@@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@		@@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@@ " << endl;
-		cout << "!@@        @@!  @@@  @@! @@! @@!  @@!		      @@!  @@@  @@!  @@@  @@!       @@!  @@@  " << endl;
+	static void gameOver(int turnCount, int OrganismCount) {
+		p::xy(0, 0);
+		setColor(4);
+		cout << " @@@@@@@@   @@@@@@   @@@@@@@@@@   @@@@@@@@		 @@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@" << endl;
+		cout << "@@@@@@@@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@		@@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@@" << endl;
+		cout << "!@@        @@!  @@@  @@! @@! @@!  @@!			@@!  @@@  @@!  @@@  @@!       @@!  @@@" << endl;
 		cout << "!@!        !@!  @!@  !@! !@! !@!  !@!			!@!  @!@  !@!  @!@  !@!       !@!  @!@ " << endl;
 		cout << "!@! @!@!@  @!@!@!@!  @!! !!@ @!@  @!!!:!		@!@  !@!  @!@  !@!  @!!!:!    @!@!!@!" << endl;
-		cout << "!!! !!@!!  !!!@!!!!  !@!   ! !@!  !!!!!:		!@!  !!!  !@!  !!!  !!!!!:    !!@!@!" << endl;
+		cout << "!!! !!@!!  !!!@!!!!  !@!  !  !@!  !!!!!:		!@!  !!!  !@!  !!!  !!!!!:    !!@!@!" << endl;
 		cout << ":!!   !!:  !!:  !!!  !!:     !!:  !!:			!!:  !!!  :!:  !!:  !!:       !!: :!!" << endl;
 		cout << ":!:   !::  :!:  !:!  :!:     :!:  :!:			:!:  !:!   ::!!:!   :!:       :!:  !:!" << endl;
 		cout << " ::: ::::  ::   :::  :::     ::    :: ::::		::::: ::    ::::     :: ::::  ::   ::: " << endl;
 		cout << " :: :: :    :   : :   :      :    : :: ::		 : :  :      :      : :: ::    :   : : " << endl;
 		cout << endl;
 		cout << endl;
+
+		setColor(12);
+		cout << "ZGINALES!  Udalo ci sie przezyc " << turnCount << " tur" << endl;
+		cout << "Liczba stworzen na mapie: " << OrganismCount << endl;
+		cout << endl;
+		cout << endl;
 	}
 };
-
-                                            
-
-
-    
-       
-    
-    
-       
-       
-  
-   
-                                            
-                                        
-
- 
-
- 
-   
-    
-   
-  
- 
- 
-
 
 //virtual void Wypisz(ostream& out) const = 0;
 //friend ostream& operator<<(ostream& os, const Swiat& swiat);
