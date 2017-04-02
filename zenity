@@ -1,0 +1,41 @@
+#!/bin/bash
+CMD=0
+
+menu=("Nazwa pliku" "Sciezka do pliku" "Min rozmiar" "Max rozmiar" "Zawartosc" "Szukaj")
+
+while [ 1 ];do
+informacja="Nazwa pliku: $PLIK\nKatalog: $KATALOG\n\nMin rozmiar: $MIN\nMax rozmiar: $MAX\nZawartosc: $ZAW\n\n"
+
+CMD=$(zenity --list --height 450 --width 300 --cancel-label "KONIEC" --title "Wyszukiwanie plików" --text="$informacja" --ok-label "Wybierz opcję" --column="Menu główne" "${menu[@]}")
+
+	if [[ $? -eq 1 ]]; then
+	    break
+	fi
+
+	if [ "$CMD" = "Nazwa pliku" ];then
+	PLIK=`zenity --entry --title "Nazwa pliku:" --text "komunikat"`
+	
+	elif [ "$CMD" = "Sciezka do pliku" ];then
+	KATALOG=`zenity --entry --title "Sciezka do pliku:" --text "komunikat"`
+	
+	elif [ "$CMD" = "Min rozmiar" ];then
+	MIN=`zenity --entry --title "c/k/M/G (rozmiar):" --text "komunikat"`
+		
+	elif [ "$CMD" = "Max rozmiar" ];then
+	MAX=`zenity --entry --title "c/k/M/G (rozmiar):" --text "komunikat"`
+	
+	elif [ "$CMD" = "Zawartosc" ];then
+	ZAW=`zenity --entry --title "Zawartosc:" --text "komunikat"`
+	
+	elif [ "$CMD" = "Szukaj" ];then
+	WYNIK=$(find $KATALOG -name $PLIK -size "+$MIN" -size "-$MAX" -exec grep -l $ZAW {} \; |& grep -v "Brak dostępu" | wc -l)
+		echo $WYNIK
+		if [ $WYNIK -gt 0 ];then
+		zenity --info --title "tytuł" --text "plik istnieje"
+		else
+		zenity --info --title "tytuł" --text "plik nie istnieje"
+		fi
+
+	else echo "-----------------"
+	fi
+	done
