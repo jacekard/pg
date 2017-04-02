@@ -10,6 +10,13 @@ Czlowiek::Czlowiek(Swiat& sw) : Zwierze(5, 4, 254, 12, 0, "CZLOWIEK", sw) {
 	skillEnabled = 5;
 };
 
+Czlowiek::Czlowiek(Swiat& sw, int x, int y) : Zwierze(5, 4, 254, 12, 0, "CZLOWIEK", sw) {
+	coolDown = 0;
+	skillEnabled = 5;
+	this->pos.x = x;
+	this->pos.y = y;
+};
+
 void Czlowiek::akcja() {
 	unsigned char znak = getch();
 
@@ -18,13 +25,20 @@ void Czlowiek::akcja() {
 
 	switch (znak)
 	{
-	case 0: //klawisze specjalne
 	case 'q':
 		swiat.czyKoniec = true;
+		swiat.komentuj(" + Wyszedles z gry +");
 		break;
 	case 'p': //tarcza alzura
 		umiejetnosc();
 		break;
+	case 's':
+		swiat.czySave = true;
+		break;
+	case 'l':
+		swiat.czyLoad = true;
+		break;
+	case 0: //klawisze specjalne
 	case 224: //klawisze specjalne
 		znak = getch();
 		switch (znak)

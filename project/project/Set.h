@@ -8,7 +8,9 @@ class p{
 public:
 	int x;
 	int y;
-	p() : x(0), y(0) {};
+	p() : x(0), y(0) {
+		SetConsoleTitle(TEXT("Symulator zycia -- Jacek Ardanowski 165178"));
+	};
 	static void setColor(int k = 15) {
 		HANDLE hConsole;
 		hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -61,27 +63,28 @@ public:
 			&count
 			)) return;
 	}
-	static void gameOver(int turnCount, int OrganismCount) {
+	static void gameOver(int turnCount, int OrganismCount, string ostatni) {
 		p::xy(0, 0);
 		p::clrscr();
 		setColor(4);
-		cout << " @@@@@@@@   @@@@@@   @@@@@@@@@@   @@@@@@@@     @@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@" << endl;
-		cout << "@@@@@@@@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@    @@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@@" << endl;
-		cout << "!@@        @@!  @@@  @@! @@! @@!  @@!         @@!  @@@  @@!  @@@  @@!       @@!  @@@" << endl;
-		cout << "!@!        !@!  @!@  !@! !@! !@!  !@!         !@!  @!@  !@!  @!@  !@!       !@!  @!@ " << endl;
-		cout << "!@! @!@!@  @!@!@!@!  @!! !!@ @!@  @!!!:!      @!@  !@!  @!@  !@!  @!!!:!    @!@!!@!" << endl;
-		cout << "!!! !!@!!  !!!@!!!!  !@!  !  !@!  !!!!!:      !@!  !!!  !@!  !!!  !!!!!:    !!@!@!" << endl;
-		cout << ":!!   !!:  !!:  !!!  !!:     !!:  !!:         !!:  !!!  :!:  !!:  !!:       !!: :!!" << endl;
-		cout << ":!:   !::  :!:  !:!  :!:     :!:  :!:         :!:  !:!   ::!!:!   :!:       :!:  !:!" << endl;
-		cout << " ::: ::::  ::   :::  :::     ::   :: ::::     ::::: ::    ::::    :: ::::   ::   ::: " << endl;
-		cout << " :: :: :    :   : :   :      :    : :: ::      : :  :      :      : :: ::    :   : : " << endl;
+		cout << endl;
+		cout << "   @@@@@@@@   @@@@@@   @@@@@@@@@@   @@@@@@@@     @@@@@@   @@@  @@@  @@@@@@@@  @@@@@@@" << endl;
+		cout << "  @@@@@@@@@  @@@@@@@@  @@@@@@@@@@@  @@@@@@@@    @@@@@@@@  @@@  @@@  @@@@@@@@  @@@@@@@@" << endl;
+		cout << "  !@@        @@!  @@@  @@! @@! @@!  @@!         @@!  @@@  @@!  @@@  @@!       @@!  @@@" << endl;
+		cout << "  !@!        !@!  @!@  !@! !@! !@!  !@!         !@!  @!@  !@!  @!@  !@!       !@!  @!@ " << endl;
+		cout << "  !@! @!@!@  @!@!@!@!  @!! !!@ @!@  @!!!:!      @!@  !@!  @!@  !@!  @!!!:!    @!@!!@!" << endl;
+		cout << "  !!! !!@!!  !!!@!!!!  !@!  !  !@!  !!!!!:      !@!  !!!  !@!  !!!  !!!!!:    !!@!@!" << endl;
+		cout << "  :!!   !!:  !!:  !!!  !!:     !!:  !!:         !!:  !!!  :!:  !!:  !!:       !!: :!!" << endl;
+		cout << "  :!:   !::  :!:  !:!  :!:     :!:  :!:         :!:  !:!   ::!!:!   :!:       :!:  !:!" << endl;
+		cout << "   ::: ::::  ::   :::  :::     ::   :: ::::     ::::: ::    ::::    :: ::::   ::   ::: " << endl;
+		cout << "   :: :: :    :   : :   :      :    : :: ::      : :  :      :      : :: ::    :   : : " << endl;
 		cout << endl;
 		cout << endl;
 
 		setColor(12);
-		cout << "Udalo ci sie przezyc " << turnCount << " tur" << endl;
-		cout << "Liczba stworzen na mapie: " << OrganismCount << endl;
-		cout << endl;
+
+		cout << " * Udalo ci sie przezyc " << turnCount << " tur" << endl;
+		cout << " * Liczba stworzen na mapie: " << OrganismCount << endl;
 		cout << endl;
 	}
 };

@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Czlowiek.h" />
+    <ClInclude Include="Mlecz.h" />
     <ClInclude Include="Organizm.h" />
     <ClInclude Include="Set.h" />
     <ClInclude Include="Roslina.h" />
@@ -90,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Czlowiek.cpp" />
+    <ClCompile Include="Mlecz.cpp" />
     <ClCompile Include="Organizm.cpp" />
     <ClCompile Include="project.cpp" />
     <ClCompile Include="Roslina.cpp" />

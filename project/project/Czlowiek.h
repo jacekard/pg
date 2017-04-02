@@ -9,7 +9,8 @@ private:
 	int coolDown;
 	int skillEnabled;
 public:
-	Czlowiek(Swiat& sw);
+	Czlowiek(Swiat&);
+	Czlowiek(Swiat&, int, int);
 	void kolizja(Organizm& other);
 	void akcja() override;
 	void rozmnazanie() override {};

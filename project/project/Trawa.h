@@ -5,7 +5,7 @@
 class Trawa : public Roslina {
 public:
 	Trawa(Swiat&);
-	Trawa(Swiat&, p);
+	Trawa(Swiat&, int, int);
 	void kolizja(Organizm& other);
 	void rozmnazanie() override;
 };

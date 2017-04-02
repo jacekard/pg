@@ -5,7 +5,7 @@
 class Wilk : public Zwierze {
 public:
 	Wilk(Swiat&);
-	Wilk(Swiat&, p);
+	Wilk(Swiat&, int, int);
 	void kolizja(Organizm& other);
 	void rozmnazanie() override;
 };

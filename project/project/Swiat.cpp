@@ -4,8 +4,10 @@ Swiat::Swiat() {
 	p::hidecursor();
 	turnCount = 0;
 	czyKoniec = false;
+	czySave = false;
+	czyLoad = false;
 	tarczaAlzura = false;
-	int LICZBA_STWOROW = 5;
+	int LICZBA_STWOROW = 1;
 
 
 	komunikaty.push_back("Nowa gra!");
@@ -22,11 +24,16 @@ Swiat::Swiat() {
 		}
 	}
 
-
-
 	for (int k = 0; k < LICZBA_STWOROW; k++) {
 		lista.push_back(new Wilk(*this));
 		lista.push_back(new Trawa(*this));
+		lista.push_back(new Trawa(*this));
+		lista.push_back(new Trawa(*this));
+		lista.push_back(new Trawa(*this));
+		lista.push_back(new Trawa(*this));
+		lista.push_back(new Trawa(*this));
+		lista.push_back(new Mlecz(*this));
+		lista.push_back(new Mlecz(*this));
 	}
 	lista.push_back(new Czlowiek(*this));
 
@@ -45,13 +52,16 @@ Swiat::~Swiat() {
 
 void Swiat::Rysuj() {
 	rysujInterfejs();
-	listaGatunkow();
+	//	listaGatunkow();
 	rysujMape();
 	p::xy(54, 2);
 
 }
 
 void Swiat::wykonajTure() {
+
+	if (czySave) save();
+	if (czyLoad) load();
 
 	int x, y;
 	string a;
@@ -64,11 +74,22 @@ void Swiat::wykonajTure() {
 		world[y][x] = NULL;
 		world[lista[i]->getPosy()][lista[i]->getPosx()] = lista[i];
 	}
-	
+
+	//randomowe rozsiewanie: (dla guarany, wilczych jagod i barszczu sosnowskiego
+	//if (losuj(1, 100) == 1)
+	//	lista.push_back(new Guarana(*this));
+	//if (losuj(1, 100) == 2)
+	//	lista.push_back(new Jagody(*this));
+	//if (losuj(1, 100) == 3)
+	//	lista.push_back(new Barszcz(*this));
+
+
 	/* */
 	p::clrscr();
 	Rysuj();
 	/* */
+
+
 	turnCount++;
 }
 
@@ -100,12 +121,10 @@ void Swiat::rysujInterfejs() {
 	int x = WIDTH + OFFX;
 	int y = 0;
 	p::xy(x, y);
-	cout << "Jacek Ardanowski 165178";
-	p::xy(x, ++y);
-	cout << "- - - - - - - - - - - -";
+	cout << "+ + + + + + + + + + + + + + + + + + +";
 	p::xy(x, ++y);
 	cout << "Tura nr " << turnCount;
-	p::xy(x + 15, y);
+	p::xy(x + 13, y);
 	if (tarczaAlzura) {
 		p::setColor(14);
 		cout << "Tarcza Alzura ";
@@ -119,15 +138,14 @@ void Swiat::rysujInterfejs() {
 		cout << "nieaktywna";
 	}
 	++y;
-	p::xy(x, ++y);
-	cout << "Komunikaty: ";
+
 	wypiszKomunikaty(x, ++y);
-	
+
 }
 
 void Swiat::rysujMape() {
-	for (int y = 0; y < HEIGHT; y++) {
-		for (int x = 0; x < WIDTH; x++) {
+	for (int y = 1; y < HEIGHT; y++) {
+		for (int x = 1; x < WIDTH; x++) {
 			if (world[y][x] != NULL) {
 				world[y][x]->rysowanie();
 				//tutaj jest problem z traw¹
@@ -167,16 +185,22 @@ void Swiat::komentuj(string komunikat) {
 }
 
 void Swiat::wypiszKomunikaty(int x, int y) {
+	p::setColor(13);
+	p::xy(x, ++y);
+	cout << "Komunikaty: ";
 	p::setColor(11);
 	if (komunikaty.size() == 0) {
-		p::xy(x, y);
+		p::xy(x, ++y);
 		cout << "Brak nowych komunikatow";
 	}
+
 	for (auto v : komunikaty) {
-		p::xy(x, y++);
+		p::xy(x, ++y);
 		cout << v;
+		ostatni_komunikat = v;
 	}
 	p::setColor();
+
 	while (!komunikaty.empty())
 	{
 		komunikaty.pop_back();
@@ -187,4 +211,71 @@ void Swiat::sortujInicjatywa() {
 	sort(lista.begin(), lista.end(), [](Organizm* a, Organizm* b) {
 		return a->getInicjatywa() > b->getInicjatywa();
 	});
+}
+
+void Swiat::save() {
+	czySave = false;
+
+	char b[4];
+	ofstream plik;
+	plik.open("../save.txt");
+
+	for (int y = 0; y < HEIGHT; y++) {
+		for (int x = 0; x < WIDTH; x++) {
+			if (world[y][x] == NULL) plik << ".";
+			else if (world[y][x]->getRodzaj() == "CZLOWIEK") plik << "a";
+			else if (world[y][x]->getRodzaj() == "WILK") plik << "b";
+			else if (world[y][x]->getRodzaj() == "TRAWA") plik << "c";
+			else if (world[y][x]->getRodzaj() == "MLECZ") plik << "d";
+		}
+		plik << endl;
+	}
+	if (tarczaAlzura) plik << "1 ";
+	else plik << "0 ";
+
+	plik << turnCount-1;
+
+	plik.close();
+
+	komentuj("Zapisano gre!");
+
+}
+
+void Swiat::load() {
+	czyLoad = false;
+	p::clrscr();
+	p::xy(0, 0);
+	lista.erase(lista.begin(), lista.end());
+	for (int y = 0; y < HEIGHT; y++) {
+		for (int x = 0; x < WIDTH; x++) {
+			world[y][x] = NULL;
+		}
+	}
+
+
+	char n;
+	int x0 = 0;
+	int y0 = 0;
+	int a = 0, b = 0;
+	FILE *plik = fopen("../save.txt", "r");
+	while (y0 != HEIGHT) {
+		fscanf(plik, "%c", &n);
+		if (n == '\n') {
+			x0 = -1;
+			++y0;
+		}
+		if (n == 'a') lista.push_back(new Czlowiek(*this, x0, y0));
+		else if (n == 'b') lista.push_back(new Wilk(*this, x0, y0));
+		else if (n == 'c') lista.push_back(new Trawa(*this, x0, y0));
+		else if (n == 'd') lista.push_back(new Mlecz(*this, x0, y0));
+		++x0;
+	}
+	fscanf(plik, "\n%d %d", &a, &b);
+	if (a) tarczaAlzura = true;
+	turnCount = b;
+	komentuj("Wczytano gre!");
+	//
+	p::clrscr();
+	Rysuj();
+	//
 }

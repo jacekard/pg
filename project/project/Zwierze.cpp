@@ -23,21 +23,20 @@ p Zwierze::ruch() {
 void Zwierze::akcja() {
 	p tmp;
 
-	//tmp = ruch();
-	tmp.x = 0;
-	tmp.y = 0;
-
+	tmp = ruch();
+	
 	if (pos.x + tmp.x > swiat.WIDTH - 1 || pos.x + tmp.x < 1)
 		tmp.x = 0;
 	if (pos.y + tmp.y > swiat.HEIGHT - 1 || pos.y + tmp.y < 1)
 		tmp.y = 0;
 
-	if (swiat.world[pos.y+tmp.y][pos.x+tmp.x] != NULL)
-		kolizja(*swiat.world[pos.y+tmp.y][pos.x+tmp.x]);
-	
 	//aktualizuj pozycje
 	pos.x += tmp.x;
 	pos.y += tmp.y;
+
+	if (swiat.world[pos.y][pos.x] != NULL)
+		kolizja(*swiat.world[pos.y][pos.x]);
+	
 
 
 	//dodaj wiek;

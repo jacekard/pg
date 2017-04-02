@@ -6,10 +6,8 @@ Roslina::Roslina(int s, int i, char sy, int c, int w, string r, Swiat& sw)
 }
 
 void Roslina::akcja() {
-	if (swiat.losuj(1, 150) == 1)
+	if (swiat.losuj(1, 100) == 1)
 		rozmnazanie();
-
-
 	grow();
 }
 

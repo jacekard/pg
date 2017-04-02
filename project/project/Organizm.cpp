@@ -7,8 +7,8 @@ Organizm::Organizm(int s, int i, char sy, int c, int w,
 	: sila(s), inicjatywa(i), symbol(sy),
 	color(c), wiek(w), rodzaj(r), swiat(sw) {
 
-	pos.x = swiat.losuj(1, swiat.WIDTH - 1);
-	pos.y = swiat.losuj(1, swiat.HEIGHT - 1);
+	pos.x = swiat.losuj(1, swiat.WIDTH-1);
+	pos.y = swiat.losuj(1, swiat.HEIGHT-1);
 	if (swiat.world[pos.y][pos.x] == NULL)
 		swiat.world[pos.y][pos.x] = this;
 	else {
@@ -43,6 +43,7 @@ bool Organizm::czyZwierze(Organizm& other) {
 	else return false;
 }
 bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
+	if (&atakujacy == this) return false;
 	string rodzaj = atakujacy.getRodzaj();
 	if (rodzaj == "OWCA" || rodzaj == "LIS" || rodzaj == "ZOLW" ||
 		rodzaj == "ANTYLOPA" || rodzaj == "CYBER-OWCA" ||
@@ -50,7 +51,7 @@ bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
 		if (rodzaj == this->rodzaj) {
 			if (this->wiek > 10 && atakujacy.getWiek() > 10) {
 				this->rozmnazanie();
-				swiat.komentuj("Urodzil/a sie maly/a " + this->rodzaj + "!");
+				swiat.komentuj(" + Urodzil/a sie maly/a " + this->rodzaj + "! + ");
 				return true;
 			}
 		}
@@ -58,7 +59,7 @@ bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
 			if ((this->rodzaj == "CZLOWIEK" || rodzaj == "CZLOWIEK") && swiat.tarczaAlzura) {
 				return true;
 			}
-			swiat.komentuj(this->rodzaj + " zostal pokonany przez " + rodzaj + "!");
+			swiat.komentuj(" + " +this->rodzaj + " zginal w paszczy " + rodzaj + "A! + ");
 			this->die();
 			return false;
 		}
@@ -92,48 +93,48 @@ void Organizm::die() {
 
 void Organizm::reallocate() {
 	p tmp;
-
-	int rand = 1;
-
-	switch (rand) {
-	case 1: 	//case up
-		tmp = pos;
-		tmp.y--;
-		if ((czyDozwolonyRuch(tmp)) &&
-			(swiat.world[tmp.y][tmp.x] == NULL)) {
-			swiat.world[tmp.y][tmp.x] = this;
-			pos = tmp;
-			return;
-		}
-	case 2: 	//case down
-		tmp = pos;
-		tmp.y++;
-		if ((czyDozwolonyRuch(tmp)) &&
-			(swiat.world[tmp.y][tmp.x] == NULL)) {
-			swiat.world[tmp.y][tmp.x] = this;
-			pos = tmp;
-			return;
-		}
-	case 3:	//case left
-		tmp = pos;
-		tmp.x--;
-		if ((czyDozwolonyRuch(tmp)) &&
-			(swiat.world[tmp.y][tmp.x] == NULL)) {
-			swiat.world[tmp.y][tmp.x] = this;
-			pos = tmp;
-			return;
-		}
-	case 4: 	//case right
-		tmp = pos;
-		tmp.x++;
-		if ((czyDozwolonyRuch(tmp)) &&
-			(swiat.world[tmp.y][tmp.x] == NULL)) {
-			swiat.world[tmp.y][tmp.x] = this;
-			pos = tmp;
-			return;
+	int rand;
+	for (int i = 0; i < 4; i++) {
+		rand = swiat.losuj(1, 4);
+		switch (rand) {
+		case 1: 	//case up
+			tmp = pos;
+			tmp.y--;
+			if ((czyDozwolonyRuch(tmp)) &&
+				(swiat.world[tmp.y][tmp.x] == NULL)) {
+				swiat.world[tmp.y][tmp.x] = this;
+				pos = tmp;
+				return;
+			}
+		case 2: 	//case down
+			tmp = pos;
+			tmp.y++;
+			if ((czyDozwolonyRuch(tmp)) &&
+				(swiat.world[tmp.y][tmp.x] == NULL)) {
+				swiat.world[tmp.y][tmp.x] = this;
+				pos = tmp;
+				return;
+			}
+		case 3:	//case left
+			tmp = pos;
+			tmp.x--;
+			if ((czyDozwolonyRuch(tmp)) &&
+				(swiat.world[tmp.y][tmp.x] == NULL)) {
+				swiat.world[tmp.y][tmp.x] = this;
+				pos = tmp;
+				return;
+			}
+		case 4: 	//case right
+			tmp = pos;
+			tmp.x++;
+			if ((czyDozwolonyRuch(tmp)) &&
+				(swiat.world[tmp.y][tmp.x] == NULL)) {
+				swiat.world[tmp.y][tmp.x] = this;
+				pos = tmp;
+				return;
+			}
 		}
 	}
-
 	//swiat.komentuj("Realokacja obiektu " + this->rodzaj + " nie udala sie ");
 	this->die();
 }
