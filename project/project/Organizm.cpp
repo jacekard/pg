@@ -53,8 +53,10 @@ bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
 		//rozmnazanie
 		if (rodzaj == this->rodzaj) {
 			if (this->wiek > 10 && atakujacy.getWiek() > 10) {
-				this->rozmnazanie();
-				swiat.komentuj(" + Urodzil/a sie maly/a " + this->rodzaj + "! + ");
+				if (swiat.losuj(1, 5) == 1) {
+					this->rozmnazanie();
+					swiat.komentuj(" + Urodzil/a sie maly/a " + this->rodzaj + "! + ");
+				}
 				return true;
 			}
 		}
@@ -99,7 +101,22 @@ bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
 		}
 	}
 	else {
-		swiat.komentuj(this->rodzaj + " zjada " + rodzaj);
+		if (rodzaj == "GUARANA") {
+			this->setSila(this->getSila() + 3);
+			swiat.komentuj(" + " + this->rodzaj + " ma teraz +3 do sily! + ");
+		}
+		else if (rodzaj == "JAGODY") {
+			swiat.komentuj(" + " + this->rodzaj + " jest otruty przez WILCZE JAGODY! + ");
+			this->die();
+
+		}
+		else if (rodzaj == "BARSZCZ") {
+			if (this->getRodzaj() != "CYBER-OWCA")
+				this->die();
+			swiat.komentuj(" + " + this->rodzaj + " ginie otruty przez BARSZCZ! + ");
+
+		}
+		swiat.komentuj(" + " + this->rodzaj + " zjada " + rodzaj);
 		atakujacy.die();
 		return false;
 	}

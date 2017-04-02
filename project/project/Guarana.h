@@ -2,11 +2,11 @@
 #define GUARANA_H
 #include "Roslina.h"
 
-class Trawa : public Roslina {
+class Guarana : public Roslina {
 public:
-	Trawa(Swiat&);
-	Trawa(Swiat&, int, int);
-	void kolizja(Organizm& other);
+	Guarana(Swiat&);
+	Guarana(Swiat&, int, int);
+	~Guarana();
 	void rozmnazanie() override;
 	void akcja() override;
 };

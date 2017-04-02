@@ -54,6 +54,18 @@
     <ClCompile Include="Zolw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Guarana.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Jagody.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Barszcz.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Lis.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Swiat.h">
@@ -93,6 +105,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Guarana.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Jagody.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Barszcz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Lis.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

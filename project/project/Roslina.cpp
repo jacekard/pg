@@ -8,15 +8,7 @@ Roslina::Roslina(int s, int i, char sy, int c, int w, string r, Swiat& sw)
 
 
 void Roslina::kolizja(Organizm& other) {
-	// tutaj jesli roslina jest zabojcza to wtedy cos tam
-	if (this->rodzaj == "GUARANA")
-		other.setSila(other.getSila() + 3);
-	else if (this->rodzaj == "JAGODY")
-		other.die();
-	else if (this->rodzaj == "BARSZCZ") {
-		if (other.getRodzaj() != "CYBER-OWCA")
-			other.die();
-	}
+
 }
 
 bool Roslina::validPosY(int y) {

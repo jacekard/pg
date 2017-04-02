@@ -1,7 +1,7 @@
-#include "Guarana.h"
+#include "Jagody.h"
 #include "Swiat.h"
 
-Guarana::Guarana(Swiat& sw) : Roslina(0, 0, '+', 20, 0, "GUARANA", sw) {
+Jagody::Jagody(Swiat& sw) : Roslina(99, 0, 'W', 13, 0, "JAGODY", sw) {
 	if (swiat.world[pos.y][pos.x] == NULL)
 		swiat.world[pos.y][pos.x] = this;
 	else {
@@ -9,7 +9,7 @@ Guarana::Guarana(Swiat& sw) : Roslina(0, 0, '+', 20, 0, "GUARANA", sw) {
 	}
 };
 
-Guarana::Guarana(Swiat& sw, int x, int y) : Roslina(0, 0, '+', 20, 0, "GUARANA", sw) {
+Jagody::Jagody(Swiat& sw, int x, int y) : Roslina(99, 0, 'W', 13, 0, "JAGODY", sw) {
 	this->pos.x = x;
 	this->pos.y = y;
 
@@ -20,13 +20,17 @@ Guarana::Guarana(Swiat& sw, int x, int y) : Roslina(0, 0, '+', 20, 0, "GUARANA",
 	}
 }
 
-void Guarana::rozmnazanie() {
-	Organizm *child = new Guarana(swiat, pos.x, pos.y);
+void Jagody::rozmnazanie() {
+	Organizm *child = new Jagody(swiat, pos.x, pos.y);
 	swiat.lista.push_back(child);
 	swiat.sortujInicjatywa();
 }
 
-void Guarana::akcja() {
+void Jagody::kolizja(Organizm& other) {
+
+}
+
+void Jagody::akcja() {
 	grow();
 
 	if ((validPosY(pos.y - 1) && validPosX(pos.x) && swiat.world[pos.y - 1][pos.x] != NULL) &&
@@ -35,8 +39,6 @@ void Guarana::akcja() {
 		(validPosY(pos.y) && validPosX(pos.x + 1) && swiat.world[pos.y][pos.x + 1] != NULL))
 		return;
 	else
-	if (swiat.losuj(1, 150) == swiat.losuj(1, 20))
+	if (swiat.losuj(1, 300) == swiat.losuj(1, 50))
 		rozmnazanie();
 }
-
-Guarana::~Guarana() {};

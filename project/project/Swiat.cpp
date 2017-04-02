@@ -25,24 +25,23 @@ Swiat::Swiat() {
 	}
 
 	for (int k = 0; k < LICZBA_ZWIERZAT; k++) {
-	//	lista.push_back(new Wilk(*this));
-	//	lista.push_back(new Antylopa(*this));
-		lista.push_back(new Owca(*this));
+		//	lista.push_back(new Wilk(*this));
+		//	lista.push_back(new Antylopa(*this));
+		//lista.push_back(new Owca(*this));
 
 
-	//	lista.push_back(new Zolw(*this));
-		//lista.push_back(new Trawa(*this));
-		//lista.push_back(new Mlecz(*this));
-		//lista.push_back(new Mlecz(*this));
+		//	lista.push_back(new Zolw(*this));
+		lista.push_back(new Lis(*this));
+
 	}
 	for (int k = 0; k < LICZBA_ROSLIN; k++) {
 		lista.push_back(new Trawa(*this));
-		lista.push_back(new Trawa(*this));
+		//	lista.push_back(new Trawa(*this));
 
-		lista.push_back(new Mlecz(*this));
+		//	lista.push_back(new Mlecz(*this));
 		//lista.push_back(new Guarana(*this));
 		//lista.push_back(new Jagody(*this));
-		//lista.push_back(new Barszcz(*this));
+		lista.push_back(new Barszcz(*this));
 
 	}
 	lista.push_back(new Czlowiek(*this));
@@ -64,8 +63,6 @@ void Swiat::Rysuj() {
 	rysujInterfejs();
 	//	listaGatunkow();
 	rysujMape();
-	p::xy(54, 2);
-
 }
 
 void Swiat::wykonajTure() {
@@ -85,13 +82,13 @@ void Swiat::wykonajTure() {
 		world[lista[i]->getPosy()][lista[i]->getPosx()] = lista[i];
 	}
 
-	//randomowe rozsiewanie: (dla guarany, wilczych jagod i barszczu sosnowskiego
-	//if (losuj(1, 100) == 1)
-	//	lista.push_back(new Guarana(*this));
-	//if (losuj(1, 100) == 2)
-	//	lista.push_back(new Jagody(*this));
-	//if (losuj(1, 100) == 3)
-	//	lista.push_back(new Barszcz(*this));
+	//randomowe rozsiewanie: (dla guarany, wilczych jagod i barszczu sosnowskiego)
+	if (losuj(1, 100) == 1)
+		lista.push_back(new Guarana(*this));
+	if (losuj(1, 100) == 2)
+		lista.push_back(new Jagody(*this));
+	if (losuj(1, 100) == 3)
+		lista.push_back(new Barszcz(*this));
 
 	/* */
 	p::clrscr();
@@ -156,15 +153,8 @@ void Swiat::rysujInterfejs() {
 void Swiat::rysujMape() {
 	for (int y = 1; y < HEIGHT; y++) {
 		for (int x = 1; x < WIDTH; x++) {
-			if (world[y][x] != NULL) {
+			if (world[y][x] != NULL)
 				world[y][x]->rysowanie();
-				//tutaj jest problem z traw¹
-				/*if (world[y][x]->getRodzaj() != "CZLOWIEK")
-					komentuj("TU JEST COS INNEGO NIZ CZLOWIEK");*/
-			}
-			else
-				p::xy(x, y);
-			//	printf("%c", 177);
 		}
 	}
 }
@@ -235,10 +225,17 @@ void Swiat::save() {
 	for (int y = 0; y < HEIGHT; y++) {
 		for (int x = 0; x < WIDTH; x++) {
 			if (world[y][x] == NULL) plik << ".";
-			else if (world[y][x]->getRodzaj() == "CZLOWIEK") plik << "a";
-			else if (world[y][x]->getRodzaj() == "WILK") plik << "b";
-			else if (world[y][x]->getRodzaj() == "TRAWA") plik << "c";
-			else if (world[y][x]->getRodzaj() == "MLECZ") plik << "d";
+			else if (world[y][x]->getRodzaj() == "CZLOWIEK") plik << "c";
+			else if (world[y][x]->getRodzaj() == "WILK") plik << "w";
+			else if (world[y][x]->getRodzaj() == "OWCA") plik << "o";
+			else if (world[y][x]->getRodzaj() == "LIS") plik << "l";
+			else if (world[y][x]->getRodzaj() == "ZOLW") plik << "z";
+			else if (world[y][x]->getRodzaj() == "ANTYLOPA") plik << "a";
+			else if (world[y][x]->getRodzaj() == "TRAWA") plik << "t";
+			else if (world[y][x]->getRodzaj() == "MLECZ") plik << "m";
+			else if (world[y][x]->getRodzaj() == "GUARANA") plik << "g";
+			else if (world[y][x]->getRodzaj() == "JAGODY") plik << "j";
+			else if (world[y][x]->getRodzaj() == "BARSZCZ") plik << "b";
 		}
 		plik << endl;
 	}
@@ -276,10 +273,17 @@ void Swiat::load() {
 			x0 = -1;
 			++y0;
 		}
-		if (n == 'a') lista.push_back(new Czlowiek(*this, x0, y0));
-		else if (n == 'b') lista.push_back(new Wilk(*this, x0, y0));
-		else if (n == 'c') lista.push_back(new Trawa(*this, x0, y0));
-		else if (n == 'd') lista.push_back(new Mlecz(*this, x0, y0));
+		if (n == 'c') lista.push_back(new Czlowiek(*this, x0, y0));
+		else if (n == 'w') lista.push_back(new Wilk(*this, x0, y0));
+		else if (n == 'a') lista.push_back(new Antylopa(*this, x0, y0));
+		else if (n == 'o') lista.push_back(new Owca(*this, x0, y0));
+		else if (n == 'z') lista.push_back(new Zolw(*this, x0, y0));
+		else if (n == 'l') lista.push_back(new Lis(*this, x0, y0));
+		else if (n == 'g') lista.push_back(new Guarana(*this, x0, y0));
+		else if (n == 't') lista.push_back(new Trawa(*this, x0, y0));
+		else if (n == 'm') lista.push_back(new Mlecz(*this, x0, y0));
+		else if (n == 'j') lista.push_back(new Jagody(*this, x0, y0));
+		else if (n == 'b') lista.push_back(new Barszcz(*this, x0, y0));
 		++x0;
 	}
 	fscanf(plik, "\n%d %d", &a, &b);
