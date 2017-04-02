@@ -8,6 +8,12 @@
 Czlowiek::Czlowiek(Swiat& sw) : Zwierze(5, 4, 254, 12, 0, "CZLOWIEK", sw) {
 	coolDown = 0;
 	skillEnabled = 5;
+
+	if (swiat.world[pos.y][pos.x] == NULL)
+		swiat.world[pos.y][pos.x] = this;
+	else {
+		reallocate();
+	}
 };
 
 Czlowiek::Czlowiek(Swiat& sw, int x, int y) : Zwierze(5, 4, 254, 12, 0, "CZLOWIEK", sw) {
@@ -15,6 +21,12 @@ Czlowiek::Czlowiek(Swiat& sw, int x, int y) : Zwierze(5, 4, 254, 12, 0, "CZLOWIE
 	skillEnabled = 5;
 	this->pos.x = x;
 	this->pos.y = y;
+	
+	if (swiat.world[pos.y][pos.x] == NULL)
+		swiat.world[pos.y][pos.x] = this;
+	else {
+		reallocate();
+	}
 };
 
 void Czlowiek::akcja() {
@@ -83,19 +95,9 @@ void Czlowiek::umiejetnosc() {
 
 
 	if (swiat.tarczaAlzura == false && coolDown <= 0) {
-		coolDown = 10;
+		coolDown = 11;
 		skillEnabled = 5;
 		swiat.tarczaAlzura = true;
-		//tutaj trzeba sprawdzic czy obiekt jest zwierzeciem
-		//if (swiat.world[pos.y - 1][pos.x] )
-		//if (swiat.world[pos.y - 1][pos.x] != NULL)
-		//	swiat.world[pos.y - 1][pos.x]->reallocate();
-		//if (swiat.world[pos.y + 1][pos.x] != NULL)
-		//	swiat.world[pos.y + 1][pos.x]->reallocate();
-		//if (swiat.world[pos.y][pos.x - 1] != NULL)
-		//	swiat.world[pos.y][pos.x - 1]->reallocate();
-		//if (swiat.world[pos.y][pos.x + 1] != NULL)
-		//	swiat.world[pos.y][pos.x + 1]->reallocate();
 		skillEnabled--;
 	}
 

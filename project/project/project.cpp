@@ -13,8 +13,7 @@ int main() {
 
 
 	p::gameOver(swiat.turnCount, swiat.lista.size(), swiat.ostatni_komunikat);
-	p::setColor(14);
-	cout << swiat.ostatni_komunikat;
+
 	Sleep(5000);
 	return 0;
 }

@@ -7,13 +7,8 @@ Organizm::Organizm(int s, int i, char sy, int c, int w,
 	: sila(s), inicjatywa(i), symbol(sy),
 	color(c), wiek(w), rodzaj(r), swiat(sw) {
 
-	pos.x = swiat.losuj(1, swiat.WIDTH-1);
-	pos.y = swiat.losuj(1, swiat.HEIGHT-1);
-	if (swiat.world[pos.y][pos.x] == NULL)
-		swiat.world[pos.y][pos.x] = this;
-	else {
-		reallocate();
-	}
+	pos.x = swiat.losuj(1, swiat.WIDTH - 1);
+	pos.y = swiat.losuj(1, swiat.HEIGHT - 1);
 
 };
 void Organizm::rysowanie() {
@@ -48,6 +43,14 @@ bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
 	if (rodzaj == "OWCA" || rodzaj == "LIS" || rodzaj == "ZOLW" ||
 		rodzaj == "ANTYLOPA" || rodzaj == "CYBER-OWCA" ||
 		rodzaj == "WILK" || rodzaj == "CZLOWIEK") {
+
+		if (this->rodzaj == "OWCA" &&
+			atakujacy.getSila() < 5) {
+			//NAPASTNIK MUSI WROCIC NA SWOJE POPRZEDNIE POLE ;/
+			atakujacy.reallocate();
+		}
+
+		//rozmnazanie
 		if (rodzaj == this->rodzaj) {
 			if (this->wiek > 10 && atakujacy.getWiek() > 10) {
 				this->rozmnazanie();
@@ -55,17 +58,44 @@ bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
 				return true;
 			}
 		}
+		//walka
 		else if (atakujacy.getSila() >= this->sila) {
-			if ((this->rodzaj == "CZLOWIEK" || rodzaj == "CZLOWIEK") && swiat.tarczaAlzura) {
+
+			if (this->rodzaj == "ANTYLOPA" &&
+				swiat.losuj(0, 1) == 0) {
+				this->reallocate();
+				swiat.komentuj(this->rodzaj + " ucieka przed walka!");
+				return false;
+			}
+			else if (rodzaj == "ANTYLOPA" &&
+				swiat.losuj(0, 10 == 0)) {
+				atakujacy.reallocate();
+				swiat.komentuj(this->rodzaj + " ucieka przed walka!");
+				return false;
+			}
+
+			if (this->rodzaj == "CZLOWIEK" && swiat.tarczaAlzura) {
+				swiat.komentuj(this->rodzaj + " uzywa Tarczy Alzura!");
 				return true;
 			}
-			swiat.komentuj(" + " +this->rodzaj + " zginal w paszczy " + rodzaj + "A! + ");
+
+			if (rodzaj == "ANTYLOPA" || rodzaj == "OWCA") {
+				swiat.komentuj(" + " + this->rodzaj + " ginie w paszczy " + rodzaj.replace(rodzaj.length() - 1, 1, "Y! + "));
+			}
+			else if (rodzaj == "WILK" || rodzaj == "LIS")
+				swiat.komentuj(" + " + this->rodzaj + " ginie w paszczy " + rodzaj + "A! + ");
+			else if (rodzaj == "ZOLW")
+				swiat.komentuj(" + " + this->rodzaj + " ginie w paszczy " + rodzaj + "IA! + ");
+			else if (rodzaj == "CZLOWIEK")
+				swiat.komentuj(" + " + this->rodzaj + " ginie z reki " + rodzaj + "A! + ");
+			
 			this->die();
 			return false;
 		}
 		else {
-			return true;
 			swiat.komentuj(this->rodzaj + " odbil atak!");
+			return true;
+
 		}
 	}
 	else {

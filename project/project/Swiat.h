@@ -11,10 +11,15 @@ using namespace std;
 #include <list>
 #include "Set.h"
 
-#include "Wilk.h"
 #include "Czlowiek.h"
+#include "Wilk.h"
+#include "Antylopa.h"
+#include "Owca.h"
+#include "Zolw.h"
+
 #include "Trawa.h"
 #include "Mlecz.h"
+
 
 class Swiat {
 protected:

@@ -21,10 +21,8 @@ p Zwierze::ruch() {
 }
 
 void Zwierze::akcja() {
-	p tmp;
+	p tmp = ruch();
 
-	tmp = ruch();
-	
 	if (pos.x + tmp.x > swiat.WIDTH - 1 || pos.x + tmp.x < 1)
 		tmp.x = 0;
 	if (pos.y + tmp.y > swiat.HEIGHT - 1 || pos.y + tmp.y < 1)
@@ -37,8 +35,6 @@ void Zwierze::akcja() {
 	if (swiat.world[pos.y][pos.x] != NULL)
 		kolizja(*swiat.world[pos.y][pos.x]);
 	
-
-
 	//dodaj wiek;
 	grow();
 }

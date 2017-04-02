@@ -45,6 +45,15 @@
     <ClCompile Include="Mlecz.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Owca.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Antylopa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Zolw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Swiat.h">
@@ -72,6 +81,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Mlecz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Owca.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Antylopa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Zolw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Guarana.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

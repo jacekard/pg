@@ -5,11 +5,7 @@ Roslina::Roslina(int s, int i, char sy, int c, int w, string r, Swiat& sw)
 : Organizm(s, i, sy, c, w, r, sw) {
 }
 
-void Roslina::akcja() {
-	if (swiat.losuj(1, 100) == 1)
-		rozmnazanie();
-	grow();
-}
+
 
 void Roslina::kolizja(Organizm& other) {
 	// tutaj jesli roslina jest zabojcza to wtedy cos tam
@@ -21,6 +17,17 @@ void Roslina::kolizja(Organizm& other) {
 		if (other.getRodzaj() != "CYBER-OWCA")
 			other.die();
 	}
+}
+
+bool Roslina::validPosY(int y) {
+	if (y < swiat.HEIGHT)
+		return true;
+	else return false;
+}
+bool Roslina::validPosX(int x) {
+	if (x < swiat.WIDTH)
+		return true;
+	else return false;
 }
 
 Roslina::~Roslina() {

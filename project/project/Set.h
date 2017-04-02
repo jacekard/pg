@@ -2,6 +2,7 @@
 #define SET_H
 #include <Windows.h>
 #include <iostream>
+#include <string>
 using namespace std;
 
 class p{
@@ -9,7 +10,7 @@ public:
 	int x;
 	int y;
 	p() : x(0), y(0) {
-		SetConsoleTitle(TEXT("Symulator zycia -- Jacek Ardanowski 165178"));
+		SetConsoleTitle(TEXT("Wirtualny swiat-- Jacek Ardanowski 165178"));
 	};
 	static void setColor(int k = 15) {
 		HANDLE hConsole;
@@ -63,7 +64,7 @@ public:
 			&count
 			)) return;
 	}
-	static void gameOver(int turnCount, int OrganismCount, string ostatni) {
+	static void gameOver(int turnCount, int OrganismCount, string ostatni_komunikat) {
 		p::xy(0, 0);
 		p::clrscr();
 		setColor(4);
@@ -81,8 +82,12 @@ public:
 		cout << endl;
 		cout << endl;
 
-		setColor(12);
 
+		p::setColor(14);
+		cout << ostatni_komunikat;
+		cout << endl;
+		cout << endl;
+		setColor(12);
 		cout << " * Udalo ci sie przezyc " << turnCount << " tur" << endl;
 		cout << " * Liczba stworzen na mapie: " << OrganismCount << endl;
 		cout << endl;

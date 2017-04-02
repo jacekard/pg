@@ -7,8 +7,8 @@ Swiat::Swiat() {
 	czySave = false;
 	czyLoad = false;
 	tarczaAlzura = false;
-	int LICZBA_STWOROW = 1;
-
+	int LICZBA_ZWIERZAT = 2;
+	int LICZBA_ROSLIN = 5;
 
 	komunikaty.push_back("Nowa gra!");
 
@@ -24,16 +24,26 @@ Swiat::Swiat() {
 		}
 	}
 
-	for (int k = 0; k < LICZBA_STWOROW; k++) {
-		lista.push_back(new Wilk(*this));
+	for (int k = 0; k < LICZBA_ZWIERZAT; k++) {
+	//	lista.push_back(new Wilk(*this));
+	//	lista.push_back(new Antylopa(*this));
+		lista.push_back(new Owca(*this));
+
+
+	//	lista.push_back(new Zolw(*this));
+		//lista.push_back(new Trawa(*this));
+		//lista.push_back(new Mlecz(*this));
+		//lista.push_back(new Mlecz(*this));
+	}
+	for (int k = 0; k < LICZBA_ROSLIN; k++) {
 		lista.push_back(new Trawa(*this));
 		lista.push_back(new Trawa(*this));
-		lista.push_back(new Trawa(*this));
-		lista.push_back(new Trawa(*this));
-		lista.push_back(new Trawa(*this));
-		lista.push_back(new Trawa(*this));
+
 		lista.push_back(new Mlecz(*this));
-		lista.push_back(new Mlecz(*this));
+		//lista.push_back(new Guarana(*this));
+		//lista.push_back(new Jagody(*this));
+		//lista.push_back(new Barszcz(*this));
+
 	}
 	lista.push_back(new Czlowiek(*this));
 
@@ -83,11 +93,11 @@ void Swiat::wykonajTure() {
 	//if (losuj(1, 100) == 3)
 	//	lista.push_back(new Barszcz(*this));
 
-
 	/* */
 	p::clrscr();
 	Rysuj();
 	/* */
+
 
 
 	turnCount++;
@@ -209,6 +219,8 @@ void Swiat::wypiszKomunikaty(int x, int y) {
 
 void Swiat::sortujInicjatywa() {
 	sort(lista.begin(), lista.end(), [](Organizm* a, Organizm* b) {
+		if (a->getInicjatywa() == b->getInicjatywa())
+			return a->getWiek() > b->getWiek();
 		return a->getInicjatywa() > b->getInicjatywa();
 	});
 }
@@ -233,7 +245,7 @@ void Swiat::save() {
 	if (tarczaAlzura) plik << "1 ";
 	else plik << "0 ";
 
-	plik << turnCount-1;
+	plik << turnCount - 1;
 
 	plik.close();
 

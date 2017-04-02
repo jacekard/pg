@@ -6,9 +6,11 @@ class Roslina : public Organizm{
 public:
 	Roslina(int s, int i, char sy, int c, int w, string r, Swiat& sw);
 	~Roslina();
-	void akcja() override;
-	void rozmnazanie() override {}; 
-	void kolizja(Organizm& other) override;
+	virtual void akcja() = 0;
+	virtual void rozmnazanie() = 0;
+	virtual void kolizja(Organizm& other) override;
+	bool validPosY(int y);
+	bool validPosX(int x);
 };
 
 #endif

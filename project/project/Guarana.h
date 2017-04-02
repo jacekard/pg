@@ -1,5 +1,5 @@
-#ifndef TRAWA_H
-#define TRAWA_H
+#ifndef GUARANA_H
+#define GUARANA_H
 #include "Roslina.h"
 
 class Trawa : public Roslina {
