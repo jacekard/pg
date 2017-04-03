@@ -6,9 +6,10 @@ Swiat::Swiat() {
 	czyKoniec = false;
 	czySave = false;
 	czyLoad = false;
+	czyRespawn = false;
 	tarczaAlzura = false;
 	int LICZBA_ZWIERZAT = 2;
-	int LICZBA_ROSLIN = 5;
+	int LICZBA_ROSLIN = 4;
 
 	komunikaty.push_back("Nowa gra!");
 
@@ -25,12 +26,12 @@ Swiat::Swiat() {
 	}
 
 	for (int k = 0; k < LICZBA_ZWIERZAT; k++) {
-		//	lista.push_back(new Wilk(*this));
-		//	lista.push_back(new Antylopa(*this));
+		//lista.push_back(new Wilk(*this));
+		//lista.push_back(new Antylopa(*this));
 		//lista.push_back(new Owca(*this));
 
 
-		//	lista.push_back(new Zolw(*this));
+		//		lista.push_back(new Zolw(*this));
 		lista.push_back(new Lis(*this));
 
 	}
@@ -38,10 +39,10 @@ Swiat::Swiat() {
 		lista.push_back(new Trawa(*this));
 		//	lista.push_back(new Trawa(*this));
 
-		//	lista.push_back(new Mlecz(*this));
+		//lista.push_back(new Mlecz(*this));
 		//lista.push_back(new Guarana(*this));
 		//lista.push_back(new Jagody(*this));
-		lista.push_back(new Barszcz(*this));
+		//lista.push_back(new Barszcz(*this));
 
 	}
 	lista.push_back(new Czlowiek(*this));
@@ -54,6 +55,7 @@ Swiat::Swiat() {
 }
 
 Swiat::~Swiat() {
+
 	lista.erase(lista.begin(), lista.end());
 
 	//delete caly world
@@ -61,7 +63,7 @@ Swiat::~Swiat() {
 
 void Swiat::Rysuj() {
 	rysujInterfejs();
-	//	listaGatunkow();
+	//listaGatunkow();
 	rysujMape();
 }
 
@@ -69,7 +71,7 @@ void Swiat::wykonajTure() {
 
 	if (czySave) save();
 	if (czyLoad) load();
-
+	if (czyRespawn) respawn();
 	int x, y;
 	string a;
 
@@ -80,7 +82,12 @@ void Swiat::wykonajTure() {
 		lista[i]->akcja();
 		world[y][x] = NULL;
 		world[lista[i]->getPosy()][lista[i]->getPosx()] = lista[i];
+		/* */
+		//p::clrscr();
+		//Rysuj();
+		/* */
 	}
+
 
 	//randomowe rozsiewanie: (dla guarany, wilczych jagod i barszczu sosnowskiego)
 	if (losuj(1, 100) == 1)
@@ -90,12 +97,9 @@ void Swiat::wykonajTure() {
 	if (losuj(1, 100) == 3)
 		lista.push_back(new Barszcz(*this));
 
-	/* */
+
 	p::clrscr();
 	Rysuj();
-	/* */
-
-
 
 	turnCount++;
 }
@@ -194,15 +198,12 @@ void Swiat::wypiszKomunikaty(int x, int y) {
 		cout << "Brak nowych komunikatow";
 	}
 
-	for (auto v : komunikaty) {
-		p::xy(x, ++y);
-		cout << v;
-		ostatni_komunikat = v;
-	}
 	p::setColor();
 
 	while (!komunikaty.empty())
 	{
+		p::xy(x, ++y);
+		cout << *(--komunikaty.end());
 		komunikaty.pop_back();
 	}
 }
@@ -294,4 +295,24 @@ void Swiat::load() {
 	p::clrscr();
 	Rysuj();
 	//
+}
+
+void Swiat::respawn() {
+	czyRespawn = false;
+	p::xy(1, HEIGHT + 1);
+	cout << "Jakie zwierze chcesz dodac? ";
+	char n;
+	cin >> n;
+	if (n == 'c') lista.push_back(new Czlowiek(*this));
+	else if (n == 'w') lista.push_back(new Wilk(*this));
+	else if (n == 'a') lista.push_back(new Antylopa(*this));
+	else if (n == 'o') lista.push_back(new Owca(*this));
+	else if (n == 'z') lista.push_back(new Zolw(*this));
+	else if (n == 'l') lista.push_back(new Lis(*this));
+	else if (n == 'g') lista.push_back(new Guarana(*this));
+	else if (n == 't') lista.push_back(new Trawa(*this));
+	else if (n == 'm') lista.push_back(new Mlecz(*this));
+	else if (n == 'j') lista.push_back(new Jagody(*this));
+	else if (n == 'b') lista.push_back(new Barszcz(*this));
+	cout << " OK!";
 }

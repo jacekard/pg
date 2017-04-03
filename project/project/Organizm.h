@@ -21,7 +21,7 @@ protected:
 public:
 
 	Organizm(int, int, char, int, int, string, Swiat&);
-
+	~Organizm() {};
 	virtual void rozmnazanie() = 0;
 	virtual void akcja() = 0;
 	virtual void kolizja(Organizm& other) = 0;

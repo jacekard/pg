@@ -8,7 +8,6 @@ int main() {
 	//1. specyfika metody akcja() obiektu LIS
 	//2. specyfika metody kolizja() obiektu ZOLW
 	//3. specyfika metody kolizja() obiektu BARSZCZ
-	//ew. CYBER-OWCA
 
 	char zn = '1';
 	do {

@@ -50,6 +50,9 @@ void Czlowiek::akcja() {
 	case 'l':
 		swiat.czyLoad = true;
 		break;
+	case 'r':
+		swiat.czyRespawn = true;
+		break;
 	case 0: //klawisze specjalne
 	case 224: //klawisze specjalne
 		znak = getch();

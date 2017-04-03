@@ -45,7 +45,8 @@ void Barszcz::akcja() {
 	//	swiat.world[pos.y][pos.x - 1]->die();
 	//	swiat.komentuj(" + " + swiat.world[pos.y][pos.x - 1]->getRodzaj() + " ginie przez trujace opary BARSZCZU! + ");
 	//}
-	//if (validPosX(pos.x + 1) && (swiat.world[pos.y][pos.x + 1] != NULL)) {
+	//if (validPosX(pos.x + 1) 
+	//	&& (swiat.world[pos.y][pos.x + 1] != NULL)) {
 	//	swiat.world[pos.y][pos.x + 1]->die();
 	//	swiat.komentuj(" + " + swiat.world[pos.y][pos.x + 1]->getRodzaj() + " ginie przez trujace opary BARSZCZU! + ");
 	//}

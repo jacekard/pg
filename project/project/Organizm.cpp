@@ -85,7 +85,11 @@ bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
 				swiat.komentuj(" + " + this->rodzaj + " ginie w paszczy " + rodzaj.replace(rodzaj.length() - 1, 1, "Y! + "));
 			}
 			else if (rodzaj == "WILK" || rodzaj == "LIS")
-				swiat.komentuj(" + " + this->rodzaj + " ginie w paszczy " + rodzaj + "A! + ");
+				swiat.komentuj(" + " + 
+				this->rodzaj + 
+				" ginie w paszczy " + 
+				rodzaj + 
+				"A! + ");
 			else if (rodzaj == "ZOLW")
 				swiat.komentuj(" + " + this->rodzaj + " ginie w paszczy " + rodzaj + "IA! + ");
 			else if (rodzaj == "CZLOWIEK")
@@ -108,13 +112,12 @@ bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
 		else if (rodzaj == "JAGODY") {
 			swiat.komentuj(" + " + this->rodzaj + " jest otruty przez WILCZE JAGODY! + ");
 			this->die();
-
 		}
 		else if (rodzaj == "BARSZCZ") {
-			if (this->getRodzaj() != "CYBER-OWCA")
+			if (this->getRodzaj() != "CYBER-OWCA") {
+				swiat.komentuj(" + " + this->rodzaj + " ginie otruty przez BARSZCZ! + ");
 				this->die();
-			swiat.komentuj(" + " + this->rodzaj + " ginie otruty przez BARSZCZ! + ");
-
+			}
 		}
 		swiat.komentuj(" + " + this->rodzaj + " zjada " + rodzaj);
 		atakujacy.die();
@@ -131,19 +134,19 @@ void Organizm::die() {
 		for (int v = 0; v < swiat.lista.size(); v++) {
 			if (this == swiat.lista[v]) {
 				swiat.lista.erase(swiat.lista.begin() + v);
+				//delete this;
 				break;
 			}
 		}
-		swiat.sortujInicjatywa();
 	}
 }
 
 void Organizm::reallocate() {
 	p tmp;
 	int rand;
+	rand = swiat.losuj(1, 4);
 	for (int i = 0; i < 4; i++) {
-		rand = swiat.losuj(1, 4);
-		switch (rand) {
+		switch ((rand + i)%4 + 1) {
 		case 1: 	//case up
 			tmp = pos;
 			tmp.y--;
@@ -153,6 +156,7 @@ void Organizm::reallocate() {
 				pos = tmp;
 				return;
 			}
+			break;
 		case 2: 	//case down
 			tmp = pos;
 			tmp.y++;
@@ -162,6 +166,7 @@ void Organizm::reallocate() {
 				pos = tmp;
 				return;
 			}
+			break;
 		case 3:	//case left
 			tmp = pos;
 			tmp.x--;
@@ -171,6 +176,7 @@ void Organizm::reallocate() {
 				pos = tmp;
 				return;
 			}
+			break;
 		case 4: 	//case right
 			tmp = pos;
 			tmp.x++;
@@ -180,10 +186,17 @@ void Organizm::reallocate() {
 				pos = tmp;
 				return;
 			}
+			break;
 		}
 	}
 	//swiat.komentuj("Realokacja obiektu " + this->rodzaj + " nie udala sie ");
-	this->die();
+	for (int v = 0; v < swiat.lista.size(); v++) {
+		if (this == swiat.lista[v]) {
+			swiat.lista.erase(swiat.lista.begin() + v);
+			//delete this;
+			break;
+		}
+	}
 }
 
 bool Organizm::czyDozwolonyRuch(p tmp) {
