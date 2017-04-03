@@ -211,11 +211,20 @@ bool Organizm::czyDozwolonyRuch(p tmp) {
 	else return false;
 }
 
+p Organizm::ruch() {
+	int s = swiat.losuj(0, 3);
+	p tmp;
+	if (s == 0)
+		tmp.y--;
+	else if (s == 1)
+		tmp.y++;
+	else if (s == 2)
+		tmp.x--;
+	else if (s == 3)
+		tmp.x++;
 
-
-//Organizm& Organizm::operator=(const Organizm& other) {
-//	//mozliwe ze to przeciazenie bedzie zbedne
-//}
+	return tmp;
+}
 
 
 

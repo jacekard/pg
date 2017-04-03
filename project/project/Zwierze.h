@@ -9,7 +9,6 @@ public:
 	virtual void akcja() override;
 	virtual void rozmnazanie() = 0;
 	virtual void kolizja(Organizm& other) = 0;
-	virtual p ruch();
 };
 
 

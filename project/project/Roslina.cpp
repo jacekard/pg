@@ -11,15 +11,15 @@ void Roslina::kolizja(Organizm& other) {
 
 }
 
-bool Roslina::validPosY(int y) {
-	if (y < swiat.HEIGHT)
-		return true;
-	else return false;
-}
-bool Roslina::validPosX(int x) {
-	if (x < swiat.WIDTH)
-		return true;
-	else return false;
+bool Roslina::rozsiewanie() {
+	p tmp = ruch();
+	if ((pos.x + tmp.x < swiat.WIDTH - 1 && pos.y + tmp.y > 1) &&
+		(pos.y + tmp.y < swiat.HEIGHT - 1 && pos.y + tmp.y > 1)) {
+		if (swiat.world[pos.y + tmp.y][pos.x + tmp.x] == NULL) {
+			return true;
+		}
+	}
+	return false;
 }
 
 Roslina::~Roslina() {

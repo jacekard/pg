@@ -25,15 +25,13 @@ void Mlecz::akcja() {
 	if (this->wiek == 150) {
 		this->color = 6;
 	}
-	if ((validPosY(pos.y - 1) && validPosX(pos.x) && swiat.world[pos.y - 1][pos.x] != NULL) &&
-		(validPosY(pos.y + 1) && validPosX(pos.x) && swiat.world[pos.y + 1][pos.x] != NULL) &&
-		(validPosY(pos.y) && validPosX(pos.x - 1) && swiat.world[pos.y][pos.x - 1] != NULL) &&
-		(validPosY(pos.y) && validPosX(pos.x + 1) && swiat.world[pos.y][pos.x + 1] != NULL))
-		return;
-	else
+
 	for (int i = 0; i < 3; i++) {
-		if (swiat.losuj(1, 250) == swiat.losuj(1,100))
-			rozmnazanie();
+		if (swiat.losuj(1, 250) == 1) {
+			if (rozsiewanie()) {
+				rozmnazanie();
+			}
+		}
 	}
 
 

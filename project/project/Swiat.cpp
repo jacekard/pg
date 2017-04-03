@@ -8,8 +8,8 @@ Swiat::Swiat() {
 	czyLoad = false;
 	czyRespawn = false;
 	tarczaAlzura = false;
-	int LICZBA_ZWIERZAT = 2;
-	int LICZBA_ROSLIN = 4;
+	int LICZBA_ZWIERZAT = 0;
+	int LICZBA_ROSLIN = 10;
 
 	komunikaty.push_back("Nowa gra!");
 
@@ -32,20 +32,18 @@ Swiat::Swiat() {
 
 
 		//		lista.push_back(new Zolw(*this));
-		lista.push_back(new Lis(*this));
+		//lista.push_back(new Lis(*this));
 
 	}
 	for (int k = 0; k < LICZBA_ROSLIN; k++) {
 		lista.push_back(new Trawa(*this));
-		//	lista.push_back(new Trawa(*this));
-
-		//lista.push_back(new Mlecz(*this));
-		//lista.push_back(new Guarana(*this));
-		//lista.push_back(new Jagody(*this));
-		//lista.push_back(new Barszcz(*this));
+		lista.push_back(new Mlecz(*this));
+		lista.push_back(new Guarana(*this));
+		lista.push_back(new Jagody(*this));
+		lista.push_back(new Barszcz(*this));
 
 	}
-	lista.push_back(new Czlowiek(*this));
+	//lista.push_back(new Czlowiek(*this));
 
 	sortujInicjatywa();
 

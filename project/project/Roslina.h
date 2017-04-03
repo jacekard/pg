@@ -9,8 +9,7 @@ public:
 	virtual void akcja() = 0;
 	virtual void rozmnazanie() = 0;
 	virtual void kolizja(Organizm& other) override;
-	bool validPosY(int y);
-	bool validPosX(int x);
+	bool rozsiewanie();
 };
 
 #endif

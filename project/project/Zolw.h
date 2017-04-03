@@ -8,7 +8,6 @@ public:
 	Zolw(Swiat&, int, int);
 	void kolizja(Organizm& other);
 	void rozmnazanie() override;
-	p ruch() override;
 };
 
 #endif

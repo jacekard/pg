@@ -48,6 +48,7 @@ public:
 		this->pos.x += other.x;
 		this->pos.y += other.y;
 	}
+	p ruch();
 
 
 };

@@ -51,6 +51,9 @@ void Barszcz::akcja() {
 	//	swiat.komentuj(" + " + swiat.world[pos.y][pos.x + 1]->getRodzaj() + " ginie przez trujace opary BARSZCZU! + ");
 	//}
 
-	if (swiat.losuj(1, 300) == swiat.losuj(1, 50))
-		rozmnazanie();
+	if (swiat.losuj(1, 300) == swiat.losuj(1, 50)) {
+		if (rozsiewanie()) {
+			rozmnazanie();
+		}
+	}
 }

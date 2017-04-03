@@ -33,12 +33,9 @@ void Jagody::kolizja(Organizm& other) {
 void Jagody::akcja() {
 	grow();
 
-	if ((validPosY(pos.y - 1) && validPosX(pos.x) && swiat.world[pos.y - 1][pos.x] != NULL) &&
-		(validPosY(pos.y + 1) && validPosX(pos.x) && swiat.world[pos.y + 1][pos.x] != NULL) &&
-		(validPosY(pos.y) && validPosX(pos.x - 1) && swiat.world[pos.y][pos.x - 1] != NULL) &&
-		(validPosY(pos.y) && validPosX(pos.x + 1) && swiat.world[pos.y][pos.x + 1] != NULL))
-		return;
-	else
-	if (swiat.losuj(1, 300) == swiat.losuj(1, 50))
-		rozmnazanie();
+	if (swiat.losuj(1, 300) == swiat.losuj(1, 50)) {
+		if (rozsiewanie()) {
+			rozmnazanie();
+		}
+	}
 }

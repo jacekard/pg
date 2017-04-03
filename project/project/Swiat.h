@@ -30,8 +30,8 @@ protected:
 private:
 	p pos;
 public:
-	const int WIDTH = 5;
-	const int HEIGHT = 5;
+	const int WIDTH = 41;
+	const int HEIGHT = 21;
 	const int OFFY = 1;
 	const int OFFX = 2;
 

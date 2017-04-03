@@ -5,21 +5,6 @@ Zwierze::Zwierze(int s, int i, char sy, int c, int w, string r, Swiat& sw)
 : Organizm(s, i, sy, c, w, r, sw) {
 }
 
-p Zwierze::ruch() {
-	int s = swiat.losuj(0, 3);
-	p tmp;
-	if (s == 0)
-		tmp.y--;
-	else if (s == 1)
-		tmp.y++;
-	else if (s == 2)
-		tmp.x--;
-	else if (s == 3)
-		tmp.x++;
-
-	return tmp;
-}
-
 void Zwierze::akcja() {
 	p tmp = ruch();
 
