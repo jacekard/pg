@@ -8,7 +8,8 @@ int main() {
 	//1. specyfika metody akcja() obiektu LIS
 	//2. specyfika metody kolizja() obiektu ZOLW
 	//3. specyfika metody kolizja() obiektu BARSZCZ
-
+	//4. przepisz cala funkcje kolizja
+	//5. ponazywaj inaczej klase p (np. na point) wywal te funkcje rysujace z niej do nowej klasy Util
 	char zn = '1';
 	do {
 		
