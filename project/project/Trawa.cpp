@@ -42,7 +42,7 @@ void Trawa::akcja() {
 		this->symbol = 178;
 	}
 	
-	if (swiat.losuj(1, 100) == 1)
+	if (swiat.losuj(1, 70) == 1)
 		if (rozsiewanie()) {
 			rozmnazanie();
 		}

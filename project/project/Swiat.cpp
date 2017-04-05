@@ -29,9 +29,7 @@ Swiat::Swiat() {
 		//lista.push_back(new Wilk(*this));
 		//lista.push_back(new Antylopa(*this));
 		//lista.push_back(new Owca(*this));
-
-
-		//		lista.push_back(new Zolw(*this));
+		//lista.push_back(new Zolw(*this));
 		//lista.push_back(new Lis(*this));
 
 	}
@@ -43,7 +41,7 @@ Swiat::Swiat() {
 		lista.push_back(new Barszcz(*this));
 
 	}
-	//lista.push_back(new Czlowiek(*this));
+	lista.push_back(new Czlowiek(*this));
 
 	sortujInicjatywa();
 
@@ -88,12 +86,12 @@ void Swiat::wykonajTure() {
 
 
 	//randomowe rozsiewanie: (dla guarany, wilczych jagod i barszczu sosnowskiego)
-	if (losuj(1, 100) == 1)
-		lista.push_back(new Guarana(*this));
-	if (losuj(1, 100) == 2)
-		lista.push_back(new Jagody(*this));
-	if (losuj(1, 100) == 3)
-		lista.push_back(new Barszcz(*this));
+	//if (losuj(1, 100) == 1)
+	//	lista.push_back(new Guarana(*this));
+	//if (losuj(1, 100) == 2)
+	//	lista.push_back(new Jagody(*this));
+	//if (losuj(1, 100) == 3)
+	//	lista.push_back(new Barszcz(*this));
 
 
 	p::clrscr();
