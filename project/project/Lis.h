@@ -6,7 +6,7 @@ class Lis : public Zwierze {
 public:
 	Lis(Swiat&);
 	Lis(Swiat&, int, int);
-	void kolizja(Organizm& other);
+	void akcja();
 	void rozmnazanie() override;
 };
 

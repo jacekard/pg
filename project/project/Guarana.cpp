@@ -20,6 +20,12 @@ Guarana::Guarana(Swiat& sw, int x, int y) : Roslina(0, 0, '+', 20, 0, "GUARANA",
 	}
 }
 
+void Guarana::kolizja(Organizm& other) {
+	other.setSila(other.getSila() + 3);
+	swiat.komentuj(" + " + other.getRodzaj() + " ma teraz +3 do sily! + ");
+	Roslina::kolizja(other);
+}
+
 void Guarana::rozmnazanie() {
 	Organizm *child = new Guarana(swiat, pos.x, pos.y);
 	swiat.lista.push_back(child);
@@ -29,7 +35,7 @@ void Guarana::rozmnazanie() {
 void Guarana::akcja() {
 	grow();
 
-	if (swiat.losuj(1, 150) == 1) {
+	if (Util::los(1, 200) == 1) {
 		if (rozsiewanie()) {
 			rozmnazanie();
 		}
@@ -37,3 +43,6 @@ void Guarana::akcja() {
 }
 
 Guarana::~Guarana() {};
+
+
+

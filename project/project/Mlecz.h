@@ -6,7 +6,6 @@ class Mlecz : public Roslina {
 public:
 	Mlecz(Swiat&);
 	Mlecz(Swiat&, int, int);
-	void kolizja(Organizm& other);
 	void rozmnazanie() override;
 	void akcja() override;
 };

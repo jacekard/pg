@@ -7,6 +7,7 @@ public:
 	Guarana(Swiat&);
 	Guarana(Swiat&, int, int);
 	~Guarana();
+	void kolizja(Organizm& other);
 	void rozmnazanie() override;
 	void akcja() override;
 };

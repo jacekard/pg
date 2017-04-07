@@ -2,22 +2,13 @@
 #include "Swiat.h"
 
 Jagody::Jagody(Swiat& sw) : Roslina(99, 0, 'W', 13, 0, "JAGODY", sw) {
-	if (swiat.world[pos.y][pos.x] == NULL)
-		swiat.world[pos.y][pos.x] = this;
-	else {
-		reallocate();
-	}
+	allocate();
 };
 
 Jagody::Jagody(Swiat& sw, int x, int y) : Roslina(99, 0, 'W', 13, 0, "JAGODY", sw) {
 	this->pos.x = x;
 	this->pos.y = y;
-
-	if (swiat.world[pos.y][pos.x] == NULL)
-		swiat.world[pos.y][pos.x] = this;
-	else {
-		reallocate();
-	}
+	allocate();
 }
 
 void Jagody::rozmnazanie() {
@@ -27,13 +18,14 @@ void Jagody::rozmnazanie() {
 }
 
 void Jagody::kolizja(Organizm& other) {
-
+	swiat.komentuj(" + " + other.getRodzaj() + " ginie otruty przez " + rodzaj + "! + ");
+	other.die();
 }
 
 void Jagody::akcja() {
 	grow();
 
-	if (swiat.losuj(1, 300) == swiat.losuj(1, 50)) {
+	if (Util::los(1, 300) == Util::los(1, 50)) {
 		if (rozsiewanie()) {
 			rozmnazanie();
 		}

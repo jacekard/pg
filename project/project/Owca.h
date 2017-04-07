@@ -6,7 +6,6 @@ class Owca : public Zwierze {
 public:
 	Owca(Swiat&);
 	Owca(Swiat&, int, int);
-	void kolizja(Organizm& other);
 	void rozmnazanie() override;
 };
 

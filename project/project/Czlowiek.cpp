@@ -1,19 +1,10 @@
 #include "Czlowiek.h"
 #include "Swiat.h"
-//
-//void Czlowiek::kolizja() {
-//
-//};
 
 Czlowiek::Czlowiek(Swiat& sw) : Zwierze(5, 4, 254, 12, 0, "CZLOWIEK", sw) {
 	coolDown = 0;
 	skillEnabled = 5;
-
-	if (swiat.world[pos.y][pos.x] == NULL)
-		swiat.world[pos.y][pos.x] = this;
-	else {
-		reallocate();
-	}
+	allocate();
 };
 
 Czlowiek::Czlowiek(Swiat& sw, int x, int y) : Zwierze(5, 4, 254, 12, 0, "CZLOWIEK", sw) {
@@ -21,15 +12,15 @@ Czlowiek::Czlowiek(Swiat& sw, int x, int y) : Zwierze(5, 4, 254, 12, 0, "CZLOWIE
 	skillEnabled = 5;
 	this->pos.x = x;
 	this->pos.y = y;
-	
-	if (swiat.world[pos.y][pos.x] == NULL)
-		swiat.world[pos.y][pos.x] = this;
-	else {
-		reallocate();
-	}
+	allocate();
 };
 
 void Czlowiek::akcja() {
+	Util::clrscr();
+	swiat.Rysuj();
+
+	old_pos = pos;
+
 	unsigned char znak = getch();
 
 	if (--skillEnabled < 0)
@@ -80,30 +71,28 @@ void Czlowiek::akcja() {
 		znak = 0;
 		break;
 	}
-
-
-	if (swiat.world[pos.y][pos.x] != NULL)
-		kolizja(*swiat.world[pos.y][pos.x]);
+	if (swiat.world[pos.y][pos.x] != NULL 
+		&& swiat.world[pos.y][pos.x] != this)
+		swiat.world[pos.y][pos.x]->kolizja(*this);
 
 	grow();
 	coolDown--;
 }
 
-void Czlowiek::kolizja(Organizm& other) {
-	if (czyOdbilAtak(other))
-		other.reallocate();
-}
-
 void Czlowiek::umiejetnosc() {
-
-
 	if (swiat.tarczaAlzura == false && coolDown <= 0) {
 		coolDown = 11;
 		skillEnabled = 5;
 		swiat.tarczaAlzura = true;
 		skillEnabled--;
 	}
-
-
 }
 
+bool Czlowiek::czyOdbilAtak(Organizm& atakujacy) {
+	if (swiat.tarczaAlzura) {
+		atakujacy.reallocate();
+		swiat.komentuj(this->rodzaj + " uzywa Tarczy Alzura! + ");
+		return true;
+	}
+	else return false;
+}

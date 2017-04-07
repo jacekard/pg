@@ -6,8 +6,10 @@ class Zolw : public Zwierze {
 public:
 	Zolw(Swiat&);
 	Zolw(Swiat&, int, int);
-	void kolizja(Organizm& other);
+	bool czyOdbilAtak(Organizm& other);
 	void rozmnazanie() override;
+	point ruch();
+
 };
 
 #endif

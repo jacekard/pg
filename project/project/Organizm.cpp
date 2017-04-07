@@ -7,36 +7,40 @@ Organizm::Organizm(int s, int i, char sy, int c, int w,
 	: sila(s), inicjatywa(i), symbol(sy),
 	color(c), wiek(w), rodzaj(r), swiat(sw) {
 
-	pos.x = swiat.losuj(1, swiat.WIDTH - 1);
-	pos.y = swiat.losuj(1, swiat.HEIGHT - 1);
-
+	pos.x = Util::los(1, swiat.WIDTH - 1);
+	pos.y = Util::los(1, swiat.HEIGHT - 1);
+	old_pos = pos;
 };
 void Organizm::rysowanie() {
-	p::xy(pos.x, pos.y);
-	p::setColor(color);
+	Util::gotoxy(pos.x, pos.y);
+	Util::setColor(color);
 	printf("%c", symbol);
-	p::setColor();
+	Util::setColor();
 }
 
 int Organizm::getPosx() { return this->pos.x; }
 int Organizm::getPosy() { return this->pos.y; }
+int Organizm::getOldPosx() { return this->old_pos.x; }
+int Organizm::getOldPosy() { return this->old_pos.y; }
 int Organizm::getWiek() { return this->wiek; }
-int  Organizm::getSila() { return this->sila; }
-int  Organizm::getInicjatywa() { return this->inicjatywa; }
-string  Organizm::getRodzaj() { return this->rodzaj; }
+int Organizm::getSila() { return this->sila; }
+int Organizm::getInicjatywa() { return this->inicjatywa; }
+string Organizm::getRodzaj() { return this->rodzaj; }
 
 void Organizm::setPosx(int x) { this->pos.x = x; }
 void Organizm::setPosy(int y) { this->pos.y = y; }
 void Organizm::setWiek(int a) { this->wiek = a; }
 void Organizm::setSila(int s) { this->sila = s; }
-void  Organizm::grow() { this->wiek++; }
+void Organizm::grow() { this->wiek++; }
 
-bool Organizm::czyZwierze(Organizm& other) {
-	string a = other.getRodzaj();
-	if (a == "WILK" || a == "OWCA" || a == "ZOLW" || a == "ANTYLOPA"
-		|| a == "CYBER-OWCA" || a == "CZLOWIEK") return true;
-	else return false;
+void Organizm::allocate() {
+	if (swiat.world[pos.y][pos.x] == NULL)
+		swiat.world[pos.y][pos.x] = this;
+	else {
+		reallocate();
+	}
 }
+
 bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
 	if (&atakujacy == this) return false;
 	string rodzaj = atakujacy.getRodzaj();
@@ -50,27 +54,27 @@ bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
 			atakujacy.reallocate();
 		}
 
-		//rozmnazanie
-		if (rodzaj == this->rodzaj) {
-			if (this->wiek > 10 && atakujacy.getWiek() > 10) {
-				if (swiat.losuj(1, 5) == 1) {
-					this->rozmnazanie();
-					swiat.komentuj(" + Urodzil/a sie maly/a " + this->rodzaj + "! + ");
-				}
-				return true;
-			}
-		}
+		////rozmnazanie
+		//if (rodzaj == this->rodzaj) {
+		//	if (this->wiek > 10 && atakujacy.getWiek() > 10) {
+		//		if (Util::los(1, 5) == 1) {
+		//			this->rozmnazanie();
+		//			swiat.komentuj(" + Urodzil/a sie maly/a " + this->rodzaj + "! + ");
+		//		}
+		//		return true;
+		//	}
+		//}
 		//walka
 		else if (atakujacy.getSila() >= this->sila) {
 
 			if (this->rodzaj == "ANTYLOPA" &&
-				swiat.losuj(0, 1) == 0) {
+				Util::los(0, 1) == 0) {
 				this->reallocate();
 				swiat.komentuj(this->rodzaj + " ucieka przed walka!");
 				return false;
 			}
 			else if (rodzaj == "ANTYLOPA" &&
-				swiat.losuj(0, 10 == 0)) {
+				Util::los(0, 10 == 0)) {
 				atakujacy.reallocate();
 				swiat.komentuj(this->rodzaj + " ucieka przed walka!");
 				return false;
@@ -126,8 +130,6 @@ bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
 
 }
 void Organizm::die() {
-	//tutaj jest jakis problem przy wpisywaniu NULL do world[][]
-	//nie wiem jaki, ale trzeba to naprawic!
 	if (this->rodzaj == "CZLOWIEK") swiat.czyKoniec = true;
 	else {
 		swiat.world[pos.y][pos.x] = NULL;
@@ -142,9 +144,9 @@ void Organizm::die() {
 }
 
 void Organizm::reallocate() {
-	p tmp;
+	point tmp;
 	int rand;
-	rand = swiat.losuj(1, 4);
+	rand = Util::los(1, 4);
 	for (int i = 0; i < 4; i++) {
 		switch ((rand + i)%4 + 1) {
 		case 1: 	//case up
@@ -199,7 +201,7 @@ void Organizm::reallocate() {
 	}
 }
 
-bool Organizm::czyDozwolonyRuch(p tmp) {
+bool Organizm::czyDozwolonyRuch(point tmp) {
 	bool correctX = true;
 	bool correctY = true;
 	if (tmp.x > swiat.WIDTH - 1 || tmp.x < 1)
@@ -211,16 +213,16 @@ bool Organizm::czyDozwolonyRuch(p tmp) {
 	else return false;
 }
 
-p Organizm::ruch() {
-	int s = swiat.losuj(0, 3);
-	p tmp;
-	if (s == 0)
+point Organizm::ruch() {
+	int kierunek_ruchu = Util::los(0, 3);
+	point tmp;
+	if (kierunek_ruchu == 0)
 		tmp.y--;
-	else if (s == 1)
+	else if (kierunek_ruchu == 1)
 		tmp.y++;
-	else if (s == 2)
+	else if (kierunek_ruchu == 2)
 		tmp.x--;
-	else if (s == 3)
+	else if (kierunek_ruchu == 3)
 		tmp.x++;
 
 	return tmp;

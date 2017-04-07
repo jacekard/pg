@@ -1,15 +1,15 @@
 #include "Swiat.h"
 
 Swiat::Swiat() {
-	p::hidecursor();
+	Util::hidecursor();
 	turnCount = 0;
 	czyKoniec = false;
 	czySave = false;
 	czyLoad = false;
 	czyRespawn = false;
 	tarczaAlzura = false;
-	int LICZBA_ZWIERZAT = 0;
-	int LICZBA_ROSLIN = 10;
+	int LICZBA_ZWIERZAT = 14;
+	int LICZBA_ROSLIN = 2;
 
 	komunikaty.push_back("Nowa gra!");
 
@@ -26,12 +26,11 @@ Swiat::Swiat() {
 	}
 
 	for (int k = 0; k < LICZBA_ZWIERZAT; k++) {
-		//lista.push_back(new Wilk(*this));
-		//lista.push_back(new Antylopa(*this));
-		//lista.push_back(new Owca(*this));
-		//lista.push_back(new Zolw(*this));
-		//lista.push_back(new Lis(*this));
-
+		lista.push_back(new Wilk(*this));
+		lista.push_back(new Antylopa(*this));
+		lista.push_back(new Owca(*this));
+		lista.push_back(new Zolw(*this));
+		lista.push_back(new Lis(*this));
 	}
 	for (int k = 0; k < LICZBA_ROSLIN; k++) {
 		lista.push_back(new Trawa(*this));
@@ -41,13 +40,11 @@ Swiat::Swiat() {
 		lista.push_back(new Barszcz(*this));
 
 	}
-	lista.push_back(new Czlowiek(*this));
+	//lista.push_back(new Czlowiek(*this));
+
+
 
 	sortujInicjatywa();
-
-	/* */
-	Rysuj();
-	/* */
 }
 
 Swiat::~Swiat() {
@@ -70,43 +67,41 @@ void Swiat::wykonajTure() {
 	if (czyRespawn) respawn();
 	int x, y;
 	string a;
-
+	lista.shrink_to_fit();
 	for (int i = 0; i < lista.size(); i++) {
 		y = lista[i]->getPosy();
 		x = lista[i]->getPosx();
 		a = lista[i]->getRodzaj();
 		lista[i]->akcja();
 		world[y][x] = NULL;
+		if (i == lista.size()) break;
 		world[lista[i]->getPosy()][lista[i]->getPosx()] = lista[i];
-		/* */
-		//p::clrscr();
-		//Rysuj();
-		/* */
 	}
 
-
-	//randomowe rozsiewanie: (dla guarany, wilczych jagod i barszczu sosnowskiego)
-	//if (losuj(1, 100) == 1)
-	//	lista.push_back(new Guarana(*this));
-	//if (losuj(1, 100) == 2)
-	//	lista.push_back(new Jagody(*this));
-	//if (losuj(1, 100) == 3)
-	//	lista.push_back(new Barszcz(*this));
-
-
-	p::clrscr();
+	randomPlants();
+	Util::clrscr();
 	Rysuj();
 
 	turnCount++;
 }
 
+void Swiat::randomPlants() {
+	//randomowe rozsiewanie: (dla guarany, wilczych jagod i barszczu sosnowskiego)
+	if (Util::los(1, 200) == 1)
+		lista.push_back(new Guarana(*this));
+	if (Util::los(1, 200) == 2)
+		lista.push_back(new Jagody(*this));
+	if (Util::los(1, 200) == 3)
+		lista.push_back(new Barszcz(*this));
+}
+
 void Swiat::rysujInterfejs() {
-	p::setColor();
+	Util::setColor();
 	pos.x = 0;
 	pos.y = 0;
 	for (int x = 0; x < 2; x++) {
 		for (int i = 0; i <= WIDTH; i++) {
-			p::xy(pos.x, pos.y);
+			Util::gotoxy(pos.x, pos.y);
 			cout << "-";
 			pos.x++;
 		}
@@ -117,7 +112,7 @@ void Swiat::rysujInterfejs() {
 	pos.y = 1;
 	for (int x = 0; x < 2; x++) {
 		for (int i = 0; i < HEIGHT - 1; i++) {
-			p::xy(pos.x, pos.y);
+			Util::gotoxy(pos.x, pos.y);
 			cout << "|";
 			pos.y++;
 		}
@@ -127,21 +122,21 @@ void Swiat::rysujInterfejs() {
 
 	int x = WIDTH + OFFX;
 	int y = 0;
-	p::xy(x, y);
+	Util::gotoxy(x, y);
 	cout << "+ + + + + + + + + + + + + + + + + + +";
-	p::xy(x, ++y);
+	Util::gotoxy(x, ++y);
 	cout << "Tura nr " << turnCount;
-	p::xy(x + 13, y);
+	Util::gotoxy(x + 13, y);
 	if (tarczaAlzura) {
-		p::setColor(14);
+		Util::setColor(14);
 		cout << "Tarcza Alzura ";
-		p::setColor(10);
+		Util::setColor(10);
 		cout << "aktywna";
 	}
 	else {
-		p::setColor(14);
+		Util::setColor(14);
 		cout << "Tarcza Alzura ";
-		p::setColor(12);
+		Util::setColor(12);
 		cout << "nieaktywna";
 	}
 	++y;
@@ -163,21 +158,15 @@ void Swiat::listaGatunkow() {
 	int pom = 0;
 	int x = WIDTH + OFFX;
 	int y = 12;
-	p::xy(x, y);
+	Util::gotoxy(x, y);
 	cout << "lista organizmow: ";
 	y++;
 	for (int i = 0; i < lista.size(); i++) {
-		p::xy(x, y + i);
+		Util::gotoxy(x, y + i);
 		//if (lista[i]->getRodzaj() != "TRAWA")
 		cout << i + 1 << ". " << lista[i]->getRodzaj() << ", ";
 		pom = i;
 	}
-}
-
-int Swiat::losuj(int a, int b) {
-	random_device generator;
-	uniform_int_distribution<int> distribution{ a, b };
-	return distribution(generator);
 }
 
 void Swiat::komentuj(string komunikat) {
@@ -185,23 +174,27 @@ void Swiat::komentuj(string komunikat) {
 }
 
 void Swiat::wypiszKomunikaty(int x, int y) {
-	p::setColor(13);
-	p::xy(x, ++y);
+	Util::setColor(13);
+	Util::gotoxy(x, ++y);
 	cout << "Komunikaty: ";
-	p::setColor(11);
+	Util::setColor(11);
 	if (komunikaty.size() == 0) {
-		p::xy(x, ++y);
+		Util::gotoxy(x, ++y);
 		cout << "Brak nowych komunikatow";
 	}
 
-	p::setColor();
+	Util::setColor(14);
 
+	for (auto v : komunikaty) {
+		Util::gotoxy(x, ++y);
+		cout << v;
+	}
 	while (!komunikaty.empty())
 	{
-		p::xy(x, ++y);
-		cout << *(--komunikaty.end());
 		komunikaty.pop_back();
 	}
+
+	Util::setColor();
 }
 
 void Swiat::sortujInicjatywa() {
@@ -217,7 +210,7 @@ void Swiat::save() {
 
 	char b[4];
 	ofstream plik;
-	plik.open("../save.txt");
+	plik.open("Debug/save.txt");
 
 	for (int y = 0; y < HEIGHT; y++) {
 		for (int x = 0; x < WIDTH; x++) {
@@ -249,8 +242,8 @@ void Swiat::save() {
 
 void Swiat::load() {
 	czyLoad = false;
-	p::clrscr();
-	p::xy(0, 0);
+	Util::clrscr();
+	Util::gotoxy(0, 0);
 	lista.erase(lista.begin(), lista.end());
 	for (int y = 0; y < HEIGHT; y++) {
 		for (int x = 0; x < WIDTH; x++) {
@@ -263,7 +256,7 @@ void Swiat::load() {
 	int x0 = 0;
 	int y0 = 0;
 	int a = 0, b = 0;
-	FILE *plik = fopen("../save.txt", "r");
+	FILE *plik = fopen("Debug/save.txt", "r");
 	while (y0 != HEIGHT) {
 		fscanf(plik, "%c", &n);
 		if (n == '\n') {
@@ -288,14 +281,14 @@ void Swiat::load() {
 	turnCount = b;
 	komentuj("Wczytano gre!");
 	//
-	p::clrscr();
+	Util::clrscr();
 	Rysuj();
 	//
 }
 
 void Swiat::respawn() {
 	czyRespawn = false;
-	p::xy(1, HEIGHT + 1);
+	Util::gotoxy(1, HEIGHT + 1);
 	cout << "Jakie zwierze chcesz dodac? ";
 	char n;
 	cin >> n;

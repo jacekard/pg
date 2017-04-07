@@ -6,10 +6,10 @@
 #include <algorithm>
 #include <random>
 #include <fstream>
-using namespace std;
 #include <vector>
 #include <list>
-#include "Set.h"
+#include "Point.h"
+#include "Util.h"
 
 #include "Czlowiek.h"
 #include "Wilk.h"
@@ -24,11 +24,13 @@ using namespace std;
 #include "Jagody.h"
 #include "Barszcz.h"
 
+using namespace std;
+
 class Swiat {
 protected:
 
 private:
-	p pos;
+	point pos;
 public:
 	const int WIDTH = 41;
 	const int HEIGHT = 21;
@@ -44,8 +46,6 @@ public:
 	~Swiat();
 
 	int turnCount;
-	int losuj(int a, int b);
-
 	bool czyKoniec;
 	bool czySave;
 	bool czyLoad;
@@ -63,6 +63,7 @@ public:
 	void save();
 	void load();
 	void respawn();
+	void randomPlants();
 };
 
 #endif

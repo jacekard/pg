@@ -27,24 +27,16 @@ void Mlecz::akcja() {
 	}
 
 	for (int i = 0; i < 3; i++) {
-		if (swiat.losuj(1, 250) == 1) {
-			if (rozsiewanie()) {
+		if (Util::los(1, 150) == 1) {
+			if (rozsiewanie()) 
 				rozmnazanie();
-			}
 		}
 	}
-
-
 }
 
 void Mlecz::rozmnazanie() {
-	Organizm *child;
-	child = new Mlecz(swiat, pos.x, pos.y);
+	Organizm *child = new Mlecz(swiat, pos.x, pos.y);
 	swiat.lista.push_back(child);
 	swiat.sortujInicjatywa();
-}
-
-void Mlecz::kolizja(Organizm& other) {
-
 }
 

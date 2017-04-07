@@ -2,7 +2,7 @@
 #define ORGANIZM_H
 
 #include <string>
-#include "Set.h"
+#include "Point.h"
 
 using namespace std;
 
@@ -16,7 +16,8 @@ protected:
 	int color;
 	int wiek;
 	string rodzaj;
-	p pos;
+	point pos;
+	point old_pos;
 	Swiat& swiat;
 public:
 
@@ -29,6 +30,8 @@ public:
 	//gettery
 	int getPosx();
 	int getPosy();
+	int getOldPosx();
+	int getOldPosy();
 	int getWiek();
 	int getSila();
 	int getInicjatywa();
@@ -38,19 +41,13 @@ public:
 	void setPosy(int y);
 	void setWiek(int a);
 	void setSila(int s);
-	bool czyDozwolonyRuch(p tmp);
+	bool czyDozwolonyRuch(point tmp);
 	bool czyOdbilAtak(Organizm& atakujacy);
-	bool Organizm::czyZwierze(Organizm& other);
 	void grow();
 	void die();
 	void reallocate();
-	void operator=(p& other) {
-		this->pos.x += other.x;
-		this->pos.y += other.y;
-	}
-	p ruch();
-
-
+	void allocate();
+	virtual point ruch();
 };
 
 

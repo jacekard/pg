@@ -26,11 +26,6 @@ void Trawa::rozmnazanie() {
 	swiat.sortujInicjatywa();
 }
 
-
-void Trawa::kolizja(Organizm& other) {
-
-}
-
 void Trawa::akcja() {
 	grow();
 	if (this->wiek == 200) {
@@ -42,7 +37,7 @@ void Trawa::akcja() {
 		this->symbol = 178;
 	}
 	
-	if (swiat.losuj(1, 70) == 1)
+	if (Util::los(1, 60) == 1)
 		if (rozsiewanie()) {
 			rozmnazanie();
 		}

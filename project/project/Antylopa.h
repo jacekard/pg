@@ -6,9 +6,9 @@ class Antylopa : public Zwierze {
 public:
 	Antylopa(Swiat&);
 	Antylopa(Swiat&, int, int);
-	void kolizja(Organizm& other);
+	bool czyOdbilAtak(Organizm& atakujacy);
 	void rozmnazanie() override;
-	p ruch();
+	point ruch();
 };
 
 #endif

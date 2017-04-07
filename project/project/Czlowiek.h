@@ -11,11 +11,11 @@ private:
 public:
 	Czlowiek(Swiat&);
 	Czlowiek(Swiat&, int, int);
-	void kolizja(Organizm& other);
+	bool czyOdbilAtak(Organizm& atakujacy);
 	void akcja() override;
 	void rozmnazanie() override {};
 	void umiejetnosc();
-	p obslugaStrzalek();
+	point obslugaStrzalek();
 };
 
 #endif
