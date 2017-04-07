@@ -8,8 +8,8 @@ Swiat::Swiat() {
 	czyLoad = false;
 	czyRespawn = false;
 	tarczaAlzura = false;
-	int LICZBA_ZWIERZAT = 14;
-	int LICZBA_ROSLIN = 2;
+	int LICZBA_ZWIERZAT = 25;
+	int LICZBA_ROSLIN = 15;
 
 	komunikaty.push_back("Nowa gra!");
 
@@ -36,8 +36,8 @@ Swiat::Swiat() {
 		lista.push_back(new Trawa(*this));
 		lista.push_back(new Mlecz(*this));
 		lista.push_back(new Guarana(*this));
-		lista.push_back(new Jagody(*this));
-		lista.push_back(new Barszcz(*this));
+		//lista.push_back(new Jagody(*this));
+		//lista.push_back(new Barszcz(*this));
 
 	}
 	//lista.push_back(new Czlowiek(*this));
