@@ -1,4 +1,17 @@
 #!/bin/bash
+# Author           : Imie Nazwisko ( email )
+# Created On       : data
+# Last Modified By : Imie Nazwisko ( email )
+# Last Modified On : data 
+# Version          : wersja
+#
+# Description      :
+# Opis
+#
+# Licensed under GPL (see /usr/share/common-licenses/GPL for more details
+# or contact # the Free Software Foundation for a copy)
+
+
 while getopts hvf:q  OPT; do
   case $OPT in
    h) echo "Pomoc";;
@@ -10,3 +23,6 @@ while getopts hvf:q  OPT; do
    *) echo "Nieznana opcja";;
   esac
 done
+
+
+#Dodać do dużego skryptu "getopts" z parametrami -h -v (help i version)
