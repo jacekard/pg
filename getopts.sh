@@ -27,5 +27,13 @@ while getopts hvf:q  OPT; do
   esac
 done
 
+## getopts zmienna: = zmienna z dwukropkiem po niej przyjmuje argument $OPTARG (bez ':' nie działa!)
 
-#Dodać do dużego skryptu "getopts" z parametrami -h -v (help i version)
+
+# Dodać do dużego skryptu "getopts" z parametrami -h -v (help i version)
+# PLIK TYMCZASOWY NAZWAĆ TMP+NAZWA TEGO PROCESU:
+
+#ZMIENNA '$$' trzyma numer procesu
+$ZMIENNA > /tmp/165178.$$
+rm /tmp/165178.$$
+
