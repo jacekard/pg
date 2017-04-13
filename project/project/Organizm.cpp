@@ -41,99 +41,12 @@ void Organizm::allocate() {
 	}
 }
 
-bool  Organizm::czyOdbilAtak(Organizm& atakujacy) {
-	if (&atakujacy == this) return false;
-	string rodzaj = atakujacy.getRodzaj();
-	if (rodzaj == "OWCA" || rodzaj == "LIS" || rodzaj == "ZOLW" ||
-		rodzaj == "ANTYLOPA" || rodzaj == "CYBER-OWCA" ||
-		rodzaj == "WILK" || rodzaj == "CZLOWIEK") {
-
-		if (this->rodzaj == "OWCA" &&
-			atakujacy.getSila() < 5) {
-			//NAPASTNIK MUSI WROCIC NA SWOJE POPRZEDNIE POLE ;/
-			atakujacy.reallocate();
-		}
-
-		////rozmnazanie
-		//if (rodzaj == this->rodzaj) {
-		//	if (this->wiek > 10 && atakujacy.getWiek() > 10) {
-		//		if (Util::los(1, 5) == 1) {
-		//			this->rozmnazanie();
-		//			swiat.komentuj(" + Urodzil/a sie maly/a " + this->rodzaj + "! + ");
-		//		}
-		//		return true;
-		//	}
-		//}
-		//walka
-		else if (atakujacy.getSila() >= this->sila) {
-
-			if (this->rodzaj == "ANTYLOPA" &&
-				Util::los(0, 1) == 0) {
-				this->reallocate();
-				swiat.komentuj(this->rodzaj + " ucieka przed walka!");
-				return false;
-			}
-			else if (rodzaj == "ANTYLOPA" &&
-				Util::los(0, 10 == 0)) {
-				atakujacy.reallocate();
-				swiat.komentuj(this->rodzaj + " ucieka przed walka!");
-				return false;
-			}
-
-			if (this->rodzaj == "CZLOWIEK" && swiat.tarczaAlzura) {
-				swiat.komentuj(this->rodzaj + " uzywa Tarczy Alzura!");
-				return true;
-			}
-
-			if (rodzaj == "ANTYLOPA" || rodzaj == "OWCA") {
-				swiat.komentuj(" + " + this->rodzaj + " ginie w paszczy " + rodzaj.replace(rodzaj.length() - 1, 1, "Y! + "));
-			}
-			else if (rodzaj == "WILK" || rodzaj == "LIS")
-				swiat.komentuj(" + " + 
-				this->rodzaj + 
-				" ginie w paszczy " + 
-				rodzaj + 
-				"A! + ");
-			else if (rodzaj == "ZOLW")
-				swiat.komentuj(" + " + this->rodzaj + " ginie w paszczy " + rodzaj + "IA! + ");
-			else if (rodzaj == "CZLOWIEK")
-				swiat.komentuj(" + " + this->rodzaj + " ginie z reki " + rodzaj + "A! + ");
-			
-			this->die();
-			return false;
-		}
-		else {
-			swiat.komentuj(this->rodzaj + " odbil atak!");
-			return true;
-
-		}
-	}
-	else {
-		if (rodzaj == "GUARANA") {
-			this->setSila(this->getSila() + 3);
-			swiat.komentuj(" + " + this->rodzaj + " ma teraz +3 do sily! + ");
-		}
-		else if (rodzaj == "JAGODY") {
-			swiat.komentuj(" + " + this->rodzaj + " jest otruty przez WILCZE JAGODY! + ");
-			this->die();
-		}
-		else if (rodzaj == "BARSZCZ") {
-			if (this->getRodzaj() != "CYBER-OWCA") {
-				swiat.komentuj(" + " + this->rodzaj + " ginie otruty przez BARSZCZ! + ");
-				this->die();
-			}
-		}
-		swiat.komentuj(" + " + this->rodzaj + " zjada " + rodzaj);
-		atakujacy.die();
-		return false;
-	}
-
-}
+//
 void Organizm::die() {
 	if (this->rodzaj == "CZLOWIEK") swiat.czyKoniec = true;
 	else {
 		swiat.world[pos.y][pos.x] = NULL;
-		for (int v = 0; v < swiat.lista.size(); v++) {
+		for (int v = swiat.lista.size() -1; v >=0 ; v--) {
 			if (this == swiat.lista[v]) {
 				swiat.lista.erase(swiat.lista.begin() + v);
 				//delete this;

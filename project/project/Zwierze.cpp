@@ -31,23 +31,19 @@ void Zwierze::kolizja(Organizm& other) {
 				swiat.komentuj(" + " + this->rodzaj + " ginie z reki " + rodzaj + "A! + ");
 			else
 				swiat.komentuj(" + " + this->rodzaj + " ginie w paszczy " + rodzaj + "! + ");
-
-			int a = pos.x;
-			int b = pos.y;
 			this->die();
-			swiat.world[b][a] = &other;
+			swiat.world[pos.y][pos.x] = &other;
 		}
 		else {
 			if (this->rodzaj == "CZLOWIEK")
 				swiat.komentuj(" + " + rodzaj + " ginie z reki " + this->rodzaj + "A! + ");
 			else
 				swiat.komentuj(" + " + rodzaj + " ginie w paszczy " + this->rodzaj + "A! + ");
-			int a = other.getPosx();
-			int b = other.getPosy();
 			other.die();
-			swiat.world[b][a] = &other;
+			swiat.world[pos.y][pos.x] = this;
 		}
 	}
+	swiat.Rysuj();
 }
 
 void Zwierze::akcja() {

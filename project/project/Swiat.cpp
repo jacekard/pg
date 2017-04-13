@@ -8,8 +8,8 @@ Swiat::Swiat() {
 	czyLoad = false;
 	czyRespawn = false;
 	tarczaAlzura = false;
-	int LICZBA_ZWIERZAT = 25;
-	int LICZBA_ROSLIN = 15;
+	int LICZBA_ZWIERZAT = 10;
+	int LICZBA_ROSLIN = 0;
 
 	komunikaty.push_back("Nowa gra!");
 
@@ -26,21 +26,23 @@ Swiat::Swiat() {
 	}
 
 	for (int k = 0; k < LICZBA_ZWIERZAT; k++) {
-		lista.push_back(new Wilk(*this));
+		//lista.push_back(new Wilk(*this));
 		lista.push_back(new Antylopa(*this));
-		lista.push_back(new Owca(*this));
-		lista.push_back(new Zolw(*this));
+		//lista.push_back(new Owca(*this));
+		//lista.push_back(new Zolw(*this));
 		lista.push_back(new Lis(*this));
 	}
 	for (int k = 0; k < LICZBA_ROSLIN; k++) {
 		lista.push_back(new Trawa(*this));
 		lista.push_back(new Mlecz(*this));
+		lista.push_back(new Trawa(*this));
+		lista.push_back(new Mlecz(*this));
 		lista.push_back(new Guarana(*this));
-		//lista.push_back(new Jagody(*this));
-		//lista.push_back(new Barszcz(*this));
+		lista.push_back(new Jagody(*this));
+		lista.push_back(new Barszcz(*this));
 
 	}
-	//lista.push_back(new Czlowiek(*this));
+	lista.push_back(new Czlowiek(*this));
 
 
 
@@ -67,6 +69,8 @@ void Swiat::wykonajTure() {
 	if (czyRespawn) respawn();
 	int x, y;
 	string a;
+	
+	randomPlants();
 	lista.shrink_to_fit();
 	for (int i = 0; i < lista.size(); i++) {
 		y = lista[i]->getPosy();
@@ -78,10 +82,10 @@ void Swiat::wykonajTure() {
 		world[lista[i]->getPosy()][lista[i]->getPosx()] = lista[i];
 	}
 
-	randomPlants();
-	Util::clrscr();
-	Rysuj();
-
+	if (turnCount >= 500 - 1) {
+		komentuj("Zakonczono symulacje!");
+		czyKoniec = true;
+	}
 	turnCount++;
 }
 
@@ -140,9 +144,6 @@ void Swiat::rysujInterfejs() {
 		cout << "nieaktywna";
 	}
 	++y;
-
-	wypiszKomunikaty(x, ++y);
-
 }
 
 void Swiat::rysujMape() {
@@ -150,6 +151,10 @@ void Swiat::rysujMape() {
 		for (int x = 1; x < WIDTH; x++) {
 			if (world[y][x] != NULL)
 				world[y][x]->rysowanie();
+			else {
+				Util::gotoxy(x, y);
+				printf(" ");
+			}
 		}
 	}
 }
@@ -210,7 +215,7 @@ void Swiat::save() {
 
 	char b[4];
 	ofstream plik;
-	plik.open("Debug/save.txt");
+	plik.open("Saves/save.txt");
 
 	for (int y = 0; y < HEIGHT; y++) {
 		for (int x = 0; x < WIDTH; x++) {
@@ -256,7 +261,7 @@ void Swiat::load() {
 	int x0 = 0;
 	int y0 = 0;
 	int a = 0, b = 0;
-	FILE *plik = fopen("Debug/save.txt", "r");
+	FILE *plik = fopen("Saves/save.txt", "r");
 	while (y0 != HEIGHT) {
 		fscanf(plik, "%c", &n);
 		if (n == '\n') {

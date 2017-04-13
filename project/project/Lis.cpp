@@ -31,7 +31,13 @@ void Lis::akcja() {
 	pos.x += tmp.x;
 	pos.y += tmp.y;
 
+	//lis nie wchodzi na pole, gdy przeciwnik ma wieksza sile
 	if (swiat.world[pos.y][pos.x] != NULL
+		&& swiat.world[pos.y][pos.x]->getSila() > this->sila) {
+		swiat.komentuj("Lis zweszyl " + swiat.world[pos.y][pos.x]->getRodzaj() + "!");
+		this->reallocate();
+	}
+	else if (swiat.world[pos.y][pos.x] != NULL
 		&& swiat.world[pos.y][pos.x] != this)
 		swiat.world[pos.y][pos.x]->kolizja(*this);
 

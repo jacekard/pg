@@ -16,11 +16,11 @@ Czlowiek::Czlowiek(Swiat& sw, int x, int y) : Zwierze(5, 4, 254, 12, 0, "CZLOWIE
 };
 
 void Czlowiek::akcja() {
-	Util::clrscr();
+	//Util::clrscr();
 	swiat.Rysuj();
-
+	swiat.wypiszKomunikaty(swiat.WIDTH + 2, 3);
+	
 	old_pos = pos;
-
 	unsigned char znak = getch();
 
 	if (--skillEnabled < 0)

@@ -9,9 +9,6 @@ using namespace std;
 
 class Util {
 public:
-	Util() {
-		SetConsoleTitle(TEXT("Wirtualny swiat-- Jacek Ardanowski 165178"));
-	}
 	static int los(int a, int b) {
 		random_device generator;
 		uniform_int_distribution<int> distribution{ a, b };
@@ -19,6 +16,7 @@ public:
 	}
 
 	static void setColor(int k = 15) {
+		SetConsoleTitle(TEXT("Wirtualny swiat -- Jacek Ardanowski 165178"));
 		HANDLE hConsole;
 		hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleTextAttribute(hConsole, k);
