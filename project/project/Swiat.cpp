@@ -8,8 +8,8 @@ Swiat::Swiat() {
 	czyLoad = false;
 	czyRespawn = false;
 	tarczaAlzura = false;
-	int LICZBA_ZWIERZAT = 10;
-	int LICZBA_ROSLIN = 0;
+	int LICZBA_ZWIERZAT = 0;
+	int LICZBA_ROSLIN = 3;
 
 	komunikaty.push_back("Nowa gra!");
 
@@ -26,10 +26,10 @@ Swiat::Swiat() {
 	}
 
 	for (int k = 0; k < LICZBA_ZWIERZAT; k++) {
-		//lista.push_back(new Wilk(*this));
+		lista.push_back(new Wilk(*this));
 		lista.push_back(new Antylopa(*this));
-		//lista.push_back(new Owca(*this));
-		//lista.push_back(new Zolw(*this));
+		lista.push_back(new Owca(*this));
+		lista.push_back(new Zolw(*this));
 		lista.push_back(new Lis(*this));
 	}
 	for (int k = 0; k < LICZBA_ROSLIN; k++) {
@@ -43,7 +43,6 @@ Swiat::Swiat() {
 
 	}
 	lista.push_back(new Czlowiek(*this));
-
 
 
 	sortujInicjatywa();
@@ -87,6 +86,9 @@ void Swiat::wykonajTure() {
 		czyKoniec = true;
 	}
 	turnCount++;
+
+	Rysuj();
+
 }
 
 void Swiat::randomPlants() {
@@ -133,15 +135,15 @@ void Swiat::rysujInterfejs() {
 	Util::gotoxy(x + 13, y);
 	if (tarczaAlzura) {
 		Util::setColor(14);
-		cout << "Tarcza Alzura ";
+		cout << "Tarcza Alzura: ";
 		Util::setColor(10);
-		cout << "aktywna";
+		printf("%c", 254);
 	}
 	else {
 		Util::setColor(14);
-		cout << "Tarcza Alzura ";
+		cout << "Tarcza Alzura: ";
 		Util::setColor(12);
-		cout << "nieaktywna";
+		printf("%c", 254);
 	}
 	++y;
 }
@@ -168,7 +170,6 @@ void Swiat::listaGatunkow() {
 	y++;
 	for (int i = 0; i < lista.size(); i++) {
 		Util::gotoxy(x, y + i);
-		//if (lista[i]->getRodzaj() != "TRAWA")
 		cout << i + 1 << ". " << lista[i]->getRodzaj() << ", ";
 		pom = i;
 	}
@@ -183,15 +184,22 @@ void Swiat::wypiszKomunikaty(int x, int y) {
 	Util::gotoxy(x, ++y);
 	cout << "Komunikaty: ";
 	Util::setColor(11);
+	Util::gotoxy(x, ++y);
+	cout << "                                                       ";
 	if (komunikaty.size() == 0) {
-		Util::gotoxy(x, ++y);
+		Util::gotoxy(x, y);
 		cout << "Brak nowych komunikatow";
 	}
 
-	Util::setColor(14);
+	for (int i = 0; i < HEIGHT; i++) {
+		Util::gotoxy(WIDTH+1, y+1+i);
+		cout << "                                                   ";
+
+	}
 
 	for (auto v : komunikaty) {
-		Util::gotoxy(x, ++y);
+		Util::gotoxy(x, y);
+		Util::setColor(Util::los(14,16));
 		cout << v;
 	}
 	while (!komunikaty.empty())
