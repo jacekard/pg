@@ -34,12 +34,12 @@ Swiat::Swiat() {
 	}
 	for (int k = 0; k < LICZBA_ROSLIN; k++) {
 		lista.push_back(new Trawa(*this));
-		lista.push_back(new Mlecz(*this));
-		lista.push_back(new Trawa(*this));
-		lista.push_back(new Mlecz(*this));
-		lista.push_back(new Guarana(*this));
-		lista.push_back(new Jagody(*this));
-		lista.push_back(new Barszcz(*this));
+		//lista.push_back(new Mlecz(*this));
+		//lista.push_back(new Trawa(*this));
+		//lista.push_back(new Mlecz(*this));
+		//lista.push_back(new Guarana(*this));
+		//lista.push_back(new Jagody(*this));
+		//lista.push_back(new Barszcz(*this));
 
 	}
 	lista.push_back(new Czlowiek(*this));
@@ -49,10 +49,14 @@ Swiat::Swiat() {
 }
 
 Swiat::~Swiat() {
-
+	int listaobiektow = lista.size();
 	lista.erase(lista.begin(), lista.end());
-
-	//delete caly world
+	listaobiektow = lista.size();
+	for (int y = 1; y < HEIGHT; y++) {
+		for (int x = 1; x < WIDTH; x++) {
+			delete world[y][x];
+		}
+	}
 }
 
 void Swiat::Rysuj() {
