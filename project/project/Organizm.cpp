@@ -11,27 +11,17 @@ Organizm::Organizm(int s, int i, char sy, int c, int w,
 	pos.y = Util::los(1, swiat.HEIGHT - 1);
 	old_pos = pos;
 };
+
+void Organizm::grow() { 
+	this->wiek++; 
+}
+
 void Organizm::rysowanie() {
 	Util::gotoxy(pos.x, pos.y);
 	Util::setColor(color);
 	printf("%c", symbol);
 	Util::setColor();
 }
-
-int Organizm::getPosx() { return this->pos.x; }
-int Organizm::getPosy() { return this->pos.y; }
-int Organizm::getOldPosx() { return this->old_pos.x; }
-int Organizm::getOldPosy() { return this->old_pos.y; }
-int Organizm::getWiek() { return this->wiek; }
-int Organizm::getSila() { return this->sila; }
-int Organizm::getInicjatywa() { return this->inicjatywa; }
-string Organizm::getRodzaj() { return this->rodzaj; }
-
-void Organizm::setPosx(int x) { this->pos.x = x; }
-void Organizm::setPosy(int y) { this->pos.y = y; }
-void Organizm::setWiek(int a) { this->wiek = a; }
-void Organizm::setSila(int s) { this->sila = s; }
-void Organizm::grow() { this->wiek++; }
 
 void Organizm::allocate() {
 	if (swiat.world[pos.y][pos.x] == NULL)
@@ -41,18 +31,19 @@ void Organizm::allocate() {
 	}
 }
 
-//
 void Organizm::die() {
-	if (this->rodzaj == "CZLOWIEK") swiat.czyKoniec = true;
+	if (this->rodzaj == "CZLOWIEK")
+		swiat.changeStatement(swiat.getCzyKoniec());
 	else {
-		swiat.world[pos.y][pos.x] = NULL;
-		for (int v = swiat.lista.size() -1; v >=0 ; v--) {
+		int X = pos.x;
+		int Y = pos.y;
+		for (int v = swiat.lista.size() - 1; v >= 0; v--) {
 			if (this == swiat.lista[v]) {
 				swiat.lista.erase(swiat.lista.begin() + v);
-				//delete this;
 				break;
 			}
 		}
+		swiat.world[Y][X] = NULL;
 	}
 }
 
@@ -61,7 +52,7 @@ void Organizm::reallocate() {
 	int rand;
 	rand = Util::los(1, 4);
 	for (int i = 0; i < 4; i++) {
-		switch ((rand + i)%4 + 1) {
+		switch ((rand + i) % 4 + 1) {
 		case 1: 	//case up
 			tmp = pos;
 			tmp.y--;
@@ -123,7 +114,7 @@ bool Organizm::czyDozwolonyRuch(point tmp) {
 		correctY = false;
 
 	if (correctX && correctY) return true;
-	else return false;
+	else return	 false;
 }
 
 point Organizm::ruch() {

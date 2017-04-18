@@ -13,16 +13,4 @@ public:
 
 };
 
-//void operator=(point& other) {
-//	this->x += other.x;
-//	this->y += other.y;
-//}
-
-//virtual void Wypisz(ostream& out) const = 0;
-//friend ostream& operator<<(ostream& os, const Swiat& swiat);
-
-//ostream& operator<<(ostream& os, const Swiat& swiat) {
-//	swiat.Wypisz(os);
-//	return os;
-//}
 #endif

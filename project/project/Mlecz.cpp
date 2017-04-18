@@ -2,22 +2,13 @@
 #include "Swiat.h"
 
 Mlecz::Mlecz(Swiat& sw) : Roslina(0, 0, '*', 14, 0, "MLECZ", sw) {
-	if (swiat.world[pos.y][pos.x] == NULL)
-		swiat.world[pos.y][pos.x] = this;
-	else {
-		reallocate();
-	}
+	allocate();
 };
 
 Mlecz::Mlecz(Swiat& sw, int x, int y) : Roslina(0, 0, '*', 14, 0, "MLECZ", sw) {
 	this->pos.x = x;
 	this->pos.y = y;
-
-	if (swiat.world[pos.y][pos.x] == NULL)
-		swiat.world[pos.y][pos.x] = this;
-	else {
-		reallocate();
-	}
+	allocate();
 }
 
 void Mlecz::akcja() {

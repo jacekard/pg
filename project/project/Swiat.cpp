@@ -1,24 +1,18 @@
 #include "Swiat.h"
 
 Swiat::Swiat() {
-	Util::hidecursor();
-	turnCount = 0;
-	czyKoniec = false;
-	czySave = false;
-	czyLoad = false;
-	czyRespawn = false;
-	tarczaAlzura = false;
-	int LICZBA_ZWIERZAT = 0;
+	int LICZBA_ZWIERZAT = 3;
 	int LICZBA_ROSLIN = 3;
 
 	komunikaty.push_back("Nowa gra!");
-
+	Util::hidecursor();
 
 	world = new Organizm**[HEIGHT];
 
 	for (int i = 0; i < HEIGHT; i++) {
 		world[i] = new Organizm*[WIDTH];
 	}
+
 	for (int y = 0; y < HEIGHT; y++) {
 		for (int x = 0; x < WIDTH; x++) {
 			world[y][x] = NULL;
@@ -34,18 +28,32 @@ Swiat::Swiat() {
 	}
 	for (int k = 0; k < LICZBA_ROSLIN; k++) {
 		lista.push_back(new Trawa(*this));
-		//lista.push_back(new Mlecz(*this));
-		//lista.push_back(new Trawa(*this));
-		//lista.push_back(new Mlecz(*this));
-		//lista.push_back(new Guarana(*this));
-		//lista.push_back(new Jagody(*this));
-		//lista.push_back(new Barszcz(*this));
+		lista.push_back(new Mlecz(*this));
+		lista.push_back(new Trawa(*this));
+		lista.push_back(new Mlecz(*this));
+		lista.push_back(new Guarana(*this));
+		lista.push_back(new Jagody(*this));
+		lista.push_back(new Barszcz(*this));
 
 	}
-	lista.push_back(new Czlowiek(*this));
+	//lista.push_back(new Czlowiek(*this));
 
-
+	wypiszKomunikaty();
 	sortujInicjatywa();
+}
+
+void Swiat::addTurn() {
+	turnCount++;
+}
+
+void Swiat::setTarczaAlzura(bool statement) {
+	if (statement) tarczaAlzura = true;
+	else tarczaAlzura = false;
+}
+
+void Swiat::changeStatement(bool &statement) {
+	if (statement) statement = false;
+	else statement = true;
 }
 
 Swiat::~Swiat() {
@@ -61,7 +69,6 @@ Swiat::~Swiat() {
 
 void Swiat::Rysuj() {
 	rysujInterfejs();
-	//listaGatunkow();
 	rysujMape();
 }
 
@@ -70,33 +77,35 @@ void Swiat::wykonajTure() {
 	if (czySave) save();
 	if (czyLoad) load();
 	if (czyRespawn) respawn();
-	int x, y;
-	string a;
-	
-	randomPlants();
-	lista.shrink_to_fit();
-	for (int i = 0; i < lista.size(); i++) {
-		y = lista[i]->getPosy();
-		x = lista[i]->getPosx();
-		a = lista[i]->getRodzaj();
-		lista[i]->akcja();
-		world[y][x] = NULL;
-		if (i == lista.size()) break;
-		world[lista[i]->getPosy()][lista[i]->getPosx()] = lista[i];
-	}
 
+	randomPlants();
+	for (int i = lista.size()-1; i >= 0; i--) {
+		if (lista[i]) {
+			int poz_x, poz_y;
+			poz_y = lista[i]->getPosy();
+			poz_x = lista[i]->getPosx();
+			lista[i]->akcja();
+			/*lista.shrink_to_fit();*/
+			world[poz_y][poz_x] = NULL;
+			poz_y = lista[i]->getPosy();
+			poz_x = lista[i]->getPosx();
+			world[poz_y][poz_x] = lista[i];
+		}
+	}
 	if (turnCount >= 500 - 1) {
 		komentuj("Zakonczono symulacje!");
-		czyKoniec = true;
+		changeStatement(czyKoniec);
 	}
-	turnCount++;
+	
+	addTurn();
 
 	Rysuj();
-
+	wypiszKomunikaty();
 }
 
 void Swiat::randomPlants() {
-	//randomowe rozsiewanie: (dla guarany, wilczych jagod i barszczu sosnowskiego)
+	//randomowe rozsiewanie: 
+	//(dla guarany, wilczych jagod i barszczu sosnowskiego)
 	if (Util::los(1, 200) == 1)
 		lista.push_back(new Guarana(*this));
 	if (Util::los(1, 200) == 2)
@@ -183,13 +192,14 @@ void Swiat::komentuj(string komunikat) {
 	komunikaty.push_back(komunikat);
 }
 
-void Swiat::wypiszKomunikaty(int x, int y) {
+void Swiat::wypiszKomunikaty() {
+	int x = WIDTH + 2, y = 3;
 	Util::setColor(13);
 	Util::gotoxy(x, ++y);
 	cout << "Komunikaty: ";
 	Util::setColor(11);
 	Util::gotoxy(x, ++y);
-	cout << "                                                       ";
+	cout << "                                                            ";
 	if (komunikaty.size() == 0) {
 		Util::gotoxy(x, y);
 		cout << "Brak nowych komunikatow";
@@ -197,13 +207,13 @@ void Swiat::wypiszKomunikaty(int x, int y) {
 
 	for (int i = 0; i < HEIGHT; i++) {
 		Util::gotoxy(WIDTH+1, y+1+i);
-		cout << "                                                   ";
+		cout << "                                                        ";
 
 	}
 
 	for (auto v : komunikaty) {
-		Util::gotoxy(x, y);
-		Util::setColor(Util::los(14,16));
+		Util::gotoxy(x, y++);
+		Util::setColor(Util::los(2,15));
 		cout << v;
 	}
 	while (!komunikaty.empty())
@@ -223,7 +233,7 @@ void Swiat::sortujInicjatywa() {
 }
 
 void Swiat::save() {
-	czySave = false;
+	changeStatement(czySave);
 
 	char b[4];
 	ofstream plik;
@@ -258,7 +268,7 @@ void Swiat::save() {
 }
 
 void Swiat::load() {
-	czyLoad = false;
+	changeStatement(czyLoad);
 	Util::clrscr();
 	Util::gotoxy(0, 0);
 	lista.erase(lista.begin(), lista.end());
@@ -304,7 +314,7 @@ void Swiat::load() {
 }
 
 void Swiat::respawn() {
-	czyRespawn = false;
+	changeStatement(czyRespawn);
 	Util::gotoxy(1, HEIGHT + 1);
 	cout << "Jakie zwierze chcesz dodac? ";
 	char n;

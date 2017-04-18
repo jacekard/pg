@@ -1,7 +1,6 @@
 #ifndef SWIAT_H
 #define SWIAT_H
 
-//#include <functional>
 #include <iostream>
 #include <algorithm>
 #include <random>
@@ -27,10 +26,14 @@
 using namespace std;
 
 class Swiat {
-protected:
-
 private:
 	point pos;
+	int turnCount = 0;
+	bool czyKoniec = false;
+	bool czySave = false;
+	bool czyLoad = false;
+	bool tarczaAlzura = false;
+	bool czyRespawn = false;
 public:
 	const int WIDTH = 41;
 	const int HEIGHT = 21;
@@ -39,31 +42,35 @@ public:
 
 	vector <Organizm*> lista;
 	Organizm*** world;
-	Organizm *player;
 	list <string> komunikaty;
-	string ostatni_komunikat;
+
 	Swiat();
 	~Swiat();
-
-	int turnCount;
-	bool czyKoniec;
-	bool czySave;
-	bool czyLoad;
-	bool tarczaAlzura;
-	bool czyRespawn;
 	
 	void wykonajTure();
+	void turnAction(Organizm &v);
+	void addTurn();
 	void rysujInterfejs();
 	void listaGatunkow();
 	void Rysuj();
 	void rysujMape();
 	void komentuj(string komunikat);
-	void wypiszKomunikaty(int x, int y);
+	void wypiszKomunikaty();
 	void sortujInicjatywa();
 	void save();
 	void load();
 	void respawn();
 	void randomPlants();
+	void changeStatement(bool &statement);
+	//getters
+	bool &getCzyKoniec() { return czyKoniec; }
+	bool &getCzySave() { return czySave; }
+	bool &getCzyLoad() { return czyLoad; }
+	bool &getTarczaAlzura() { return tarczaAlzura; }
+	void setTarczaAlzura(bool statement);
+	bool &getCzyRespawn() { return czyRespawn; }
+	int getTurnCount() { return turnCount; }
+
 };
 
 #endif

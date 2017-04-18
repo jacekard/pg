@@ -2,22 +2,13 @@
 #include "Swiat.h"
 
 Trawa::Trawa(Swiat& sw) : Roslina(0, 0, 176, 10, 0, "TRAWA", sw) {
-	if (swiat.world[pos.y][pos.x] == NULL)
-		swiat.world[pos.y][pos.x] = this;
-	else {
-		reallocate();
-	}
+	allocate();
 };
 
 Trawa::Trawa(Swiat& sw, int x, int y) : Roslina(0, 0, 176, 10, 0, "TRAWA", sw) {
 	this->pos.x = x;
 	this->pos.y = y;
-
-	if (swiat.world[pos.y][pos.x] == NULL)
-		swiat.world[pos.y][pos.x] = this;
-	else {
-		reallocate();
-	}
+	allocate();
 }
 
 void Trawa::rozmnazanie() {

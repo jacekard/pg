@@ -16,33 +16,32 @@ Czlowiek::Czlowiek(Swiat& sw, int x, int y) : Zwierze(5, 4, 254, 12, 0, "CZLOWIE
 };
 
 void Czlowiek::akcja() {
-	//Util::clrscr();
+
 	swiat.Rysuj();
-	swiat.wypiszKomunikaty(swiat.WIDTH + 2, 3);
 	
 	old_pos = pos;
 	unsigned char znak = getch();
 
 	if (--skillEnabled < 0)
-		swiat.tarczaAlzura = false;
+		swiat.setTarczaAlzura(0);
 
 	switch (znak)
 	{
 	case 'q':
-		swiat.czyKoniec = true;
+		swiat.changeStatement(swiat.getCzyKoniec());
 		swiat.komentuj(" + Wyszedles z gry +");
 		break;
 	case 'p': //tarcza alzura
 		umiejetnosc();
 		break;
 	case 's':
-		swiat.czySave = true;
+		swiat.changeStatement(swiat.getCzySave());
 		break;
 	case 'l':
-		swiat.czyLoad = true;
+		swiat.changeStatement(swiat.getCzyLoad());
 		break;
 	case 'r':
-		swiat.czyRespawn = true;
+		swiat.changeStatement(swiat.getCzyRespawn());
 		break;
 	case 0: //klawisze specjalne
 	case 224: //klawisze specjalne
@@ -80,16 +79,16 @@ void Czlowiek::akcja() {
 }
 
 void Czlowiek::umiejetnosc() {
-	if (swiat.tarczaAlzura == false && coolDown <= 0) {
+	if (!swiat.getTarczaAlzura() && coolDown <= 0) {
 		coolDown = 11;
 		skillEnabled = 5;
-		swiat.tarczaAlzura = true;
+		swiat.setTarczaAlzura(1);
 		skillEnabled--;
 	}
 }
 
 bool Czlowiek::czyOdbilAtak(Organizm& atakujacy) {
-	if (swiat.tarczaAlzura) {
+	if (swiat.getTarczaAlzura()) {
 		atakujacy.reallocate();
 		swiat.komentuj(this->rodzaj + " uzywa Tarczy Alzura! + ");
 		return true;

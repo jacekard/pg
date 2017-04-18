@@ -22,6 +22,7 @@ void Barszcz::kolizja(Organizm& other) {
 	if (this->getRodzaj() != "CYBER-OWCA") {
 		swiat.komentuj(" + " + other.getRodzaj() + " ginie otruty przez " + rodzaj + "! + ");
 		other.die();
+		this->die();
 	}
 }
 

@@ -21,7 +21,7 @@ void Zwierze::kolizja(Organizm& other) {
 	string rodzaj = other.getRodzaj();
 	if (czyRozmnazanie(other)) {
 		if (other.getWiek() > 10 && this->wiek > 10) {
-			if (Util::los(1, 5) == 1)
+			if (Util::los(1, 3) == 1)
 				this->rozmnazanie();
 		}
 	}
@@ -32,7 +32,7 @@ void Zwierze::kolizja(Organizm& other) {
 			else
 				swiat.komentuj(" + " + this->rodzaj + " ginie w paszczy " + rodzaj + "! + ");
 			this->die();
-			swiat.world[pos.y][pos.x] = &other;
+			swiat.world[other.getPosy()][other.getPosx()] = &other;
 		}
 		else {
 			if (this->rodzaj == "CZLOWIEK")

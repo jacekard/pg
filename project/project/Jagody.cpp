@@ -20,6 +20,7 @@ void Jagody::rozmnazanie() {
 void Jagody::kolizja(Organizm& other) {
 	swiat.komentuj(" + " + other.getRodzaj() + " ginie otruty przez " + rodzaj + "! + ");
 	other.die();
+	this->die();
 }
 
 void Jagody::akcja() {
