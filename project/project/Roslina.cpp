@@ -7,6 +7,8 @@ Roslina::Roslina(int s, int i, char sy, int c, int w, string r, Swiat& sw)
 
 void Roslina::kolizja(Organizm& other) {
 	swiat.komentuj(" + " + other.getRodzaj() + " zjada " + this->rodzaj + "! + ");
+	swiat.world[pos.y][pos.x] = &other;
+	swiat.world[other.getOldPosy()][other.getOldPosx()] = NULL;
 	this->die();
 }
 

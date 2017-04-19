@@ -37,9 +37,13 @@ void Lis::akcja() {
 		swiat.komentuj("Lis zweszyl " + swiat.world[pos.y][pos.x]->getRodzaj() + "!");
 		this->reallocate();
 	}
-	else if (swiat.world[pos.y][pos.x] != NULL
+	if (swiat.world[pos.y][pos.x] != NULL
 		&& swiat.world[pos.y][pos.x] != this)
 		swiat.world[pos.y][pos.x]->kolizja(*this);
+	else {
+		swiat.world[old_pos.y][old_pos.x] = NULL;
+		swiat.world[pos.y][pos.x] = this;
+	}
 
 	//dodaj wiek;
 	grow();

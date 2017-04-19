@@ -23,8 +23,8 @@ Swiat::Swiat() {
 		lista.push_back(new Wilk(*this));
 		lista.push_back(new Antylopa(*this));
 		lista.push_back(new Owca(*this));
-		lista.push_back(new Zolw(*this));
 		lista.push_back(new Lis(*this));
+		lista.push_back(new Zolw(*this));
 	}
 	for (int k = 0; k < LICZBA_ROSLIN; k++) {
 		lista.push_back(new Trawa(*this));
@@ -36,7 +36,7 @@ Swiat::Swiat() {
 		lista.push_back(new Barszcz(*this));
 
 	}
-	//lista.push_back(new Czlowiek(*this));
+	/*lista.push_back(new Czlowiek(*this));*/
 
 	wypiszKomunikaty();
 	sortujInicjatywa();
@@ -79,19 +79,22 @@ void Swiat::wykonajTure() {
 	if (czyRespawn) respawn();
 
 	randomPlants();
-	for (int i = lista.size()-1; i >= 0; i--) {
-		if (lista[i]) {
-			int poz_x, poz_y;
-			poz_y = lista[i]->getPosy();
-			poz_x = lista[i]->getPosx();
+
+	for (int i = 0; i < lista.size(); i++) {
+		if (lista[i]->getWiek() != -1) {
 			lista[i]->akcja();
-			/*lista.shrink_to_fit();*/
-			world[poz_y][poz_x] = NULL;
-			poz_y = lista[i]->getPosy();
-			poz_x = lista[i]->getPosx();
-			world[poz_y][poz_x] = lista[i];
 		}
 	}
+	
+	for (int i = lista.size() - 1; i >= 0; i--) {
+		if (lista[i]->getWiek() == -1) {
+			int X = lista[i]->getPosx();
+			int Y = lista[i]->getPosy();
+			lista.erase(lista.begin() + i);
+			/*world[Y][X] = NULL;*/
+		}
+	}
+
 	if (turnCount >= 500 - 1) {
 		komentuj("Zakonczono symulacje!");
 		changeStatement(czyKoniec);

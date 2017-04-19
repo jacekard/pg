@@ -21,7 +21,9 @@ void Barszcz::rozmnazanie() {
 void Barszcz::kolizja(Organizm& other) {
 	if (this->getRodzaj() != "CYBER-OWCA") {
 		swiat.komentuj(" + " + other.getRodzaj() + " ginie otruty przez " + rodzaj + "! + ");
+		swiat.world[other.getOldPosy()][other.getOldPosx()] = NULL;
 		other.die();
+		swiat.world[pos.y][pos.x] = NULL;
 		this->die();
 	}
 }
@@ -33,6 +35,8 @@ void Barszcz::akcja() {
 		tmp = swiat.world[pos.y - 1][pos.x];
 		if (tmp != NULL && dynamic_cast<Zwierze*>(tmp)) {
 			swiat.komentuj(" + " + tmp->getRodzaj() + " ginie przez trujace opary BARSZCZU! + ");
+			swiat.world[tmp->getOldPosy()][tmp->getOldPosx()] = NULL;
+			swiat.world[tmp->getPosy()][tmp->getPosx()] = NULL;
 			tmp->die();
 		}
 	}
@@ -41,7 +45,10 @@ void Barszcz::akcja() {
 		tmp = swiat.world[pos.y + 1][pos.x];
 		if (tmp != NULL && dynamic_cast<Zwierze*>(tmp)) {
 			swiat.komentuj(" + " + tmp->getRodzaj() + " ginie przez trujace opary BARSZCZU! + ");
+			swiat.world[tmp->getOldPosy()][tmp->getOldPosx()] = NULL;
+			swiat.world[tmp->getPosy()][tmp->getPosx()] = NULL;
 			tmp->die();
+
 		}
 	}
 
@@ -49,6 +56,8 @@ void Barszcz::akcja() {
 		tmp = swiat.world[pos.y][pos.x + 1];
 		if (tmp != NULL && dynamic_cast<Zwierze*>(tmp)) {
 			swiat.komentuj(" + " + tmp->getRodzaj() + " ginie przez trujace opary BARSZCZU! + ");
+			swiat.world[tmp->getOldPosy()][tmp->getOldPosx()] = NULL;
+			swiat.world[tmp->getPosy()][tmp->getPosx()] = NULL;
 			tmp->die();
 		}
 	}
@@ -57,7 +66,10 @@ void Barszcz::akcja() {
 		tmp = swiat.world[pos.y][pos.x - 1];
 		if (tmp != NULL && dynamic_cast<Zwierze*>(tmp)) {
 			swiat.komentuj(" + " + tmp->getRodzaj() + " ginie przez trujace opary BARSZCZU! + ");
+			swiat.world[tmp->getOldPosy()][tmp->getOldPosx()] = NULL;
+			swiat.world[tmp->getPosy()][tmp->getPosx()] = NULL;
 			tmp->die();
+
 		}
 	}
 

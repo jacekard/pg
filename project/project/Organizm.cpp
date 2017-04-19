@@ -35,15 +35,7 @@ void Organizm::die() {
 	if (this->rodzaj == "CZLOWIEK")
 		swiat.changeStatement(swiat.getCzyKoniec());
 	else {
-		int X = pos.x;
-		int Y = pos.y;
-		for (int v = swiat.lista.size() - 1; v >= 0; v--) {
-			if (this == swiat.lista[v]) {
-				swiat.lista.erase(swiat.lista.begin() + v);
-				break;
-			}
-		}
-		swiat.world[Y][X] = NULL;
+		this->wiek = -1;
 	}
 }
 

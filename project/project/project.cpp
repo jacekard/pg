@@ -4,8 +4,6 @@ int main() {
 	
 	Swiat swiat;
 
-	//ZROBIC FABRYKE ZWIERZAT!
-
 	char zn = '1';
 	do {
 		

@@ -10,43 +10,45 @@ bool Zwierze::czyOdbilAtak(Organizm& atakujacy) {
 }
 
 bool Zwierze::czyRozmnazanie(Organizm& other) {
-	if (rodzaj == other.getRodzaj())
-		return true;
-	else
-		return false;
+	if (rodzaj == other.getRodzaj()) {
+		if (Util::los(1, 3) == 1) {
+			if (other.getWiek() > 15 && this->wiek > 15)
+				return true;
+		}
+	}
+	return false;
 }
 
 void Zwierze::kolizja(Organizm& other) {
 	if (&other == this) return;
 	string rodzaj = other.getRodzaj();
-	if (czyRozmnazanie(other)) {
-		if (other.getWiek() > 10 && this->wiek > 10) {
-			if (Util::los(1, 3) == 1)
-				this->rozmnazanie();
-		}
-	}
-	else if (czyOdbilAtak(other) == false) {
+	if (czyRozmnazanie(other))
+		this->rozmnazanie();
+	else if (!czyOdbilAtak(other)) {
 		if (other.getSila() >= sila) {
 			if (rodzaj == "CZLOWIEK")
 				swiat.komentuj(" + " + this->rodzaj + " ginie z reki " + rodzaj + "A! + ");
 			else
 				swiat.komentuj(" + " + this->rodzaj + " ginie w paszczy " + rodzaj + "! + ");
+			swiat.world[pos.y][pos.x] = &other;
+			swiat.world[other.getOldPosy()][other.getOldPosx()] = NULL;
 			this->die();
-			swiat.world[other.getPosy()][other.getPosx()] = &other;
 		}
 		else {
 			if (this->rodzaj == "CZLOWIEK")
 				swiat.komentuj(" + " + rodzaj + " ginie z reki " + this->rodzaj + "A! + ");
 			else
 				swiat.komentuj(" + " + rodzaj + " ginie w paszczy " + this->rodzaj + "A! + ");
+			swiat.world[other.getOldPosy()][other.getOldPosx()] = NULL;
 			other.die();
-			swiat.world[pos.y][pos.x] = this;
 		}
 	}
-	swiat.Rysuj();
 }
 
 void Zwierze::akcja() {
+	//dodaj wiek;
+	grow();
+
 	point tmp = ruch();
 	/*tmp.x = 0;
 	tmp.y = 0;*/
@@ -63,9 +65,11 @@ void Zwierze::akcja() {
 	if (swiat.world[pos.y][pos.x] != NULL
 		&& swiat.world[pos.y][pos.x] != this)
 		swiat.world[pos.y][pos.x]->kolizja(*this);
+	else {
+		swiat.world[old_pos.y][old_pos.x] = NULL;
+		swiat.world[pos.y][pos.x] = this;
+	}
 
-	//dodaj wiek;
-	grow();
 }
 
 Zwierze::~Zwierze() {

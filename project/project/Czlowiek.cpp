@@ -70,9 +70,13 @@ void Czlowiek::akcja() {
 		znak = 0;
 		break;
 	}
-	if (swiat.world[pos.y][pos.x] != NULL 
+	if (swiat.world[pos.y][pos.x] != NULL
 		&& swiat.world[pos.y][pos.x] != this)
 		swiat.world[pos.y][pos.x]->kolizja(*this);
+	else {
+		swiat.world[old_pos.y][old_pos.x] = NULL;
+		swiat.world[pos.y][pos.x] = this;
+	}
 
 	grow();
 	coolDown--;
