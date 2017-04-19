@@ -1,8 +1,9 @@
 #include "Swiat.h"
 
-Swiat::Swiat() {
+Swiat::Swiat(int WIDTH, int HEIGHT) : WIDTH(WIDTH), HEIGHT(HEIGHT) {
+
 	int LICZBA_ZWIERZAT = 3;
-	int LICZBA_ROSLIN = 3;
+	int LICZBA_ROSLIN = 5;
 
 	komunikaty.push_back("Nowa gra!");
 	Util::hidecursor();
@@ -36,7 +37,7 @@ Swiat::Swiat() {
 		lista.push_back(new Barszcz(*this));
 
 	}
-	/*lista.push_back(new Czlowiek(*this));*/
+	lista.push_back(new Czlowiek(*this));
 
 	wypiszKomunikaty();
 	sortujInicjatywa();
@@ -91,19 +92,21 @@ void Swiat::wykonajTure() {
 			int X = lista[i]->getPosx();
 			int Y = lista[i]->getPosy();
 			lista.erase(lista.begin() + i);
-			/*world[Y][X] = NULL;*/
 		}
 	}
 
-	if (turnCount >= 500 - 1) {
+	if (turnCount >= 1500) {
+		Rysuj();
+		Sleep(5000);
 		komentuj("Zakonczono symulacje!");
 		changeStatement(czyKoniec);
 	}
 	
-	addTurn();
-
 	Rysuj();
 	wypiszKomunikaty();
+	addTurn();
+
+
 }
 
 void Swiat::randomPlants() {
@@ -202,7 +205,7 @@ void Swiat::wypiszKomunikaty() {
 	cout << "Komunikaty: ";
 	Util::setColor(11);
 	Util::gotoxy(x, ++y);
-	cout << "                                                            ";
+	cout << "                                                      ";
 	if (komunikaty.size() == 0) {
 		Util::gotoxy(x, y);
 		cout << "Brak nowych komunikatow";
@@ -210,7 +213,7 @@ void Swiat::wypiszKomunikaty() {
 
 	for (int i = 0; i < HEIGHT; i++) {
 		Util::gotoxy(WIDTH+1, y+1+i);
-		cout << "                                                        ";
+		cout << "                                                  ";
 
 	}
 
@@ -242,6 +245,9 @@ void Swiat::save() {
 	ofstream plik;
 	plik.open("Saves/save.txt");
 
+	plik << WIDTH << " ";
+	plik << HEIGHT << endl;
+
 	for (int y = 0; y < HEIGHT; y++) {
 		for (int x = 0; x < WIDTH; x++) {
 			if (world[y][x] == NULL) plik << ".";
@@ -264,10 +270,11 @@ void Swiat::save() {
 
 	plik << turnCount - 1;
 
+
 	plik.close();
 
 	komentuj("Zapisano gre!");
-
+	wypiszKomunikaty();
 }
 
 void Swiat::load() {
@@ -277,7 +284,7 @@ void Swiat::load() {
 	lista.erase(lista.begin(), lista.end());
 	for (int y = 0; y < HEIGHT; y++) {
 		for (int x = 0; x < WIDTH; x++) {
-			world[y][x] = NULL;
+			delete world[y][x];
 		}
 	}
 
@@ -287,6 +294,23 @@ void Swiat::load() {
 	int y0 = 0;
 	int a = 0, b = 0;
 	FILE *plik = fopen("Saves/save.txt", "r");
+
+	fscanf(plik, "\n%d %d", &a, &b);
+	WIDTH = a;
+	HEIGHT = b;
+
+	world = new Organizm**[HEIGHT];
+
+	for (int i = 0; i < HEIGHT; i++) {
+		world[i] = new Organizm*[WIDTH];
+	}
+
+	for (int y = 0; y < HEIGHT; y++) {
+		for (int x = 0; x < WIDTH; x++) {
+			world[y][x] = NULL;
+		}
+	}
+	fscanf(plik, "%c", &n);
 	while (y0 != HEIGHT) {
 		fscanf(plik, "%c", &n);
 		if (n == '\n') {
@@ -313,6 +337,7 @@ void Swiat::load() {
 	//
 	Util::clrscr();
 	Rysuj();
+	wypiszKomunikaty();
 	//
 }
 

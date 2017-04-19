@@ -1,0 +1,12 @@
+#include "Czlowiek.h"
+#include "Wilk.h"
+#include "Antylopa.h"
+#include "Owca.h"
+#include "Zolw.h"
+#include "Lis.h"
+
+#include "Trawa.h"
+#include "Mlecz.h"
+#include "Guarana.h"
+#include "Jagody.h"
+#include "Barszcz.h"

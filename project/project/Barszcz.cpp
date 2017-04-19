@@ -2,13 +2,14 @@
 #include "Swiat.h"
 
 Barszcz::Barszcz(Swiat& sw) : Roslina(99, 0, 'B', 11, 0, "BARSZCZ", sw) {
+	maxZakresLosowania = 300;
 	allocate();
 };
 
 Barszcz::Barszcz(Swiat& sw, int x, int y) : Roslina(99, 0, 'B', 11, 0, "BARSZCZ", sw) {
+	maxZakresLosowania = 300;
 	this->pos.x = x;
 	this->pos.y = y;
-
 	allocate();
 }
 
@@ -29,7 +30,7 @@ void Barszcz::kolizja(Organizm& other) {
 }
 
 void Barszcz::akcja() {
-	grow();
+	Roslina::akcja();
 	Organizm* tmp;
 	if (pos.y - 1 < swiat.HEIGHT - 1 && pos.y - 1 > 1) {
 		tmp = swiat.world[pos.y - 1][pos.x];
@@ -70,13 +71,6 @@ void Barszcz::akcja() {
 			swiat.world[tmp->getPosy()][tmp->getPosx()] = NULL;
 			tmp->die();
 
-		}
-	}
-
-
-	if (Util::los(1, 300) == Util::los(1, 50)) {
-		if (rozsiewanie()) {
-			rozmnazanie();
 		}
 	}
 }

@@ -12,7 +12,18 @@ void Roslina::kolizja(Organizm& other) {
 	this->die();
 }
 
+void Roslina::akcja() {
+	if (czyRosnie) {
+		grow();
+		if (Util::los(1, maxZakresLosowania) == 1)
+		if (rozsiewanie()) {
+			rozmnazanie();
+		}
+	}
+}
+
 bool Roslina::rozsiewanie() {
+	if (wiek >= 100) czyRosnie = false;
 	point tmp = ruch();
 	if ((pos.x + tmp.x < swiat.WIDTH - 1 && pos.y + tmp.y > 1) &&
 		(pos.y + tmp.y < swiat.HEIGHT - 1 && pos.y + tmp.y > 1)) {

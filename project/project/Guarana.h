@@ -9,7 +9,6 @@ public:
 	~Guarana();
 	void kolizja(Organizm& other);
 	void rozmnazanie() override;
-	void akcja() override;
 };
 
 #endif

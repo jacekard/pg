@@ -8,7 +8,6 @@ public:
 	Jagody(Swiat&, int, int);
 	void kolizja(Organizm& other);
 	void rozmnazanie() override;
-	void akcja() override;
 };
 
 #endif

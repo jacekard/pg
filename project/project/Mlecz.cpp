@@ -2,26 +2,24 @@
 #include "Swiat.h"
 
 Mlecz::Mlecz(Swiat& sw) : Roslina(0, 0, '*', 14, 0, "MLECZ", sw) {
+	maxZakresLosowania = 120;
 	allocate();
 };
 
 Mlecz::Mlecz(Swiat& sw, int x, int y) : Roslina(0, 0, '*', 14, 0, "MLECZ", sw) {
+	maxZakresLosowania = 120;
 	this->pos.x = x;
 	this->pos.y = y;
 	allocate();
 }
 
 void Mlecz::akcja() {
-	grow();
+	Roslina::akcja();
 	if (this->wiek == 150) {
 		this->color = 6;
 	}
-
-	for (int i = 0; i < 3; i++) {
-		if (Util::los(1, 150) == 1) {
-			if (rozsiewanie()) 
-				rozmnazanie();
-		}
+	if (this->wiek == 120) {
+		this->color = 5;
 	}
 }
 

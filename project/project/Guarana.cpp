@@ -3,9 +3,11 @@
 
 Guarana::Guarana(Swiat& sw) : Roslina(0, 0, '+', 20, 0, "GUARANA", sw) {
 	allocate();
+	maxZakresLosowania = 200;
 };
 
 Guarana::Guarana(Swiat& sw, int x, int y) : Roslina(0, 0, '+', 20, 0, "GUARANA", sw) {
+	maxZakresLosowania = 200;
 	this->pos.x = x;
 	this->pos.y = y;
 	allocate();
@@ -21,16 +23,6 @@ void Guarana::rozmnazanie() {
 	Organizm *child = new Guarana(swiat, pos.x, pos.y);
 	swiat.lista.push_back(child);
 	swiat.sortujInicjatywa();
-}
-
-void Guarana::akcja() {
-	grow();
-
-	if (Util::los(1, 200) == 1) {
-		if (rozsiewanie()) {
-			rozmnazanie();
-		}
-	}
 }
 
 Guarana::~Guarana() {};

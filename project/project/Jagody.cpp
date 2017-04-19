@@ -2,10 +2,12 @@
 #include "Swiat.h"
 
 Jagody::Jagody(Swiat& sw) : Roslina(99, 0, 'W', 13, 0, "JAGODY", sw) {
+	maxZakresLosowania = 300;
 	allocate();
 };
 
 Jagody::Jagody(Swiat& sw, int x, int y) : Roslina(99, 0, 'W', 13, 0, "JAGODY", sw) {
+	maxZakresLosowania = 300;
 	this->pos.x = x;
 	this->pos.y = y;
 	allocate();
@@ -23,14 +25,4 @@ void Jagody::kolizja(Organizm& other) {
 	other.die();
 	swiat.world[pos.y][pos.x] = NULL;
 	this->die();
-}
-
-void Jagody::akcja() {
-	grow();
-
-	if (Util::los(1, 300) == Util::los(1, 50)) {
-		if (rozsiewanie()) {
-			rozmnazanie();
-		}
-	}
 }

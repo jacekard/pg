@@ -10,18 +10,7 @@
 #include "Point.h"
 #include "Util.h"
 
-#include "Czlowiek.h"
-#include "Wilk.h"
-#include "Antylopa.h"
-#include "Owca.h"
-#include "Zolw.h"
-#include "Lis.h"
-
-#include "Trawa.h"
-#include "Mlecz.h"
-#include "Guarana.h"
-#include "Jagody.h"
-#include "Barszcz.h"
+#include "listaGatunkow.h"
 
 using namespace std;
 
@@ -35,8 +24,8 @@ private:
 	bool tarczaAlzura = false;
 	bool czyRespawn = false;
 public:
-	const int WIDTH = 41;
-	const int HEIGHT = 21;
+	int WIDTH = 41;
+	int HEIGHT = 21;
 	const int OFFY = 1;
 	const int OFFX = 2;
 
@@ -44,9 +33,9 @@ public:
 	Organizm*** world;
 	list <string> komunikaty;
 
-	Swiat();
+	Swiat(int WIDTH, int HEIGHT);
 	~Swiat();
-	
+
 	void wykonajTure();
 	void turnAction(Organizm &v);
 	void addTurn();

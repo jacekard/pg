@@ -85,6 +85,7 @@
     <ClInclude Include="Guarana.h" />
     <ClInclude Include="Jagody.h" />
     <ClInclude Include="Lis.h" />
+    <ClInclude Include="listaGatunkow.h" />
     <ClInclude Include="Mlecz.h" />
     <ClInclude Include="Organizm.h" />
     <ClInclude Include="Owca.h" />

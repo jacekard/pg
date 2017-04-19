@@ -2,7 +2,15 @@
 
 int main() {
 	
-	Swiat swiat;
+	int WIDTH, HEIGHT;
+	cout << "Podaj wymiary swiata: \n";
+	cout << "szerokosc: ";
+	cin >> WIDTH;
+	cout << "wysokosc: ";
+	cin >> HEIGHT;
+
+	Swiat swiat(WIDTH,HEIGHT);
+	//Swiat swiat(41, 21);
 
 	char zn = '1';
 	do {
