@@ -18,7 +18,7 @@ Czlowiek::Czlowiek(Swiat& sw, int x, int y) : Zwierze(5, 4, 254, 12, 0, "CZLOWIE
 void Czlowiek::akcja() {
 
 	swiat.Rysuj();
-	
+
 	old_pos = pos;
 	unsigned char znak = getch();
 
@@ -71,8 +71,20 @@ void Czlowiek::akcja() {
 		break;
 	}
 	if (swiat.world[pos.y][pos.x] != NULL
-		&& swiat.world[pos.y][pos.x] != this)
-		swiat.world[pos.y][pos.x]->kolizja(*this);
+		&& swiat.world[pos.y][pos.x] != this) {
+		if (!swiat.getTarczaAlzura())
+			swiat.world[pos.y][pos.x]->kolizja(*this);
+		else if (dynamic_cast<Zwierze*>(swiat.world[pos.y][pos.x])) {
+			swiat.world[pos.y][pos.x]->reallocate();
+			swiat.world[old_pos.y][old_pos.x] = NULL;
+			swiat.world[pos.y][pos.x] = this;
+		}
+		else {
+			swiat.world[old_pos.y][old_pos.x] = NULL;
+			swiat.world[pos.y][pos.x] = this;
+		}
+		
+	}
 	else {
 		swiat.world[old_pos.y][old_pos.x] = NULL;
 		swiat.world[pos.y][pos.x] = this;

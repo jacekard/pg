@@ -36,9 +36,10 @@ void Barszcz::akcja() {
 		tmp = swiat.world[pos.y - 1][pos.x];
 		if (tmp != NULL && dynamic_cast<Zwierze*>(tmp)) {
 			swiat.komentuj(" + " + tmp->getRodzaj() + " ginie przez trujace opary BARSZCZU! + ");
-			swiat.world[tmp->getOldPosy()][tmp->getOldPosx()] = NULL;
-			swiat.world[tmp->getPosy()][tmp->getPosx()] = NULL;
 			tmp->die();
+			swiat.world[pos.y - 1][pos.x] = NULL;
+			Util::gotoxy(pos.y - 1, pos.x);
+			putchar(' ');
 		}
 	}
 
@@ -46,10 +47,10 @@ void Barszcz::akcja() {
 		tmp = swiat.world[pos.y + 1][pos.x];
 		if (tmp != NULL && dynamic_cast<Zwierze*>(tmp)) {
 			swiat.komentuj(" + " + tmp->getRodzaj() + " ginie przez trujace opary BARSZCZU! + ");
-			swiat.world[tmp->getOldPosy()][tmp->getOldPosx()] = NULL;
-			swiat.world[tmp->getPosy()][tmp->getPosx()] = NULL;
 			tmp->die();
-
+			swiat.world[pos.y + 1][pos.x] = NULL;
+			Util::gotoxy(pos.y + 1, pos.x);
+			putchar(' ');
 		}
 	}
 
@@ -57,9 +58,10 @@ void Barszcz::akcja() {
 		tmp = swiat.world[pos.y][pos.x + 1];
 		if (tmp != NULL && dynamic_cast<Zwierze*>(tmp)) {
 			swiat.komentuj(" + " + tmp->getRodzaj() + " ginie przez trujace opary BARSZCZU! + ");
-			swiat.world[tmp->getOldPosy()][tmp->getOldPosx()] = NULL;
-			swiat.world[tmp->getPosy()][tmp->getPosx()] = NULL;
 			tmp->die();
+			swiat.world[pos.y][pos.x+1] = NULL;
+			Util::gotoxy(pos.y, pos.x + 1);
+			putchar(' ');
 		}
 	}
 
@@ -67,10 +69,10 @@ void Barszcz::akcja() {
 		tmp = swiat.world[pos.y][pos.x - 1];
 		if (tmp != NULL && dynamic_cast<Zwierze*>(tmp)) {
 			swiat.komentuj(" + " + tmp->getRodzaj() + " ginie przez trujace opary BARSZCZU! + ");
-			swiat.world[tmp->getOldPosy()][tmp->getOldPosx()] = NULL;
-			swiat.world[tmp->getPosy()][tmp->getPosx()] = NULL;
 			tmp->die();
-
+			swiat.world[pos.y][pos.x - 1] = NULL;
+			Util::gotoxy(pos.y, pos.x - 1);
+			putchar(' ');
 		}
 	}
 }

@@ -2,6 +2,8 @@
 
 int main() {
 	
+	
+	
 	int WIDTH, HEIGHT;
 	cout << "Podaj wymiary swiata: \n";
 	cout << "szerokosc: ";
@@ -9,15 +11,13 @@ int main() {
 	cout << "wysokosc: ";
 	cin >> HEIGHT;
 
-	Swiat swiat(WIDTH,HEIGHT);
-	//Swiat swiat(41, 21);
+	Swiat swiat(WIDTH+1,HEIGHT+1);
 
-	char zn = '1';
 	do {
-		
 		swiat.wykonajTure();
 
 	} while (!swiat.getCzyKoniec());
+
 	string ostatni_kom;
 	if (swiat.komunikaty.size() == 0)
 		ostatni_kom = "Koniec";

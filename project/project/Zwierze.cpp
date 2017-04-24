@@ -35,8 +35,9 @@ void Zwierze::kolizja(Organizm& other) {
 			this->die();
 		}
 		else {
-			if (this->rodzaj == "CZLOWIEK")
+			if (this->rodzaj == "CZLOWIEK") {
 				swiat.komentuj(" + " + rodzaj + " ginie z reki " + this->rodzaj + "A! + ");
+			}
 			else
 				swiat.komentuj(" + " + rodzaj + " ginie w paszczy " + this->rodzaj + "A! + ");
 			swiat.world[other.getOldPosy()][other.getOldPosx()] = NULL;
@@ -50,8 +51,7 @@ void Zwierze::akcja() {
 	grow();
 
 	point tmp = ruch();
-	/*tmp.x = 0;
-	tmp.y = 0;*/
+
 	if (pos.x + tmp.x > swiat.WIDTH - 1 || pos.x + tmp.x < 1)
 		tmp.x = 0;
 	if (pos.y + tmp.y > swiat.HEIGHT - 1 || pos.y + tmp.y < 1)

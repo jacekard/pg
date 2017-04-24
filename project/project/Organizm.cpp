@@ -19,7 +19,7 @@ void Organizm::grow() {
 void Organizm::rysowanie() {
 	Util::gotoxy(pos.x, pos.y);
 	Util::setColor(color);
-	printf("%c", symbol);
+	putchar(symbol);
 	Util::setColor();
 }
 
@@ -87,14 +87,7 @@ void Organizm::reallocate() {
 			break;
 		}
 	}
-	//swiat.komentuj("Realokacja obiektu " + this->rodzaj + " nie udala sie ");
-	for (int v = 0; v < swiat.lista.size(); v++) {
-		if (this == swiat.lista[v]) {
-			swiat.lista.erase(swiat.lista.begin() + v);
-			//delete this;
-			break;
-		}
-	}
+	die();
 }
 
 bool Organizm::czyDozwolonyRuch(point tmp) {

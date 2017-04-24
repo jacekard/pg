@@ -7,6 +7,7 @@ Swiat::Swiat(int WIDTH, int HEIGHT) : WIDTH(WIDTH), HEIGHT(HEIGHT) {
 
 	komunikaty.push_back("Nowa gra!");
 	Util::hidecursor();
+	Util::clrscr();
 
 	world = new Organizm**[HEIGHT];
 
@@ -86,27 +87,24 @@ void Swiat::wykonajTure() {
 			lista[i]->akcja();
 		}
 	}
-	
+
 	for (int i = lista.size() - 1; i >= 0; i--) {
 		if (lista[i]->getWiek() == -1) {
-			int X = lista[i]->getPosx();
-			int Y = lista[i]->getPosy();
 			lista.erase(lista.begin() + i);
 		}
 	}
 
-	if (turnCount >= 1500) {
+	if (turnCount >= 4000) {
+		save();
 		Rysuj();
 		Sleep(5000);
 		komentuj("Zakonczono symulacje!");
 		changeStatement(czyKoniec);
 	}
-	
-	Rysuj();
-	wypiszKomunikaty();
+		Rysuj();
+		wypiszKomunikaty();
+
 	addTurn();
-
-
 }
 
 void Swiat::randomPlants() {
@@ -212,14 +210,14 @@ void Swiat::wypiszKomunikaty() {
 	}
 
 	for (int i = 0; i < HEIGHT; i++) {
-		Util::gotoxy(WIDTH+1, y+1+i);
+		Util::gotoxy(WIDTH + 1, y + 1 + i);
 		cout << "                                                  ";
 
 	}
 
 	for (auto v : komunikaty) {
 		Util::gotoxy(x, y++);
-		Util::setColor(Util::los(2,15));
+		Util::setColor(Util::los(2, 15));
 		cout << v;
 	}
 	while (!komunikaty.empty())
