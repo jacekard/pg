@@ -22,11 +22,30 @@ public abstract class DiskElement implements Comparable {
     }
 
     public void print() {
+        if(file == null) return;
         String s = "";
         for(int i = 0; i < depth; i++)
             s += "-";
         System.out.printf("%-55s %s %-10s %n", s+file.getName(), symbol, formattedDate);
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof DiskElement)) {
+            return false;
+        }
+
+        return file.equals(((DiskElement)o).file);
+    }
+
+
+    @Override
+    public int hashCode() {
+        return file.hashCode();
+    }
+
 
     @Override
     public int compareTo(Object o) {
