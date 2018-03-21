@@ -1,0 +1,46 @@
+a = 1;
+r_max = 0.49;
+r_min = 0.001;
+n_max = 700;
+n = 1;
+X = zeros(1, n_max);
+Y = zeros(1, n_max);
+R = zeros(1, n_max);
+area = 0;
+firstCircle = true;
+while (n < n_max+1)
+czyWystaje = true;
+isOverlapping = false;
+x = rand(1);
+y = rand(1);
+r = r_min + (r_max-r_min).*rand(1,1);
+
+if (x + r <= a) && (y + r <= a) && ( x-r >= 0) && (y-r >= 0)
+    czyWystaje = false;
+end
+
+if czyWystaje == false
+   for i=1:n
+       if firstCircle == true
+           break;
+       end
+       dist = sqrt((X(1,i)-x)^2 + (Y(1,i)-y)^2);
+       if dist < R(1,i) + r
+           isOverlapping = true;
+           break;
+       end
+   end
+   if isOverlapping == false
+       n = n+1
+       firstCircle = false;
+       X(1,n) = x;
+       Y(1,n) = y;
+       R(1,n) = r;
+       area = area + pi*r*r;
+       pause(0.01)
+       axis equal
+       plot_circ(x, y, r)
+       hold on
+   end
+end
+end
