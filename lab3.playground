@@ -1,0 +1,157 @@
+//: Playground - noun: a place where people can play
+ 
+import UIKit
+ 
+var str = "Hello, playground"
+ 
+func minValue(_ a : Int, _ b: Int) -> Int {
+    if (a > b) {
+        return b
+    }
+    else {
+        return a
+    }
+}
+ 
+print(minValue(5,2))
+ 
+func lastDigit(a : Int) -> Int {
+    return a%10
+}
+ 
+print(lastDigit(a:115))
+ 
+func divides(_ a: Int, _ b: Int) -> Bool {
+    if ( a % b == 0) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+ 
+print(divides(6,2))
+ 
+func countDivisors(_ a: Int) -> Int {
+    var counter = 0
+    for i in 1...a {
+        if(divides(a,i) == true) {
+            counter += 1
+        }
+    }
+    return counter
+}
+ 
+print(countDivisors(12))
+ 
+func isPrime(_ a : Int) -> Bool {
+    if(countDivisors(a) == 2) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+ 
+isPrime(3)
+isPrime(8)
+ 
+var Text: () -> () = {
+    print("I will pass this course with best mark, because Swift is great!")
+}
+ 
+func smartBart(_ a: Int, _ f: () -> ()) -> () {
+    for _ in 1...a {
+        Text()
+    }
+}
+ 
+smartBart(2, Text)
+ 
+ 
+let numbers = [ 10, 16, 18, 30, 38, 40, 44, 50]
+ 
+print(numbers.filter{$0 % 4 == 0})
+print(numbers.reduce(0, {
+    if ($0 > $1) { return $0 }
+    else { return $1 }
+}))
+ 
+var strings = ["Gdansk", "University", "of", "Technology"]
+print(strings.reduce("", {
+   $0 + " " + $1
+}))
+ 
+let numbers2 = [1,2,3,4,5,6]
+var oddNumbers = numbers2.filter{$0 % 2 == 1}
+var squaredNumbers = oddNumbers.map{$0 * $0}
+print(squaredNumbers.reduce(0, {$0 + $1}))
+ 
+func minmax(_ a : Int, _ b:Int) -> (Int, Int) {
+    return (min(a,b), max(a,b))
+}
+ 
+print(minmax(20,25))
+ 
+var stringsArray = ["gdansk", "university", "gdansk", "university",
+"university", "of",  "technology", "technology", "gdansk", "gdansk"]
+ 
+var countedStrings = [(String, Int)]()
+ 
+for str in stringsArray {
+    var counter = 0
+    var contain = false
+    for str2 in stringsArray {
+        if (str == str2) {
+            counter += 1
+        }
+    }
+    for str2 in countedStrings{
+        if (str == str2.0) {
+            contain = true
+            break
+        }
+    }
+    if (!contain) {
+        countedStrings.append((str, counter))
+    }
+}
+ 
+print(countedStrings)
+enum Day: String {
+    case Monday
+    case Tuesday
+    case Wednesday
+    case Thursday
+    case Friday
+    case Saturday
+    case Sunday
+   
+    func dayDescription() -> String {
+        switch self {
+        case.Monday: return "1"
+        case.Tuesday: return "2"
+        case.Wednesday: return "3"
+        case.Thursday: return "4"
+        case.Friday: return "5"
+        case.Saturday: return "6"
+        case.Sunday: return "7"
+        }
+    }
+   
+    func dayEmoji() -> String {
+        switch self {
+        case.Monday: return "☠️"
+        case.Tuesday: return "😡"
+        case.Wednesday: return "😤"
+        case.Thursday: return "🤡"
+        case.Friday: return "😵"
+        case.Saturday: return "👌🏿"
+        case.Sunday: return "🤖"
+        }
+    }
+}
+ 
+let day = Day.Monday
+print(day.dayDescription())
+print(day.dayEmoji())
