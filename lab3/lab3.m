@@ -33,9 +33,6 @@ for i = 1:5
 end
 disp(time)
 plot(N, time);
-title('Czas obliczeniowy funkcji od N (Metoda bezpoœrednia)');
-xlabel('rozmiar macierzy N');
-ylabel('Czas [s]');
 saveas (plot(N, time),'zadD_165178.png');
 
 % zad E
@@ -58,19 +55,18 @@ for i = 1:5
     while abs(norm(res))> 10^(-14)
         res = M*r - b';
         r = -D\(L+U)*r+D\b';
-        %norm(res);
         it = it+1;
     end
     
     time_J(i) = toc;
-    iterations(i) = it;
+    iters(i) = it;
    
 end
 
 disp(time_J)
-disp(iterations)
+disp(iters)
 saveas (plot(N, time_J),'zadE_165178_Jacobi.png');
-saveas (plot(N, iterations),'zadE_165178_iteracje.png');
+saveas (plot(N, iters),'zadE_165178_iteracje.png');
 
 % Zad F
 clear all
@@ -96,16 +92,12 @@ for i = 1:5
     end
     
     time_GS(i) = toc;
-    iterations(i) = it;
+    iters(i) = it;
    
 end
 disp(time_GS)
-disp(iterations)
+disp(iters)
+saveas (plot(N, iters),'zadF_165178_iteracje.png');
 saveas (plot(N, time_GS),'zadF_165178_Gauss-Seidel.png');
-saveas (plot(N, iterations),'zadF_165178_iteracje.png');
-
-% Zad G
-clear all
-cls
 
 diary off

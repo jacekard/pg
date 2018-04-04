@@ -1,0 +1,5 @@
+Metoda bezpoœrednia rozwi¹zywania uk³adów równañ liniowych
+zajê³a najwiêcej czasu (nawet ponad 20s dla N = 12000)
+
+Najszybsz¹ metod¹ jest metoda Gaussa-Seidela, potrzebuje ona oko³o o po³owê mniej iteracji, ¿eby zbiec siê do prawid³owego wyniku w porównaniu do metody Jacobiego.
+Z moich doœwiadczeñ wynika, ¿e jest te¿ oko³o dwa razy szybsza.
