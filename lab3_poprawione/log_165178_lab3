@@ -1,0 +1,39 @@
+zadG
+    0.3556
+
+    6.3376
+
+   620
+
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('zadG', 'C:\Users\student\Documents\MATLAB\ja\lab\zadG.m', 44)" style="font-weight:bold">zadG</a> (<a href="matlab: opentoline('C:\Users\student\Documents\MATLAB\ja\lab\zadG.m',44,0)">line 44</a>)
+
+} 
+gauss_seidel
+    0.0095    0.0149    0.0427    0.0862    0.1716
+
+   107   111   111   111   113
+
+met_bezp
+    0.0068    0.0324    0.4009    2.4335   12.7563
+
+jacobi
+    0.0033    0.0036    0.0106    0.0209    0.0593
+
+    23    23    23    23    23
+
+gauss_seidel
+    0.0095    0.0149    0.0443    0.0875    0.2353
+
+   107   110   111   112   113
+
+zadG
+    0.3611
+
+    6.4717
+
+   620
+
+   45.5876
+
+        5000
+

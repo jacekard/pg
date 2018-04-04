@@ -1,0 +1,9 @@
+Metoda bezpoœrednia rozwi¹zywania uk³adów równañ liniowych
+zajê³a najwiêcej czasu z poœród trzech zaimplementowanych metod.
+
+Najszybsz¹ metod¹ jest metoda Jacobiego, potrzebuje ona mniej iteracji, ¿eby zbiec siê
+ do prawid³owego wyniku w porównaniu do metody Gaussa-Seidela.
+Z moich obliczeñ wynika, ¿e Jacobiego jest oko³o piêæ razy szybsza.
+
+W zadaniu G metoda bezpoœrednia dzia³a najszybciej, metoda Jacobiego jest wolniejsza (6.3376s), ale zbiega siê dla 620 iteracji.
+Metoda Gaussa-Seidela nie zbiega siê przy tej implementacji.
