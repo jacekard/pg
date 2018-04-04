@@ -8,12 +8,12 @@ density = 3;
 [Edges] = generate_network(N, density);
 
 % Zad B
-[A,B,I,b,M] = labM(Edges);
+[A,B,I,b,M] = lab2(Edges);
 
 save zadB_165178 A B I b
 
 % Zad C
-r = M\b;
+r = M\b';
 save zadC_165178 r
 
 % Zad D
