@@ -1,0 +1,9 @@
+Metoda bezpośrednia rozwiązywania układów równań liniowych
+zajęła najwięcej czasu z pośród trzech zaimplementowanych metod.
+
+Najszybszą metodą jest metoda Jacobiego, potrzebuje ona mniej iteracji, żeby zbiec się
+ do prawidłowego wyniku w porównaniu do metody Gaussa-Seidela.
+Z moich obliczeń wynika, że Jacobiego jest około pięć razy szybsza.
+
+W zadaniu G metoda bezpośrednia działa najszybciej, metoda Jacobiego jest wolniejsza (6.3376s), ale zbiega się dla 620 iteracji.
+Metoda Gaussa-Seidela nie zbiega się przy tej implementacji.
