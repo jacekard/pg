@@ -1,0 +1,7 @@
+D:\Dokumenty\!Studia\Semestr 4\Platformy Technologiczne\C#\Lab1\bin\Debug\Lab1.exe.config
+D:\Dokumenty\!Studia\Semestr 4\Platformy Technologiczne\C#\Lab1\bin\Debug\Lab1.exe
+D:\Dokumenty\!Studia\Semestr 4\Platformy Technologiczne\C#\Lab1\bin\Debug\Lab1.pdb
+D:\Dokumenty\!Studia\Semestr 4\Platformy Technologiczne\C#\Lab1\obj\Debug\Lab1.csprojResolveAssemblyReference.cache
+D:\Dokumenty\!Studia\Semestr 4\Platformy Technologiczne\C#\Lab1\obj\Debug\Lab1.csproj.CoreCompileInputs.cache
+D:\Dokumenty\!Studia\Semestr 4\Platformy Technologiczne\C#\Lab1\obj\Debug\Lab1.exe
+D:\Dokumenty\!Studia\Semestr 4\Platformy Technologiczne\C#\Lab1\obj\Debug\Lab1.pdb
