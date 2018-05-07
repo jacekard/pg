@@ -1,0 +1,87 @@
+#include <iostream>
+#include <time.h>
+#include <Windows.h>
+using namespace std;
+
+double p1[] = { 0.8, 0.10, 0.06, 0.04 };
+int p1W[] = { 0, 0, 0 ,0 };
+int p1Len = 4;
+
+double p2[] = { 0.096, 0.098, 0.095, 0.105, 0.118, 0.108,0.096, 0.093, 0.092, 0.099 };
+double p2Max = 0.118;
+int p2W[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+int p2Len = 10;
+
+int odwracanie(double *p, int len) {
+	double u = (double)rand() / RAND_MAX;
+	double s = 0.0;
+	for (int i = 0; i < len; i++) {
+		s += p[i];
+		if (u < s) {
+			return i;
+		}
+	}
+	return 0;
+}
+
+int eliminacja(double *p, double pMax, int len) {
+	do {
+		int u1 = (double)rand() / RAND_MAX * len;
+		double u2 = (double)rand() / RAND_MAX*pMax;
+		if (u2 < p[u1]) {
+			return u1;
+		}
+	} while (true);
+}
+
+int czyPrzezyje() {
+	double u = (double)rand() / RAND_MAX;
+	if (u < 0.7)
+		return 0;
+	else
+		return 1;
+}
+int main() {
+
+
+	for (int i = 0; i < 1000000; i++) {
+		p1W[odwracanie(p1, p1Len)]++;
+	}
+
+	for (int i = 0; i < 1000000; i++) {
+		p2W[eliminacja(p2, p2Max, p2Len)]++;
+	}
+
+
+
+	for (int i = 0; i < p1Len; i++) {
+		cout << p1W[i] << endl;
+	}
+	cout << endl;
+	for (int i = 0; i < p2Len; i++) {
+		cout << p2W[i] << endl;
+	}
+
+	int start = clock();
+	for (int i = 0; i < 1000000; i++) {
+		odwracanie(p1, p1Len);
+	}
+	float time = (float)(clock() - start) / CLOCKS_PER_SEC;
+	cout << endl << "Odwracanie czas: " << time << "ms" << endl;
+
+	start = clock();
+	for (int i = 0; i < 1000000; i++) {
+		eliminacja(p2, p2Max, p2Len);
+	}
+	time = (float)(clock() - start) / CLOCKS_PER_SEC;
+	cout << "Eliminacja czas: " << time << "ms" << endl;
+
+	int wynik = 0;
+	for (int i = 0; i < 700; i++) {
+		wynik += czyPrzezyje();
+	}
+
+	cout << endl << "Przezylo " << wynik << " zolnierzy. " << endl;
+
+	system("pause");
+}
